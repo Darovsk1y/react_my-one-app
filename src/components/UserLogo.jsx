@@ -1,3 +1,4 @@
+import "./UserLogo.css";
 const UserLogo = () => {
   return (
     <div className="user-main__logo">

@@ -1,3 +1,4 @@
+import "./Menu-nav.css";
 const Menu = () => {
   return (
     <nav className="menu">

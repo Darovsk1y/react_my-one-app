@@ -1,3 +1,4 @@
+import "./MainImage.css";
 const MainImage = () => {
   return (
     <div className="main__image">

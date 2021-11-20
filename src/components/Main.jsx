@@ -2,6 +2,7 @@ import UserInfo from "./User-Info";
 import MainImage from "./MainImage";
 import UserLogo from "./UserLogo";
 import UserPosts from "./UserPosts";
+import "./Main.css";
 
 const Main = () => {
   return (

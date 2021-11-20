@@ -1,3 +1,4 @@
+import "./UserPosts.css";
 const UserPosts = () => {
   return (
 	<div className="user-main__posts post-user">

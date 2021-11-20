@@ -1,3 +1,4 @@
+import "./User-Info.css";
 const UserInfo = () => {
   return (
     <div className="user-main__info info-user">

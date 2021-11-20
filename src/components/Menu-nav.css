@@ -1,0 +1,23 @@
+.menu {
+	grid-area: menu;
+	background: linear-gradient(to top right, #2F368E, #0355cf);
+	padding: 10px 20px;
+}
+.menu__list {
+	padding: 0px 0px 0px 0px;
+}
+.menu__li {
+	list-style-type: none;
+	color: white;
+}
+.menu__li a{
+	font-size: 24px;
+	line-height: 1.5;
+	color: inherit;
+	text-transform: uppercase;
+	margin: 0px 0px 10px 0px;
+	text-decoration: none;
+}
+.menu__li a:hover{
+	text-decoration: underline;
+}
