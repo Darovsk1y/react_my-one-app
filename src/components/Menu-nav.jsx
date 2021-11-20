@@ -1,18 +1,18 @@
-import "./Menu-nav.css";
+import s from "./Menu-nav.module.css";
 const Menu = () => {
   return (
-    <nav className="menu">
-      <ul className="menu__list">
-        <li className="menu__li">
+    <nav className={s.menu}>
+      <ul className={s.list}>
+        <li className={s.li}>
           <a href="#/">Users</a>
         </li>
-        <li className="menu__li">
+        <li className={s.li}>
           <a href="#/">Messages</a>
         </li>
-        <li className="menu__li">
+        <li className={s.li}>
           <a href="#/">News</a>
         </li>
-        <li className="menu__li">
+        <li className={s.li}>
           <a href="#/">Muzic</a>
         </li>
       </ul>

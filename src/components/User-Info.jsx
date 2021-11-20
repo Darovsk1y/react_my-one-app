@@ -1,22 +1,22 @@
-import "./User-Info.css";
+import s from "./User-Info.module.css";
 const UserInfo = () => {
   return (
-    <div className="user-main__info info-user">
-      <div className="info-user__line">
-        <div className="info-user__param">name</div>
-        <div className="info-user__answer">Aleksandr Klimovich</div>
+    <div className={s.info}>
+      <div className={s.line}>
+        <div className={s.param}>name</div>
+        <div className={s.answer}>Aleksandr Klimovich</div>
       </div>
-      <div className="info-user__line">
-        <div className="info-user__param">city</div>
-        <div className="info-user__answer">Energodar</div>
+      <div className={s.line}>
+        <div className={s.param}>city</div>
+        <div className={s.answer}>Energodar</div>
       </div>
-      <div className="info-user__line">
-        <div className="info-user__param">logon</div>
-        <div className="info-user__answer">x5</div>
+      <div className={s.line}>
+        <div className={s.param}>logon</div>
+        <div className={s.answer}>x5</div>
       </div>
-      <div className="info-user__line">
-        <div className="info-user__param">favorit class</div>
-        <div className="info-user__answer">Druid</div>
+      <div className={s.line}>
+        <div className={s.param}>favorit class</div>
+        <div className={s.answer}>Druid</div>
       </div>
     </div>
   );

@@ -1,7 +1,6 @@
-/*Main  */
 .main {
 	grid-area: main;
 }
-.main__body {
+.body {
 	margin: 10px 0px 0px 0px;
 }

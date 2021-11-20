@@ -1,21 +1,19 @@
-.user-main__info {
+.info {
 	flex: 1 1 auto;
 }
-.info-user {
-}
-.info-user__line {
+.line {
 	display: grid;
 	grid-template-rows: 1fr;
 	grid-template-columns: 150px 1fr;
 }
-.info-user__param {
+.param {
 	display: inline-flex;
 	align-items: flex-end;
 	font-size: 20px;
 	line-height: 1.4;
 	color: black;
 }
-.info-user__answer {
+.answer {
 	display: inline-flex;
 	align-items: flex-end;
 	font-size: 23px;

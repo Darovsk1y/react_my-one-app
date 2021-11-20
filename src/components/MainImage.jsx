@@ -1,7 +1,7 @@
-import "./MainImage.css";
+import s from "./MainImage.module.css";
 const MainImage = () => {
   return (
-    <div className="main__image">
+    <div className={s.image}>
       <img src="https://i.imgur.com/Wt2zf01.png" alt=""></img>
     </div>
   );

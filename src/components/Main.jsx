@@ -1,13 +1,13 @@
 
 import MainImage from "./MainImage";
-import "./Main.css";
+import s from "./Main.module.css";
 import User from "./User";
 
 const Main = () => {
   return (
-    <main className="main">
+    <main className={s.main}>
 	<MainImage/>
-      <div className="main__body">
+      <div className={s.body}>
 		<User/>
       </div>
     </main>
