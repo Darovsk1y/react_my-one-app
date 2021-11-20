@@ -6,6 +6,7 @@ const UserPosts = () => {
 		<div className={s.write}>
 			<form action="" className={s.form}>
 				<textarea name="textarea" className={s.textarea}></textarea>
+				<button type="submit" className={s.btn}>Send</button>
 			</form>
 		</div>
 		<div className={s.old}>My old Post
