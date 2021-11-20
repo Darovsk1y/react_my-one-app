@@ -2,7 +2,7 @@
 .posts {
 	font-size: 32px;
 }
-.write {
+.new {
 
 }
 .form{
@@ -24,6 +24,10 @@
 	border: none;
 }
 .btn{
+	min-width: 120px;
+	display: flex;
+	justify-content: center;
+	align-items: center;
 	padding: 10px;
 	font-size: 24px;
 	color: white;
@@ -32,13 +36,5 @@
 	border-radius: 5px;
 	text-align: right;
 	margin-left: auto;
-    display: block;
 	cursor: pointer;
-}
-.old {
-	padding: 5px 15px;
-	background-color: rgb(136, 241, 255);
-	font-size: 16px;
-	color: black;
-	border-radius: 5px;
 }

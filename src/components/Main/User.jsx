@@ -1,5 +1,5 @@
-import UserHeader from "./UserHeader";
-import UserPosts from "./UserPosts";
+import UserHeader from "./UserHeader/UserHeader";
+import UserPosts from "./UserPosts/UserPosts";
 import s from "./User.module.css";
 const User = () => {
   return (
