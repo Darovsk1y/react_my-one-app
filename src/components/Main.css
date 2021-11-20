@@ -5,17 +5,3 @@
 .main__body {
 	margin: 10px 0px 0px 0px;
 }
-.main__user {
-}
-.user-main {
-}
-.user-main__header {
-	background-color: #7dd6ff;
-	display: flex;
-	margin: 0px 0px 20px 0px;
-	padding: 10px;
-}
-.user-main__block {
-	background-color: #7dd6ff;
-	padding: 10px;
-}
