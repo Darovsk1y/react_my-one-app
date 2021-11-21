@@ -1,19 +1,21 @@
+import Like from "./Like";
 import s from "./Post.module.css";
-const Post = () => {
+const Post = (props) => {
   return (
     <div className={s.post}>
-      <div className={s.avatar}>
-        <img
-          src="http://cs622426.vk.me/v622426834/409d/baLqspYwi84.jpg"
-          alt=""
-        ></img>
+      <div className={s.row}>
+        <div className={s.avatar}>
+          <a href="#/">
+            <img src={props.avatar} alt=""></img>
+          </a>
+        </div>
+        <div className={s.block}>
+          <div className={s.name}>{props.name}</div>
+          <div className={s.text}>{props.text}</div>
+        </div>
       </div>
-      <div className={s.text}>
-        Lorem ipsum dolor sit amet consectetur, adipisicing elit. Quibusdam
-        nostrum consequatur dignissimos reiciendis dicta hic commodi, voluptatum
-        sunt maxime, fugiat laboriosam nulla illum aliquam explicabo libero nisi
-        praesentium illo ipsa!
-      </div>
+		<Like
+		likes={props.likes}/>
     </div>
   );
 };

@@ -6,7 +6,7 @@ const UserPosts = () => {
 		My Posts
 		<div className={s.new}>
 			<form action="" className={s.form}>
-				<textarea name="textarea" className={s.textarea}></textarea>
+				<textarea name="textarea" className={s.textarea} placeholder="New post ..."></textarea>
 				<button type="submit" className={s.btn}>Send</button>
 			</form>
 		</div>
