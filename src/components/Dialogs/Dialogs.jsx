@@ -1,7 +1,7 @@
-
+import s from "./Dialogs.module.css";
 const Dialogs =()=>{
 	return(
-		<div className="dialogs">
+		<div className={s.dialogs}>
 			My Dialogs
 		</div>
 	);

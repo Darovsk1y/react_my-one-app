@@ -7,7 +7,7 @@ const Menu = () => {
           <a href="/profile">Profile</a>
         </li>
         <li className={s.li}>
-          <a href="/dialog">Messages</a>
+          <a href="/dialogs">Messages</a>
         </li>
         <li className={s.li}>
           <a href="/news">News</a>
