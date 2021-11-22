@@ -1,22 +1,23 @@
 import s from "./Menu-nav.module.css";
+import { NavLink } from "react-router-dom";
 const Menu = () => {
   return (
     <nav className={s.menu}>
       <ul className={s.list}>
         <li className={s.li}>
-          <a href="/profile">Profile</a>
+          <NavLink to="/profile" className = { navLink => navLink.isActive ? s.active : '' }>Profile</NavLink>
         </li>
         <li className={s.li}>
-          <a href="/dialogs">Messages</a>
+          <NavLink to="/dialogs" className = { navLink => navLink.isActive ? s.active : '' }>Messages</NavLink>
         </li>
         <li className={s.li}>
-          <a href="/news">News</a>
+          <NavLink to="/news" className = { navLink => navLink.isActive ? s.active : '' }>News</NavLink>
         </li>
         <li className={s.li}>
-          <a href="/music">Muzic</a>
+          <NavLink to="/music" className = { navLink => navLink.isActive ? s.active : '' }>Muzic</NavLink>
         </li>
         <li className={s.li}>
-          <a href="/settings">Settings</a>
+          <NavLink to="/settings" className = { navLink => navLink.isActive ? s.active : '' }>Settings</NavLink>
         </li>
       </ul>
     </nav>

@@ -8,16 +8,19 @@
 }
 .li {
 	list-style-type: none;
-	color: white;
+
 }
 .li a{
 	font-size: 24px;
 	line-height: 1.5;
-	color: inherit;
+	color: white;
 	text-transform: uppercase;
 	margin: 0px 0px 10px 0px;
 	text-decoration: none;
 }
 .li a:hover{
 	text-decoration: underline;
+}
+.li a.active{
+	color: gold;
 }
