@@ -1,7 +1,7 @@
 import './App.css';
 import Header from './components/Header/Header';
 import Menu from './components/Menu/Menu-nav';
-import Profile from './components/Main/UserMain';
+import Profile from './components/User/UserMain';
 import { Routes, Route } from 'react-router-dom'
 import Dialogs from './components/Dialogs/Dialogs';
 import News from './components/News/News';
