@@ -1,7 +1,8 @@
 import './App.css';
 import Header from './components/Header/Header';
 import Menu from './components/Menu/Menu-nav';
-import Main from './components/Main/Main';
+import UserMain from './components/Main/UserMain';
+/* import Dialogs from './components/Dialogs/Dialogs'; */
 
 //todo Это компонента - это узел ф-ия, которая по сути является тегом
 const App = () => {
@@ -9,7 +10,10 @@ const App = () => {
 		<div className="app-wrapper">
 			<Header />
 			<Menu/>
-			<Main/>
+			<main className="main">
+				<UserMain/>
+			{/* 	<Dialogs/> */}
+			</main>
 		</div>
 	);
 }

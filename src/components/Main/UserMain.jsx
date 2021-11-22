@@ -1,16 +1,16 @@
 
 import MainImage from "./MainImage";
-import s from "./Main.module.css";
+import s from "./UserMain.module.css";
 import User from "./User";
 
-const Main = () => {
+const UserMain = () => {
   return (
-    <main className={s.main}>
+    <div className={s.main}>
 	<MainImage/>
       <div className={s.body}>
 		<User/>
       </div>
-    </main>
+    </div>
   );
 };
-export default Main;
+export default UserMain;

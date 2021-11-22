@@ -93,4 +93,6 @@ h6 {
 	gap: 10px;
 	min-height: 100vh;
 }
-
+.main {
+	grid-area: main;
+}

@@ -4,16 +4,19 @@ const Menu = () => {
     <nav className={s.menu}>
       <ul className={s.list}>
         <li className={s.li}>
-          <a href="#/">Users</a>
+          <a href="/profile">Profile</a>
         </li>
         <li className={s.li}>
-          <a href="#/">Messages</a>
+          <a href="/dialog">Messages</a>
         </li>
         <li className={s.li}>
-          <a href="#/">News</a>
+          <a href="/news">News</a>
         </li>
         <li className={s.li}>
-          <a href="#/">Muzic</a>
+          <a href="/music">Muzic</a>
+        </li>
+        <li className={s.li}>
+          <a href="/settings">Settings</a>
         </li>
       </ul>
     </nav>
