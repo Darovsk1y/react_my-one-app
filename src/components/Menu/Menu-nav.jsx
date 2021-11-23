@@ -1,23 +1,24 @@
 import s from "./Menu-nav.module.css";
 import { NavLink } from "react-router-dom";
+const setActive = (navLink) => navLink.isActive ? s.active : '';
 const Menu = () => {
   return (
     <nav className={s.menu}>
       <ul className={s.list}>
         <li className={s.li}>
-          <NavLink to="/profile" className = { navLink => navLink.isActive ? s.active : '' }>Profile</NavLink>
+          <NavLink to="/profile" className = {setActive}>Profile</NavLink>
         </li>
         <li className={s.li}>
-          <NavLink to="/dialogs" className = { navLink => navLink.isActive ? s.active : '' }>Messages</NavLink>
+          <NavLink to="/dialogs" className = {setActive}>Messages</NavLink>
         </li>
         <li className={s.li}>
-          <NavLink to="/news" className = { navLink => navLink.isActive ? s.active : '' }>News</NavLink>
+          <NavLink to="/news" className = {setActive}>News</NavLink>
         </li>
         <li className={s.li}>
-          <NavLink to="/music" className = { navLink => navLink.isActive ? s.active : '' }>Muzic</NavLink>
+          <NavLink to="/music" className = {setActive}>Muzic</NavLink>
         </li>
         <li className={s.li}>
-          <NavLink to="/settings" className = { navLink => navLink.isActive ? s.active : '' }>Settings</NavLink>
+          <NavLink to="/settings" className = {setActive}>Settings</NavLink>
         </li>
       </ul>
     </nav>
