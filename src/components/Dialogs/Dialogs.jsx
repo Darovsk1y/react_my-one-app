@@ -46,6 +46,17 @@ let dialogsData = [
     text: "I heal in raids, inexpensive! Fast healing without problems! Help and leveling characters!",
   },
 ];
+let dialogsElements = dialogsData.map((dialog) => {
+  return (
+    <DialogItem
+      key={dialog.id}
+      id={dialog.id}
+      name={dialog.name}
+      image={dialog.image}
+      text={dialog.text}
+    />
+  );
+});
 let messagesData = [
   {
     id: "1",
@@ -72,55 +83,18 @@ let messagesData = [
     message: `I heal in raids, inexpensive! Fast healing without problems! Help and leveling characters!`,
   },
 ];
+let messagesElems = messagesData.map((message) => {
+  return <Message message={message.message} key={message.id}/>;
+});
 
 const Dialogs = (props) => {
   return (
     <div className={s.dialogs}>
       <div className={s.dialogsList}>
-        <div className={s.dialogsItem}>
-          <DialogItem
-            id={dialogsData[0].id}
-            name={dialogsData[0].name}
-            image={dialogsData[0].image}
-            text={dialogsData[0].text}
-          />
-        </div>
-        <div className={s.dialogsItem}>
-          <DialogItem
-            id={dialogsData[1].id}
-            name={dialogsData[1].name}
-            image={dialogsData[1].image}
-            text={dialogsData[1].text}
-          />
-        </div>
-        <div className={s.dialogsItem}>
-          <DialogItem
-            id={dialogsData[2].id}
-            name={dialogsData[2].name}
-            image={dialogsData[2].image}
-            text={dialogsData[2].text}
-          />
-        </div>
-        <div className={s.dialogsItem}>
-          <DialogItem
-            id={dialogsData[3].id}
-            name={dialogsData[3].name}
-            image={dialogsData[3].image}
-            text={dialogsData[3].text}
-          />
-        </div>
+        <div className={s.dialogsItem}>{dialogsElements}</div>
       </div>
       <div className={s.messages}>
-        <Message
-          message={messagesData[0].message}
-        />
-        <Message message={messagesData[1].message} />
-        <Message
-          message={messagesData[2].message}
-        />
-        <Message
-          message={messagesData[3].message}
-        />
+        {messagesElems}
       </div>
     </div>
   );
