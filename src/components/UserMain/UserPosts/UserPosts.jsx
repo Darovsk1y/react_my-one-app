@@ -10,7 +10,7 @@ const UserPosts = () => {
 				<button type="submit" className={s.btn}>Send</button>
 			</form>
 		</div>
-		<PostsOld/>
+		<PostsOld />
 	</div>
   );
 };
