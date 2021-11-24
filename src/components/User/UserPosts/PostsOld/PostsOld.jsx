@@ -1,4 +1,4 @@
-import Post from "./Post";
+import Post from "./Post/Post";
 import s from "./PostsOld.module.css";
 
 /*Данные которые пришли к нам с сервера из БД  */

@@ -1,4 +1,4 @@
-import PostsOld from "./PostsOld";
+import PostsOld from "./PostsOld/PostsOld";
 import s from "./UserPosts.module.css";
 const UserPosts = () => {
   return (

@@ -1,4 +1,4 @@
-import Like from "./Like";
+import Like from "./Like/Like";
 import s from "./Post.module.css";
 const Post = (props) => {
   return (
