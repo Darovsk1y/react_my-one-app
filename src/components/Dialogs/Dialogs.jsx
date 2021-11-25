@@ -1,8 +1,25 @@
 import s from "./Dialogs.module.css";
-import dialogsElements from "./DialogsElements/DialogsElements";
-import messagesElems from './Messages/Messages';
+import Message from "./Message/Message";
+import DialogItem from './DialogItem/DialogItem';
 
 const Dialogs = (props) => {
+/* Обработка данных которые пришли из index через props */
+  let messagesElems = props.messagesData.map((message) => {
+	return <Message message={message.message} key={message.id}/>;
+  });
+  let dialogsElements = props.dialogsData.map((dialog) => {
+	
+	return (
+	  <DialogItem
+		key={dialog.id}
+		id={dialog.id}
+		name={dialog.name}
+		image={dialog.image}
+		text={dialog.text}
+	  />
+	);
+  });
+
   return (
     <div className={s.dialogs}>
       <div className={s.dialogsList}>

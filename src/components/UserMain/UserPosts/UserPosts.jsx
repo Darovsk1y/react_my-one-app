@@ -1,6 +1,6 @@
 import PostsOld from "./PostsOld/PostsOld";
 import s from "./UserPosts.module.css";
-const UserPosts = () => {
+const UserPosts = (props) => {
   return (
 	<div className={s.posts}>
 		My Posts
@@ -10,7 +10,7 @@ const UserPosts = () => {
 				<button type="submit" className={s.btn}>Send</button>
 			</form>
 		</div>
-		<PostsOld />
+		<PostsOld {...props}/>
 	</div>
   );
 };

@@ -1,12 +1,12 @@
 import UserHeader from "./UserHeader/UserHeader";
 import UserPosts from "./UserPosts/UserPosts";
 import s from "./User.module.css";
-const User = () => {
+const User = (props) => {
   return (
     <div className={s.user}>
       <UserHeader />
       <div className={s.block}>
-        <UserPosts />
+        <UserPosts {...props}/>
       </div>
     </div>
   );

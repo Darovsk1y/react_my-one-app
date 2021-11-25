@@ -8,8 +8,9 @@ import News from './components/News/News';
 import Muzic from './components/Muzic/Muzic';
 import Settings from './components/Settings/Settings';
 
+/* let SomeDialogs = () => {<Dialogs />}; */
 //todo Это компонента - это узел ф-ия, которая по сути является тегом
-const App = () => {
+const App = (props) => {
 	return (
 		<BrowserRouter>
 			<div className="app-wrapper">
@@ -17,8 +18,8 @@ const App = () => {
 				<Menu />
 				<main className="main">
 					<Routes>
-						<Route path='/profile/*' element={<Profile />} />
-						<Route path='/dialogs/*' element={<Dialogs />} />
+						<Route path='/profile/*' element={<Profile {...props}/>}/>
+						<Route path='/dialogs/*' element={<Dialogs {...props}/>} />
 						<Route path='/news/*' element={<News />} />
 						<Route path='/music/*' element={<Muzic />} />
 						<Route path='/settings/*' element={<Settings />} />
