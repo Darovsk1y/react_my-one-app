@@ -1,6 +1,6 @@
 import './App.css';
 import Header from './components/Header/Header';
-import Menu from './components/Menu/Menu-nav';
+import Asside from './components/Asside/Asside';
 import Profile from './components/UserMain/UserMain';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import Dialogs from './components/Dialogs/Dialogs';
@@ -15,11 +15,11 @@ const App = (props) => {
 		<BrowserRouter>
 			<div className="app-wrapper">
 				<Header />
-				<Menu />
+				<Asside data={props.state.assidePage}/>
 				<main className="main">
 					<Routes>
-						<Route path='/profile/*' element={<Profile {...props}/>}/>
-						<Route path='/dialogs/*' element={<Dialogs {...props}/>} />
+						<Route path='/profile/*' element={<Profile data={props.state.profilePage}/>}/>
+						<Route path='/dialogs/*' element={<Dialogs data={props.state.dialogsPage}/>} />
 						<Route path='/news/*' element={<News />} />
 						<Route path='/music/*' element={<Muzic />} />
 						<Route path='/settings/*' element={<Settings />} />

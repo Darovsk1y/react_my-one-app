@@ -87,9 +87,9 @@ h6 {
 
 	display: grid;
 	grid-template-areas: "header header"
-						"menu main";
+						"asside main";
 	grid-template-rows: 60px 1fr;
-	grid-template-columns: 0.2fr 1fr;
+	grid-template-columns: 0.25fr 1fr;
 	gap: 10px;
 	min-height: 100vh;
 }

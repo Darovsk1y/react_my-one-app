@@ -6,7 +6,7 @@ import s from "./PostsOld.module.css";
 
 const PostsOld = (props) => {
 /* Далее мы преобразовали в элементы массива */
-let postElements = props.postData.map((dialog) => {
+let postElements = props.data.posts.map((dialog) => {
 	return (
 	  <Post
 		key={dialog.id}

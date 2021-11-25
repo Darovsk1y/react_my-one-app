@@ -1,0 +1,5 @@
+.asside{
+	grid-area: asside;
+	background: linear-gradient(to top right, #2F368E, #0355cf);
+	padding: 10px 20px;
+}
