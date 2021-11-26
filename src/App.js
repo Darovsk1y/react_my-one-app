@@ -8,7 +8,6 @@ import News from './components/News/News';
 import Muzic from './components/Muzic/Muzic';
 import Settings from './components/Settings/Settings';
 
-/* let SomeDialogs = () => {<Dialogs />}; */
 //todo Это компонента - это узел ф-ия, которая по сути является тегом
 const App = (props) => {
 	return (
@@ -17,7 +16,7 @@ const App = (props) => {
 				<Asside data={props.state.assidePage}/>
 				<main className="main">
 					<Routes>
-						<Route path='/profile/*' element={<Profile data={props.state.profilePage}/>}/>
+						<Route path='/profile/*' element={<Profile data={props.state.profilePage} addPost={props.addPost}/>}/>
 						<Route path='/dialogs/*' element={<Dialogs data={props.state.dialogsPage}/>} />
 						<Route path='/news/*' element={<News />} />
 						<Route path='/music/*' element={<Muzic />} />
