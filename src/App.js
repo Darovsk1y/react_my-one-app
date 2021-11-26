@@ -2,7 +2,7 @@ import './App.css';
 import Header from './components/Header/Header';
 import Asside from './components/Asside/Asside';
 import Profile from './components/UserMain/UserMain';
-import { BrowserRouter, Routes, Route } from 'react-router-dom';
+import { Routes, Route } from 'react-router-dom';
 import Dialogs from './components/Dialogs/Dialogs';
 import News from './components/News/News';
 import Muzic from './components/Muzic/Muzic';
@@ -12,7 +12,6 @@ import Settings from './components/Settings/Settings';
 //todo Это компонента - это узел ф-ия, которая по сути является тегом
 const App = (props) => {
 	return (
-		<BrowserRouter>
 			<div className="app-wrapper">
 				<Header />
 				<Asside data={props.state.assidePage}/>
@@ -26,7 +25,6 @@ const App = (props) => {
 					</Routes>
 				</main>
 			</div>
-		</BrowserRouter>
 	);
 }
 export default App;

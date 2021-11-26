@@ -1,0 +1,29 @@
+.newmessage{
+	padding: 0px 0px 0px 50px;
+}
+.textarea{
+	width: 100%;
+    resize: none;
+    min-height: 100px;
+    padding: 10px 15px;
+    box-sizing: border-box;
+    font-size: 16px;
+    color: black;
+    border-radius: 5px;
+    border: none;
+}
+.btn{
+	min-width: 120px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 10px;
+    font-size: 24px;
+    color: black;
+    background-color: rgb(136, 241, 255);
+    border: none;
+    border-radius: 5px;
+    text-align: right;
+    margin-left: auto;
+    cursor: pointer;
+}

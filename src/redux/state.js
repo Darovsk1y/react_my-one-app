@@ -112,6 +112,8 @@ let state = {
 		messages: [
 			{
 				id: "1",
+				image:"http://cs622426.vk.me/v622426834/409d/baLqspYwi84.jpg",
+				link:"#/",
 				position: "left",
 				message: `Lorem ipsum dolor sit amet consectetur adipisicing elit. Ipsum, nulla.
 			  Error magni ipsa inventore consectetur rerum, accusamus molestias sit
@@ -120,11 +122,15 @@ let state = {
 			},
 			{
 				id: "2",
+				image:"http://cs622426.vk.me/v622426834/409d/baLqspYwi84.jpg",
+				link:"#/",
 				position: "right",
 				message: `Lorem ipsum dolor sit amet consectetur adipisicing elit. Ipsum, nulla.`,
 			},
 			{
 				id: "3",
+				image:"http://cs622426.vk.me/v622426834/409d/baLqspYwi84.jpg",
+				link:"#/",
 				position: "left",
 				message: `Lorem ipsum dolor sit amet consectetur adipisicing elit. Ipsum, nulla.
 			  Error magni ipsa inventore consectetur rerum, accusamus molestias sit
@@ -135,6 +141,8 @@ let state = {
 			},
 			{
 				id: "4",
+				image:"http://cs622426.vk.me/v622426834/409d/baLqspYwi84.jpg",
+				link:"#/",
 				position: "right",
 				message: `I heal in raids, inexpensive! Fast healing without problems! Help and leveling characters!`,
 			},
@@ -208,4 +216,15 @@ let state = {
 		],
 	}
 }
+
+/* let addPost = (newMessage) =>{
+	let newPost = {
+		id: 4,
+		likes: "2",
+		name: "Raketa",
+		avatar: "http://cs622426.vk.me/v622426834/409d/baLqspYwi84.jpg",
+		text: {newMessage},
+	}
+	state.profilePage.posts.push(newPost);
+} */
 export default state;
