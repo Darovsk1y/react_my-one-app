@@ -7,11 +7,15 @@ import App from './App';
 
 import { BrowserRouter } from 'react-router-dom';
 
-export let renderEntireTree =(state, addPost)=>{
+export let renderEntireTree =(state, addPost, addMessage, trackWritePost, trackWriteMessage)=>{
 	ReactDOM.render(
 		<React.StrictMode>
 			<BrowserRouter>
-				<App state={state} addPost={addPost}/>
+				<App state={state} 
+				addPost={addPost} 
+				addMessage={addMessage} 
+				trackWritePost={trackWritePost} 
+				trackWriteMessage={trackWriteMessage}/>
 			</BrowserRouter>
 		</React.StrictMode>,
 		document.getElementById('root')

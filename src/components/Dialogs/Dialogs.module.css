@@ -27,6 +27,8 @@ position: relative;
 }
 .messages{
 	margin: 0px 0px 10px 0px;
+	display: flex;
+	flex-direction: column;
 }
 .board{
 	

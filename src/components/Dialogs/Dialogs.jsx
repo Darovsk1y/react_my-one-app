@@ -27,15 +27,19 @@ const Dialogs = (props) => {
       />
     );
   });
-
   return (
     <div className={s.dialogs}>
       <div className={s.dialogsList}>{dialogsElements}</div>
       <div className={s.board}>
         <div className={s.messages}>{messagesElems}</div>
-			<NewMessage/>
+			<NewMessage 
+			addMessage={props.addMessage} 
+			newMessageText={props.data.newMessageText} 
+			trackWriteMessage={props.trackWriteMessage}/>
       </div>
     </div>
+	
   );
+  
 };
 export default Dialogs;

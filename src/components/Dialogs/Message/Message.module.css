@@ -1,5 +1,7 @@
-.row{
+.messageblock{
 	display: inline-flex;
+	max-width: 90%;
+    margin: 0px 0px 10px 0px;
 }
 .image{
 	flex: 0 0 40px;
@@ -13,10 +15,9 @@
 	object-fit: cover;
 }
 .message {
-	max-width: 90%;
 	background-color: rgb(136, 241, 255);
     border-radius: 5px;
-    margin: 0px 0px 10px 0px;
+
     font-size: 16px;
 	padding: 10px 15px;
 }

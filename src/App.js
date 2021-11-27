@@ -11,19 +11,27 @@ import Settings from './components/Settings/Settings';
 //todo Это компонента - это узел ф-ия, которая по сути является тегом
 const App = (props) => {
 	return (
-			<div className="app-wrapper">
-				<Header />
-				<Asside data={props.state.assidePage}/>
-				<main className="main">
-					<Routes>
-						<Route path='/profile/*' element={<Profile data={props.state.profilePage} addPost={props.addPost}/>}/>
-						<Route path='/dialogs/*' element={<Dialogs data={props.state.dialogsPage}/>} />
-						<Route path='/news/*' element={<News />} />
-						<Route path='/music/*' element={<Muzic />} />
-						<Route path='/settings/*' element={<Settings />} />
-					</Routes>
-				</main>
-			</div>
+		<div className="app-wrapper">
+			<Header />
+			<Asside data={props.state.assidePage} />
+			<main className="main">
+				<Routes>
+					<Route path='/profile/*' element={<Profile
+						data={props.state.profilePage}
+						addPost={props.addPost}
+						trackWritePost={props.trackWrite}
+					/>} />
+					<Route path='/dialogs/*' element={<Dialogs
+						data={props.state.dialogsPage}
+						addMessage={props.addMessage}
+						trackWriteMessage={props.trackWriteMessage} />}
+					/>
+					<Route path='/news/*' element={<News />} />
+					<Route path='/music/*' element={<Muzic />} />
+					<Route path='/settings/*' element={<Settings />} />
+				</Routes>
+			</main>
+		</div>
 	);
 }
 export default App;

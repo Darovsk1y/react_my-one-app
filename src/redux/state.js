@@ -28,6 +28,7 @@ let state = {
 				text: `asperiores nobis, temporibus consequatur ipsa incidunt tempore quam deleniti eum quisquam excepturi quis omnis officiis quas officia illum placeat dolorum?`,
 			},
 		],
+		newPostText: '',
 	},
 	dialogsPage: {
 		messages: [
@@ -68,6 +69,7 @@ let state = {
 				message: `I heal in raids, inexpensive! Fast healing without problems! Help and leveling characters!`,
 			},
 		],
+		newMessageText: "",
 		dialogs: [
 			{
 				id: "1",
@@ -137,16 +139,38 @@ let state = {
 		],
 	}
 }
-
-export let addPost = (newMessage) => {
+window.state =state;
+export let addPost = () => {
 	let newPost = {
 		id: 4,
 		likes: 0,
 		name: "Raketa",
 		avatar: "https://scontent.fdnk5-1.fna.fbcdn.net/v/t1.6435-9/71788193_525812181517269_1225717343393415168_n.jpg?_nc_cat=101&ccb=1-5&_nc_sid=09cbfe&_nc_ohc=Sk5ngR6CQa4AX-YK48H&tn=cowQwI4GI2N4ygpU&_nc_ht=scontent.fdnk5-1.fna&oh=1c6d0f524bfa3b80e7e77a8ab7c5b805&oe=61BCB1BD",
-		text: newMessage,
+		text: state.profilePage.newPostText,
 	}
 	state.profilePage.posts.push(newPost);
-	renderEntireTree(state, addPost);
+	state.profilePage.newPostText = '';
+	renderEntireTree(state, addPost, addMessage, trackWritePost, trackWriteMessage);
+}
+/*todo При вводе текста следит за value  */
+export let trackWritePost = (newText) => {
+	state.profilePage.newPostText = newText;
+	renderEntireTree(state, addPost, addMessage, trackWritePost, trackWriteMessage);
+}
+export let trackWriteMessage =(newMessage) =>{
+	state.dialogsPage.newMessageText = newMessage;
+	renderEntireTree(state, addPost, addMessage, trackWritePost, trackWriteMessage);
+}
+export let addMessage = () => {
+	let newMessage = {
+		id: "5",
+		image: "http://cs622426.vk.me/v622426834/409d/baLqspYwi84.jpg",
+		link: "#/",
+		position: "right",
+		message: state.dialogsPage.newMessageText,
+	}
+	state.dialogsPage.messages.push(newMessage);
+	state.dialogsPage.newMessageText = '';
+	renderEntireTree(state, addPost, addMessage, trackWritePost, trackWriteMessage);
 }
 export default state;

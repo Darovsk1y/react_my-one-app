@@ -5,8 +5,11 @@ const NewMessage = (props) => {
 let newMessage = React.createRef();
 	/* Обработчик кнопки */
 let NewPostSend = () =>{
+	props.addMessage();
+};
+let trackMessage =() =>{
 	let text = newMessage.current.value;
-	alert(text);
+	props.trackWriteMessage(text);
 };
 
   return (
@@ -14,10 +17,11 @@ let NewPostSend = () =>{
       <textarea
         name="textarea"
         className={s.textarea}
-        placeholder="New message ..."
+        value={props.newMessageText}
 		ref={newMessage}
+		onChange={trackMessage}
       ></textarea>
-      <button type="submit" className={s.btn} onClick={NewPostSend}>
+      <button type="button" className={s.btn} onClick={NewPostSend}>
         Send
       </button>
     </form>
