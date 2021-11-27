@@ -1,5 +1,7 @@
 /*Данные которые пришли к нам с сервера из БД  */
-import { renderEntireTree } from './../render';
+let renderEntireTree=()=>{
+	console.log("rendef yessss");
+}
 
 let state = {
 	profilePage: {
@@ -140,7 +142,7 @@ let state = {
 	}
 }
 window.state =state;
-export let addPost = () => {
+export const addPost = () => {
 	let newPost = {
 		id: 4,
 		likes: 0,
@@ -150,18 +152,18 @@ export let addPost = () => {
 	}
 	state.profilePage.posts.push(newPost);
 	state.profilePage.newPostText = '';
-	renderEntireTree(state, addPost, addMessage, trackWritePost, trackWriteMessage);
+	renderEntireTree(state);
 }
 /*todo При вводе текста следит за value  */
-export let trackWritePost = (newText) => {
+export const trackWritePost = (newText) => {
 	state.profilePage.newPostText = newText;
-	renderEntireTree(state, addPost, addMessage, trackWritePost, trackWriteMessage);
+	renderEntireTree(state);
 }
-export let trackWriteMessage =(newMessage) =>{
+export const trackWriteMessage =(newMessage) =>{
 	state.dialogsPage.newMessageText = newMessage;
-	renderEntireTree(state, addPost, addMessage, trackWritePost, trackWriteMessage);
+	renderEntireTree(state);
 }
-export let addMessage = () => {
+export const addMessage = () => {
 	let newMessage = {
 		id: "5",
 		image: "http://cs622426.vk.me/v622426834/409d/baLqspYwi84.jpg",
@@ -171,6 +173,9 @@ export let addMessage = () => {
 	}
 	state.dialogsPage.messages.push(newMessage);
 	state.dialogsPage.newMessageText = '';
-	renderEntireTree(state, addPost, addMessage, trackWritePost, trackWriteMessage);
+	renderEntireTree(state);
+}
+export const subscribe = (observer) =>{
+	renderEntireTree = observer;
 }
 export default state;

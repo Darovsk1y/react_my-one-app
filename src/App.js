@@ -19,7 +19,7 @@ const App = (props) => {
 					<Route path='/profile/*' element={<Profile
 						data={props.state.profilePage}
 						addPost={props.addPost}
-						trackWritePost={props.trackWrite}
+						trackWritePost={props.trackWritePost}
 					/>} />
 					<Route path='/dialogs/*' element={<Dialogs
 						data={props.state.dialogsPage}
