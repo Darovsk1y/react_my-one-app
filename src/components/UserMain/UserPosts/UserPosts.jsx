@@ -7,6 +7,7 @@ const UserPosts = (props) => {
 
 let textNewPost = React.createRef();
 let createNewPost = () =>{
+	debugger;
 	props.addPost();
 };
 let trackChange = () =>{
