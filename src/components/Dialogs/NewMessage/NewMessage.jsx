@@ -5,11 +5,12 @@ const NewMessage = (props) => {
 let newMessage = React.createRef();
 	/* Обработчик кнопки */
 let NewPostSend = () =>{
-	props.addMessage();
+	props.dispatch({type:"ADD-MESSAGE"});
 };
 let trackMessage =() =>{
 	let text = newMessage.current.value;
-	props.trackWriteMessage(text);
+	props.dispatch({type:"TRACK-WRITE-MESSAGE",
+					message: text});
 };
 
   return (
@@ -17,7 +18,7 @@ let trackMessage =() =>{
       <textarea
         name="textarea"
         className={s.textarea}
-        value={props.newMessageText}
+        value={props.data.newMessageText}
 		ref={newMessage}
 		onChange={trackMessage}
       ></textarea>

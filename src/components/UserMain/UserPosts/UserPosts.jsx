@@ -4,15 +4,14 @@ import s from "./UserPosts.module.css";
 import React from 'react'; 
 
 const UserPosts = (props) => {
-
 let textNewPost = React.createRef();
 let createNewPost = () =>{
-	debugger;
-	props.addPost();
+	props.dispatch({type:"ADD-POST"});
 };
 let trackChange = () =>{
 	let text = textNewPost.current.value
-	props.trackWritePost(text);
+	props.dispatch({type:"TRACK-WRITE-POST",
+					text:text});
 }
 
   return (

@@ -33,9 +33,8 @@ const Dialogs = (props) => {
       <div className={s.board}>
         <div className={s.messages}>{messagesElems}</div>
 			<NewMessage 
-			addMessage={props.addMessage} 
-			newMessageText={props.data.newMessageText} 
-			trackWriteMessage={props.trackWriteMessage}/>
+			dispatch={props.dispatch}
+			data={props.data}/>
       </div>
     </div>
 	

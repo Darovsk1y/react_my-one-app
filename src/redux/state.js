@@ -141,13 +141,16 @@ let store = {
 			],
 		}
 	},
+
 	/* метод возврата приватного метода */
 	getState(){
-		debugger;
 		return this._state;
 	},
-	addPost() {
-		debugger;
+	subscribe (observer){
+		this._callSubscriber = observer;
+	},
+
+	_addPost() {
 		let newPost = {
 			id: 4,
 			likes: 0,
@@ -159,16 +162,7 @@ let store = {
 		this._state.profilePage.newPostText = '';
 		this._callSubscriber(this._state);
 	},
-	/*todo При вводе текста следит за value  */
-	trackWritePost (newText) {
-		this._state.profilePage.newPostText = newText;
-		this._callSubscriber(this._state);
-	},
-	trackWriteMessage (newMessage){
-		this._state.dialogsPage.newMessageText = newMessage;
-		this._callSubscriber(this._state);
-	},
-	addMessage () {
+	_addMessage () {
 		let newMessage = {
 			id: "5",
 			image: "http://cs622426.vk.me/v622426834/409d/baLqspYwi84.jpg",
@@ -180,8 +174,28 @@ let store = {
 		this._state.dialogsPage.newMessageText = '';
 		this._callSubscriber(this._state);
 	},
-	subscribe (observer){
-		this._callSubscriber = observer;
+	/*todo При вводе текста следит за value  */
+	_trackWritePost (newText) {
+		this._state.profilePage.newPostText = newText;
+		this._callSubscriber(this._state);
+	},
+	_trackWriteMessage (newMessage){
+		this._state.dialogsPage.newMessageText = newMessage;
+		this._callSubscriber(this._state);
+	},
+	dispatch(action) {
+		if(action.type === "ADD-POST"){
+			this._addPost();
+		}
+		else if(action.type === "ADD-MESSAGE"){
+			this._addMessage();
+		}
+		else if(action.type === "TRACK-WRITE-POST"){
+			this._trackWritePost (action.text);
+		}
+		else if(action.type === "TRACK-WRITE-MESSAGE"){
+			this._trackWriteMessage (action.message);
+		}
 	},
 }
 

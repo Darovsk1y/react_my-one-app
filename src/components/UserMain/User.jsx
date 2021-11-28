@@ -6,7 +6,8 @@ const User = (props) => {
     <div className={s.user}>
       <UserHeader />
       <div className={s.block}>
-        <UserPosts {...props}/>
+        <UserPosts dispatch={props.dispatch} 
+					data={props.data}/>
       </div>
     </div>
   );
