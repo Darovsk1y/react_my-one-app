@@ -2,16 +2,19 @@
 import PostsOld from "./PostsOld/PostsOld";
 import s from "./UserPosts.module.css";
 import React from 'react'; 
+import { newPostActionCreator } from './../../../redux/state';
+import { trackWritePostActionCreator } from './../../../redux/state';
+
 
 const UserPosts = (props) => {
 let textNewPost = React.createRef();
+
 let createNewPost = () =>{
-	props.dispatch({type:"ADD-POST"});
+	props.dispatch(newPostActionCreator());
 };
 let trackChange = () =>{
 	let text = textNewPost.current.value
-	props.dispatch({type:"TRACK-WRITE-POST",
-					text:text});
+	props.dispatch(trackWritePostActionCreator(text));
 }
 
   return (

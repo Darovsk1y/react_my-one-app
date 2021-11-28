@@ -1,16 +1,18 @@
 import s from "./NewMessage.module.css";
 import  React  from 'react';
-const NewMessage = (props) => {
+import { newMessageActionCreator } from './../../../redux/state';
+import { trackMessageActionCreator } from './../../../redux/state';
 
+
+const NewMessage = (props) => {
 let newMessage = React.createRef();
 	/* Обработчик кнопки */
 let NewPostSend = () =>{
-	props.dispatch({type:"ADD-MESSAGE"});
+	props.dispatch(newMessageActionCreator());
 };
 let trackMessage =() =>{
 	let text = newMessage.current.value;
-	props.dispatch({type:"TRACK-WRITE-MESSAGE",
-					message: text});
+	props.dispatch(trackMessageActionCreator(text));
 };
 
   return (
