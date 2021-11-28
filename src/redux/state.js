@@ -150,51 +150,38 @@ let store = {
 		this._callSubscriber = observer;
 	},
 
-	_addPost() {
-		let newPost = {
-			id: 4,
-			likes: 0,
-			name: "Raketa",
-			avatar: "https://scontent.fdnk5-1.fna.fbcdn.net/v/t1.6435-9/71788193_525812181517269_1225717343393415168_n.jpg?_nc_cat=101&ccb=1-5&_nc_sid=09cbfe&_nc_ohc=Sk5ngR6CQa4AX-YK48H&tn=cowQwI4GI2N4ygpU&_nc_ht=scontent.fdnk5-1.fna&oh=1c6d0f524bfa3b80e7e77a8ab7c5b805&oe=61BCB1BD",
-			text: this._state.profilePage.newPostText,
-		}
-		this._state.profilePage.posts.push(newPost);
-		this._state.profilePage.newPostText = '';
-		this._callSubscriber(this._state);
-	},
-	_addMessage () {
-		let newMessage = {
-			id: "5",
-			image: "http://cs622426.vk.me/v622426834/409d/baLqspYwi84.jpg",
-			link: "#/",
-			position: "right",
-			message: this._state.dialogsPage.newMessageText,
-		}
-		this._state.dialogsPage.messages.push(newMessage);
-		this._state.dialogsPage.newMessageText = '';
-		this._callSubscriber(this._state);
-	},
-	/*todo При вводе текста следит за value  */
-	_trackWritePost (newText) {
-		this._state.profilePage.newPostText = newText;
-		this._callSubscriber(this._state);
-	},
-	_trackWriteMessage (newMessage){
-		this._state.dialogsPage.newMessageText = newMessage;
-		this._callSubscriber(this._state);
-	},
 	dispatch(action) {
 		if(action.type === "ADD-POST"){
-			this._addPost();
+			let newPost = {
+				id: 4,
+				likes: 0,
+				name: "Raketa",
+				avatar: "https://scontent.fdnk5-1.fna.fbcdn.net/v/t1.6435-9/71788193_525812181517269_1225717343393415168_n.jpg?_nc_cat=101&ccb=1-5&_nc_sid=09cbfe&_nc_ohc=Sk5ngR6CQa4AX-YK48H&tn=cowQwI4GI2N4ygpU&_nc_ht=scontent.fdnk5-1.fna&oh=1c6d0f524bfa3b80e7e77a8ab7c5b805&oe=61BCB1BD",
+				text: this._state.profilePage.newPostText,
+			}
+			this._state.profilePage.posts.push(newPost);
+			this._state.profilePage.newPostText = '';
+			this._callSubscriber(this._state);
 		}
 		else if(action.type === "ADD-MESSAGE"){
-			this._addMessage();
+			let newMessage = {
+				id: "5",
+				image: "http://cs622426.vk.me/v622426834/409d/baLqspYwi84.jpg",
+				link: "#/",
+				position: "right",
+				message: this._state.dialogsPage.newMessageText,
+			}
+			this._state.dialogsPage.messages.push(newMessage);
+			this._state.dialogsPage.newMessageText = '';
+			this._callSubscriber(this._state);
 		}
 		else if(action.type === "TRACK-WRITE-POST"){
-			this._trackWritePost (action.text);
+			this._state.profilePage.newPostText = action.text;
+			this._callSubscriber(this._state);
 		}
 		else if(action.type === "TRACK-WRITE-MESSAGE"){
-			this._trackWriteMessage (action.message);
+			this._state.dialogsPage.newMessageText = action.message;
+			this._callSubscriber(this._state);
 		}
 	},
 }
