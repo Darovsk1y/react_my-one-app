@@ -1,10 +1,6 @@
 import profileReducer from './profile_reducer';
 import dialogsReducer from './dialogs_reducer';
 import assideReducer from './asside_reducer';
-const ADD_MESSAGE = "ADD-MESSAGE";
-const TRACK_WRITE_MESSAGE = "TRACK-WRITE-MESSAGE";
-const ADD_POST = "ADD-POST";
-const TRACK_WRITE_POST = "TRACK-WRITE-POST";
 
 let store = {
 	_callSubscriber(){
@@ -167,27 +163,5 @@ let store = {
 	},
 }
 
-export const newMessageActionCreator = () =>{
-	return {
-		type:ADD_MESSAGE
-	}
-};
-export const trackMessageActionCreator = (message) =>{
-	return {
-		type:TRACK_WRITE_MESSAGE,
-		message: message,
-	}
-};
-export const newPostActionCreator = () =>{
-	return {
-		type:ADD_POST
-	}
-};
-export const trackWritePostActionCreator = (text) =>{
-	return {
-		type:TRACK_WRITE_POST,
-		text: text,
-	}
-}; 
 
 export default store;

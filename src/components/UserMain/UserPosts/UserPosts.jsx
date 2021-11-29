@@ -2,9 +2,8 @@
 import PostsOld from "./PostsOld/PostsOld";
 import s from "./UserPosts.module.css";
 import React from 'react'; 
-import { newPostActionCreator } from './../../../redux/state';
-import { trackWritePostActionCreator } from './../../../redux/state';
-
+import { newPostActionCreator } from './../../../redux/profile_reducer';
+import { trackWritePostActionCreator } from './../../../redux/profile_reducer';
 
 const UserPosts = (props) => {
 let textNewPost = React.createRef();

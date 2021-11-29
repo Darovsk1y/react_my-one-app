@@ -21,4 +21,15 @@ const dialogsReducer =(state, action)=>{
 			return state;
 	}
 }
+export const newMessageActionCreator = () =>{
+	return {
+		type:ADD_MESSAGE
+	}
+};
+export const trackMessageActionCreator = (message) =>{
+	return {
+		type:TRACK_WRITE_MESSAGE,
+		message: message,
+	}
+};
 export default dialogsReducer;

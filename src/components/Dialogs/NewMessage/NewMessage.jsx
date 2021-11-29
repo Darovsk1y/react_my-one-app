@@ -1,8 +1,7 @@
 import s from "./NewMessage.module.css";
 import  React  from 'react';
-import { newMessageActionCreator } from './../../../redux/state';
-import { trackMessageActionCreator } from './../../../redux/state';
-
+import { newMessageActionCreator } from './../../../redux/dialogs_reducer';
+import { trackMessageActionCreator } from './../../../redux/dialogs_reducer';
 
 const NewMessage = (props) => {
 let newMessage = React.createRef();

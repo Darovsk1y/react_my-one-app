@@ -23,4 +23,15 @@ const profileReducer =(state, action)=>{
 			return state;
 	}
 }
+export const newPostActionCreator = () =>{
+	return {
+		type:ADD_POST
+	}
+};
+export const trackWritePostActionCreator = (text) =>{
+	return {
+		type:TRACK_WRITE_POST,
+		text: text,
+	}
+}; 
 export default profileReducer;
