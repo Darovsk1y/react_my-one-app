@@ -1,3 +1,6 @@
+import profileReducer from './profile_reducer';
+import dialogsReducer from './dialogs_reducer';
+import assideReducer from './asside_reducer';
 const ADD_MESSAGE = "ADD-MESSAGE";
 const TRACK_WRITE_MESSAGE = "TRACK-WRITE-MESSAGE";
 const ADD_POST = "ADD-POST";
@@ -155,38 +158,12 @@ let store = {
 	},
 
 	dispatch(action) {
-		if(action.type === "ADD-POST"){
-			let newPost = {
-				id: 4,
-				likes: 0,
-				name: "Raketa",
-				avatar: "https://scontent.fdnk5-1.fna.fbcdn.net/v/t1.6435-9/71788193_525812181517269_1225717343393415168_n.jpg?_nc_cat=101&ccb=1-5&_nc_sid=09cbfe&_nc_ohc=Sk5ngR6CQa4AX-YK48H&tn=cowQwI4GI2N4ygpU&_nc_ht=scontent.fdnk5-1.fna&oh=1c6d0f524bfa3b80e7e77a8ab7c5b805&oe=61BCB1BD",
-				text: this._state.profilePage.newPostText,
-			}
-			this._state.profilePage.posts.push(newPost);
-			this._state.profilePage.newPostText = '';
-			this._callSubscriber(this._state);
-		}
-		else if(action.type === "ADD-MESSAGE"){
-			let newMessage = {
-				id: "5",
-				image: "http://cs622426.vk.me/v622426834/409d/baLqspYwi84.jpg",
-				link: "#/",
-				position: "right",
-				message: this._state.dialogsPage.newMessageText,
-			}
-			this._state.dialogsPage.messages.push(newMessage);
-			this._state.dialogsPage.newMessageText = '';
-			this._callSubscriber(this._state);
-		}
-		else if(action.type === "TRACK-WRITE-POST"){
-			this._state.profilePage.newPostText = action.text;
-			this._callSubscriber(this._state);
-		}
-		else if(action.type === "TRACK-WRITE-MESSAGE"){
-			this._state.dialogsPage.newMessageText = action.message;
-			this._callSubscriber(this._state);
-		}
+		/* теперь наши редьюсеры обрабатывают данные и мы их обновляем */
+		this._state.profilePage = profileReducer(this._state.profilePage, action);
+		this._state.dialogsPage = dialogsReducer(this._state.dialogsPage, action);
+		this._state.assidePage = assideReducer(this._state.assidePage, action);
+
+		this._callSubscriber(this._state);
 	},
 }
 
