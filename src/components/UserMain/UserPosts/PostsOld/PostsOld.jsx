@@ -6,7 +6,7 @@ import s from "./PostsOld.module.css";
 
 const PostsOld = (props) => {
 /* Далее мы преобразовали в элементы массива */
-let postElements = props.data.posts.map((dialog) => {
+let postElements = props.data.map((dialog) => {
 
 	return (
 	  <Post

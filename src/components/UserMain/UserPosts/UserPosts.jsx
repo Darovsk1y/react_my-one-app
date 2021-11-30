@@ -2,18 +2,16 @@
 import PostsOld from "./PostsOld/PostsOld";
 import s from "./UserPosts.module.css";
 import React from 'react'; 
-import { newPostActionCreator } from './../../../redux/profile_reducer';
-import { trackWritePostActionCreator } from './../../../redux/profile_reducer';
 
 const UserPosts = (props) => {
 let textNewPost = React.createRef();
-
-let createNewPost = () =>{
-	props.dispatch(newPostActionCreator());
+/* Теперь у нас тут только ф-ии пришедшие через пропсы, т.е. кулбеки, логику отсюда убрали */
+let addPost = () =>{
+	props.createNewPost();
 };
 let trackChange = () =>{
 	let text = textNewPost.current.value
-	props.dispatch(trackWritePostActionCreator(text));
+	props.trackWritePost(text);
 }
 
   return (
@@ -22,10 +20,10 @@ let trackChange = () =>{
 		<div className={s.new}>
 			<form action="" className={s.form}>
 				<textarea name="textarea" className={s.textarea} ref={textNewPost} value={props.data.newPostText} onChange={trackChange}></textarea>
-				<button type="button" className={s.btn} onClick={createNewPost}>Send</button>
+				<button type="button" className={s.btn} onClick={addPost}>Send</button>
 			</form>
 		</div>
-		<PostsOld data={props.data}/>
+		<PostsOld data={props.data.posts}/>
 	</div>
 
   );

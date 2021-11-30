@@ -1,7 +1,7 @@
 import s from "./Dialogs.module.css";
 import Message from "./Message/Message";
 import DialogItem from "./DialogItem/DialogItem";
-import NewMessage from "./NewMessage/NewMessage";
+import NewMessageContainer from './NewMessage/NewMessageContainer';
 
 const Dialogs = (props) => {
   /* Обработка данных которые пришли из index через props */
@@ -32,9 +32,9 @@ const Dialogs = (props) => {
       <div className={s.dialogsList}>{dialogsElements}</div>
       <div className={s.board}>
         <div className={s.messages}>{messagesElems}</div>
-			<NewMessage 
+			<NewMessageContainer 
 			dispatch={props.dispatch}
-			data={props.data}/>
+			data={props.data.newMessageText}/>
       </div>
     </div>
 	
