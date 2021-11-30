@@ -13,15 +13,15 @@ const App = (props) => {
 	return (
 		<div className="app-wrapper">
 			<Header />
-			<Asside data={props.state.assidePage} />
+			<Asside data={props.state.asside} />
 			<main className="main">
 				<Routes>
 					<Route path='/profile/*' element={<Profile
-						data={props.state.profilePage}
+						data={props.state.profile}
 						dispatch={props.dispatch}
 					/>} />
 					<Route path='/dialogs/*' element={<Dialogs
-						data={props.state.dialogsPage}
+						data={props.state.dialogs}
 						dispatch={props.dispatch}
 						 />}
 					/>
