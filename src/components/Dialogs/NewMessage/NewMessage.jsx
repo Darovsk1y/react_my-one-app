@@ -11,12 +11,13 @@ let trackMessage =() =>{
 	let text = newMessage.current.value;
 	props.trackMessage(text);
 };
+
   return (
     <form action="" className={s.newmessage}>
       <textarea
         name="textarea"
         className={s.textarea}
-        value={props.data}
+        value={props.newMessageText}
 		ref={newMessage}
 		onChange={trackMessage}
       ></textarea>

@@ -1,11 +1,12 @@
 import s from "./Dialogs.module.css";
-import Message from "./Message/Message";
-import DialogItem from "./DialogItem/DialogItem";
+/* import Message from "./Message/Message";
+import DialogItem from "./DialogItem/DialogItem"; */
 import NewMessageContainer from './NewMessage/NewMessageContainer';
 
 const Dialogs = (props) => {
-  /* Обработка данных которые пришли из index через props */
-  let messagesElems = props.data.messages.map((message) => {
+/* let state = props.store.getState();
+ */
+/*   let messagesElems = state.dialogs.messages.map((message) => {
     return (
       <Message
         position={message.position}
@@ -16,7 +17,7 @@ const Dialogs = (props) => {
       />
     );
   });
-  let dialogsElements = props.data.dialogs.map((dialog) => {
+  let dialogsElements = state.dialogs.dialogs.map((dialog) => {
     return (
       <DialogItem
         key={dialog.id}
@@ -26,15 +27,16 @@ const Dialogs = (props) => {
         text={dialog.text}
       />
     );
-  });
+  }); */
+
   return (
     <div className={s.dialogs}>
-      <div className={s.dialogsList}>{dialogsElements}</div>
+      <div className={s.dialogsList}>{props.dialogsElements}</div>
       <div className={s.board}>
-        <div className={s.messages}>{messagesElems}</div>
+        <div className={s.messages}>{props.messagesElems}</div>
 			<NewMessageContainer 
-			dispatch={props.dispatch}
-			data={props.data.newMessageText}/>
+			newMessageText={props.newMessageText}
+			dispatch={props.dispatch}/>
       </div>
     </div>
 	

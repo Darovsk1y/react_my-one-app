@@ -7,8 +7,7 @@ const UserMain = (props) => {
     <div className={s.main}>
       <MainImage />
       <div className={s.body}>
-        <User dispatch={props.dispatch} 
-				data={props.data} />
+        <User store={props.store} />
       </div>
     </div>
   );

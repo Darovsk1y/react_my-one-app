@@ -10,7 +10,7 @@ let reducersPack = combineReducers({
 	dialogs: dialogsReducer,
 	asside: assideReducer,
 });
-
+/*! теперь ф=ия getState вернет нам такие же названия для разделов как мы задали Редюсерам выше */
 let store = createStore(reducersPack);
 
 export default store;

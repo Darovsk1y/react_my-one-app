@@ -19,11 +19,11 @@ let trackChange = () =>{
 		My Posts
 		<div className={s.new}>
 			<form action="" className={s.form}>
-				<textarea name="textarea" className={s.textarea} ref={textNewPost} value={props.data.newPostText} onChange={trackChange}></textarea>
+				<textarea name="textarea" className={s.textarea} ref={textNewPost} value={props.newPostText} onChange={trackChange}></textarea>
 				<button type="button" className={s.btn} onClick={addPost}>Send</button>
 			</form>
 		</div>
-		<PostsOld data={props.data.posts}/>
+		<PostsOld posts={props.posts}/>
 	</div>
 
   );

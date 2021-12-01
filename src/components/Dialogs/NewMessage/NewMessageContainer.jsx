@@ -11,7 +11,7 @@ let trackMessage =(text) =>{
 	props.dispatch(action);
 };
   return (
-	<NewMessage newMessageSend={NewMessageSend} trackMessage={trackMessage} data={props.data}/>
+	<NewMessage newMessageSend={NewMessageSend} trackMessage={trackMessage} newMessageText={props.newMessageText}/>
   );
 };
 export default NewMessageContainer;

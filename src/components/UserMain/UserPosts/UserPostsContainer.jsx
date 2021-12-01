@@ -5,16 +5,22 @@ import UserPosts from './UserPosts';
 
 /* Теперь вся логика у нас тут */
 const UserPostsContainer = (props) => {
+let state = props.store.getState();
+
 let addPost = () =>{
-	props.dispatch(newPostActionCreator());
+	props.store.dispatch(newPostActionCreator());
 };
 let trackChange = (text) =>{
 	let action = trackWritePostActionCreator(text);
-	props.dispatch(action);
+	props.store.dispatch(action);
 }
 
   return (
-	<UserPosts trackWritePost={trackChange} createNewPost={addPost} data={props.data}/>
+	<UserPosts trackWritePost={trackChange}
+	 createNewPost={addPost}
+	  newPostText={state.profile.newPostText}
+	  posts={state.profile.posts}
+	  />
   );
 };
 export default UserPostsContainer;
