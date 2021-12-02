@@ -18,11 +18,11 @@ const App = (props) => {
 			<main className="main">
 				<Routes>
 					<Route path='/profile/*' element={<Profile />} />
-					<Route path='/dialogs/*' element={<DialogsContainer />}
-					/>
+					<Route path='/dialogs/*' element={<DialogsContainer />} />
 					<Route path='/news/*' element={<News />} />
 					<Route path='/music/*' element={<Muzic />} />
 					<Route path='/settings/*' element={<Settings />} />
+					<Route path='/users/*' element={<div>Users</div>} />
 				</Routes>
 			</main>
 		</div>

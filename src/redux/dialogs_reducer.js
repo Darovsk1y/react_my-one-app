@@ -73,6 +73,7 @@ let initialState = {
 };
 
 const dialogsReducer =(state = initialState, action)=>{
+
 	switch(action.type) {
 		case ADD_MESSAGE: {
 			let newMessage = {
@@ -82,16 +83,15 @@ const dialogsReducer =(state = initialState, action)=>{
 				position: "right",
 				message: state.newMessageText,
 			}
-			let newState = {...state};
-			newState.messages = [...state.messages];
-			newState.messages.push(newMessage);
-			newState.newMessageText = '';
-			return newState;
+			return {...state,
+				messages: [...state.messages, newMessage],
+				newMessageText: '',
+			};
 		}
 		case TRACK_WRITE_MESSAGE: {
-			let newState = {...state};
-			newState.newMessageText = action.message;
-			return newState;
+			return {...state,
+				newMessageText: action.message,
+			};
 		}
 		default:
 			return state;

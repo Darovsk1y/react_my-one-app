@@ -9,7 +9,6 @@ import {
 /* Подключение RR */
 let mapStateToProps = (state) => {
   return {
-    newMessageText: state.dialogs.newMessageText,
     dialogs: state.dialogs,
   };
 };

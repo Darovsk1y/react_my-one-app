@@ -33,7 +33,7 @@ let messagesElems = props.dialogs.messages.map((message) => {
       <div className={s.board}>
         <div className={s.messages}>{messagesElems}</div>
 			<NewMessageContainer 
-			newMessageText={props.newMessageText}
+			newMessageText={props.dialogs.newMessageText}
 			NewMessageSend={props.NewMessageSend}
 			trackMessage={props.trackMessage}
 			/>
