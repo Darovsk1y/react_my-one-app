@@ -7,7 +7,7 @@ const UserMain = (props) => {
     <div className={s.main}>
       <MainImage />
       <div className={s.body}>
-        <User store={props.store} />
+        <User />
       </div>
     </div>
   );

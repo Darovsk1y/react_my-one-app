@@ -10,23 +10,15 @@ import DialogsContainer from './components/Dialogs/DialogsContainer';
 
 //todo Это компонента - это узел ф-ия, которая по сути является тегом
 const App = (props) => {
-	let state = props.store.getState();
+	/* let state = props.store.getState(); */
 	return (
 		<div className="app-wrapper">
 			<Header />
-			<Asside data={state.asside} />
+			<Asside />
 			<main className="main">
 				<Routes>
-					<Route path='/profile/*' element={<Profile
-						/* data={props.state.profile}
-						dispatch={props.dispatch} */
-						store={props.store}
-					/>} />
-					<Route path='/dialogs/*' element={<DialogsContainer
-						/* data={props.state.dialogs}
-						dispatch={props.dispatch} */
-						store={props.store}
-						 />}
+					<Route path='/profile/*' element={<Profile />} />
+					<Route path='/dialogs/*' element={<DialogsContainer />}
 					/>
 					<Route path='/news/*' element={<News />} />
 					<Route path='/music/*' element={<Muzic />} />

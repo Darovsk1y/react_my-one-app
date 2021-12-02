@@ -1,26 +1,28 @@
-import React from 'react'; 
-import { newPostActionCreator } from '../../../redux/profile_reducer';
-import { trackWritePostActionCreator } from '../../../redux/profile_reducer';
-import UserPosts from './UserPosts';
+
+import { newPostActionCreator } from "../../../redux/profile_reducer";
+import { trackWritePostActionCreator } from "../../../redux/profile_reducer";
+import UserPosts from "./UserPosts";
+import { connect } from "react-redux";
 
 /* Теперь вся логика у нас тут */
-const UserPostsContainer = (props) => {
-let state = props.store.getState();
-
-let addPost = () =>{
-	props.store.dispatch(newPostActionCreator());
+let mapStateTopProps = (state) => {
+  return {
+    newPostText: state.profile.newPostText,
+    posts: state.profile.posts,
+  };
 };
-let trackChange = (text) =>{
-	let action = trackWritePostActionCreator(text);
-	props.store.dispatch(action);
-}
-
-  return (
-	<UserPosts trackWritePost={trackChange}
-	 createNewPost={addPost}
-	  newPostText={state.profile.newPostText}
-	  posts={state.profile.posts}
-	  />
-  );
+let mapDispatchTopProps = (dispatch) => {
+  return {
+    trackWritePost: (text) => {
+      dispatch(trackWritePostActionCreator(text));
+    },
+    createNewPost: () => {
+      dispatch(newPostActionCreator());
+    },
+  };
 };
+let UserPostsContainer = connect(
+  mapStateTopProps,
+  mapDispatchTopProps
+)(UserPosts);
 export default UserPostsContainer;

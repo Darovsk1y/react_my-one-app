@@ -74,7 +74,7 @@ let initialState = {
 
 const dialogsReducer =(state = initialState, action)=>{
 	switch(action.type) {
-		case ADD_MESSAGE:
+		case ADD_MESSAGE: {
 			let newMessage = {
 				id: "5",
 				image: "http://cs622426.vk.me/v622426834/409d/baLqspYwi84.jpg",
@@ -82,12 +82,17 @@ const dialogsReducer =(state = initialState, action)=>{
 				position: "right",
 				message: state.newMessageText,
 			}
-			state.messages.push(newMessage);
-			state.newMessageText = '';
-			return state;
-		case TRACK_WRITE_MESSAGE:
-			state.newMessageText = action.message;
-			return state;
+			let newState = {...state};
+			newState.messages = [...state.messages];
+			newState.messages.push(newMessage);
+			newState.newMessageText = '';
+			return newState;
+		}
+		case TRACK_WRITE_MESSAGE: {
+			let newState = {...state};
+			newState.newMessageText = action.message;
+			return newState;
+		}
 		default:
 			return state;
 	}

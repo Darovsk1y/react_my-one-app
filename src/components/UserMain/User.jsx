@@ -7,7 +7,7 @@ const User = (props) => {
     <div className={s.user}>
       <UserHeader />
       <div className={s.block}>
-        <UserPostsContainer store={props.store}/>
+        <UserPostsContainer />
       </div>
     </div>
   );

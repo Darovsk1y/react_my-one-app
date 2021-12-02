@@ -1,42 +1,42 @@
 import s from "./Dialogs.module.css";
-/* import Message from "./Message/Message";
-import DialogItem from "./DialogItem/DialogItem"; */
+import DialogItem from "./DialogItem/DialogItem";
+import Message from "./Message/Message";
 import NewMessageContainer from './NewMessage/NewMessageContainer';
 
 const Dialogs = (props) => {
-/* let state = props.store.getState();
- */
-/*   let messagesElems = state.dialogs.messages.map((message) => {
-    return (
-      <Message
-        position={message.position}
-        message={message.message}
-        image={message.image}
-        link={message.link}
-        key={message.id}
-      />
-    );
-  });
-  let dialogsElements = state.dialogs.dialogs.map((dialog) => {
-    return (
-      <DialogItem
-        key={dialog.id}
-        id={dialog.id}
-        name={dialog.name}
-        image={dialog.image}
-        text={dialog.text}
-      />
-    );
-  }); */
 
+let messagesElems = props.dialogs.messages.map((message) => {
+	return (
+	  <Message
+		position={message.position}
+		message={message.message}
+		image={message.image}
+		link={message.link}
+		key={message.id}
+	  />
+	);
+  });
+  let dialogsElements = props.dialogs.dialogs.map((dialog) => {
+	return (
+	  <DialogItem
+		key={dialog.id}
+		id={dialog.id}
+		name={dialog.name}
+		image={dialog.image}
+		text={dialog.text}
+	  />
+	);
+  });
   return (
     <div className={s.dialogs}>
-      <div className={s.dialogsList}>{props.dialogsElements}</div>
+      <div className={s.dialogsList}>{dialogsElements}</div>
       <div className={s.board}>
-        <div className={s.messages}>{props.messagesElems}</div>
+        <div className={s.messages}>{messagesElems}</div>
 			<NewMessageContainer 
 			newMessageText={props.newMessageText}
-			dispatch={props.dispatch}/>
+			NewMessageSend={props.NewMessageSend}
+			trackMessage={props.trackMessage}
+			/>
       </div>
     </div>
 	

@@ -1,13 +1,9 @@
 import Post from "./Post/Post";
-/* import postElements from "./postElements/postElements"; */
 import s from "./PostsOld.module.css";
-
-/*Данные теперь приходят к нам из index через props  */
 
 const PostsOld = (props) => {
 /* Далее мы преобразовали в элементы массива */
 let postElements = props.posts.map((dialog) => {
-
 	return (
 	  <Post
 		key={dialog.id}

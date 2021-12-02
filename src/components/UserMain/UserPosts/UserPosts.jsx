@@ -1,4 +1,3 @@
-/* import { useRef } from "react"; */
 import PostsOld from "./PostsOld/PostsOld";
 import s from "./UserPosts.module.css";
 import React from 'react'; 
@@ -13,7 +12,6 @@ let trackChange = () =>{
 	let text = textNewPost.current.value
 	props.trackWritePost(text);
 }
-
   return (
 	<div className={s.posts}>
 		My Posts
@@ -25,7 +23,6 @@ let trackChange = () =>{
 		</div>
 		<PostsOld posts={props.posts}/>
 	</div>
-
   );
 };
 export default UserPosts;
