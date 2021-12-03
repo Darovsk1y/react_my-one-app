@@ -11,6 +11,7 @@ let initialState = {
 			name: "Raketa",
 			avatar: "http://cs622426.vk.me/v622426834/409d/baLqspYwi84.jpg",
 			text: "Hellow friend!",
+			link: "#/",
 		},
 		{
 			id: 2,
@@ -19,6 +20,7 @@ let initialState = {
 			avatar:
 				"https://cs11.pikabu.ru/post_img/big/2020/04/12/9/1586704514168132921.png",
 			text: "Lorem ipsum dolor sit amet consectetur adipisicing elit. Ullam voluptates ",
+			link: "#/",
 		},
 		{
 			id: 3,
@@ -27,6 +29,7 @@ let initialState = {
 			avatar:
 				"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSJbnEIzrjyxxOY0epeMS4hYgqan30wNAZsIQ&usqp=CAU",
 			text: `asperiores nobis, temporibus consequatur ipsa incidunt tempore quam deleniti eum quisquam excepturi quis omnis officiis quas officia illum placeat dolorum?`,
+			link: "#/",
 		},
 	],
 	newPostText: '',
@@ -40,6 +43,7 @@ const profileReducer =(state = initialState, action)=>{
 				name: "Raketa",
 				avatar: "https://scontent.fdnk5-1.fna.fbcdn.net/v/t1.6435-9/71788193_525812181517269_1225717343393415168_n.jpg?_nc_cat=101&ccb=1-5&_nc_sid=09cbfe&_nc_ohc=Sk5ngR6CQa4AX-YK48H&tn=cowQwI4GI2N4ygpU&_nc_ht=scontent.fdnk5-1.fna&oh=1c6d0f524bfa3b80e7e77a8ab7c5b805&oe=61BCB1BD",
 				text: state.newPostText,
+				link: "#/",
 			}
 			return {...state,
 				posts: [...state.posts, newPost],

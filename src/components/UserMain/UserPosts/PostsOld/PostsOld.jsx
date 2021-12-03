@@ -11,6 +11,7 @@ let postElements = props.posts.map((dialog) => {
 		name={dialog.name}
 		avatar={dialog.avatar}
 		text={dialog.text}
+		link={dialog.link}
 	  />
 	);
   });

@@ -1,0 +1,78 @@
+.user {
+}
+.user__body {
+	padding: 10px 15px;
+    background-color: rgb(136, 241, 255);
+    border-radius: 5px;
+    margin: 0px 0px 20px 0px;
+    font-size: 16px;
+	display: flex;
+}
+.user__avatarBlock {
+	flex: 0 0 100px;
+	height: 100px;
+	align-self: center;
+	margin: 0px 20px 0px 0px;
+}
+.user__avatar {
+	border-radius: 50%;
+	overflow: hidden;
+	width: 100%;
+	height: 100%;
+	display: block;
+	position: relative;
+}
+.user__avatar img{
+	position: absolute;width: 100%;height: 100%;top: 0;left: 0;
+	object-fit: cover;
+}
+.user__infoBlock {
+	display: flex;
+	flex: 1 1 auto;
+}
+.user__main {
+	flex: 1 1 auto;
+}
+.user__nameLink{
+	display: block;
+}
+.user__name {
+	font-size: 24px;
+    line-height: 1.2;
+    color: black;
+    margin: 0px 0px 5px 0px;
+}
+.user__status {
+	font-size: 16px;
+    line-height: 1.2;
+    color: rgb(14, 14, 14);
+}
+.user__button{
+	min-width: 120px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 5px 10px;
+    font-size: 16px;
+    color: white;
+    background-color: rgb(98, 0, 255);
+    border: none;
+    border-radius: 5px;
+    text-align: right;
+	margin: 10px 0px 0px 0px;
+}
+.user__right {
+	flex: 0 0 30%;
+	text-align: right;
+}
+.user__country {
+	font-size: 16px;
+    line-height: 1.2;
+    color: rgb(14, 14, 14);
+	margin: 0px 0px 5px 0px;
+}
+.user__city {
+	font-size: 16px;
+    line-height: 1.2;
+    color: rgb(14, 14, 14);
+}

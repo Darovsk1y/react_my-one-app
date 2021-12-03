@@ -5,7 +5,7 @@ const Post = (props) => {
     <div className={s.post}>
       <div className={s.row}>
         <div className={s.avatar}>
-          <a href="#/">
+          <a href={props.link}>
             <img src={props.avatar} alt=""></img>
           </a>
         </div>
