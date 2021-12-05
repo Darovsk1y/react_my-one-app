@@ -20,6 +20,10 @@ const Menu = () => {
         <li className={s.li}>
           <NavLink to="/settings" className = {setActive}>Settings</NavLink>
         </li>
+        <li className={s.li + " "+ s.findusers}>
+		{/* <a href="/users" className={s.findusers}>Find users</a> */}
+          <NavLink to="/users" className = {setActive}>Find users</NavLink>
+        </li>
       </ul>
     </nav>
   );

@@ -7,7 +7,6 @@ const Asside = (props) => {
   return (
     <div className={s.asside}>
       <Menu />
-	  <a href="/users" className={s.findusers}>Find users</a>
 	  <FriendsContainer />
     </div>
   );
