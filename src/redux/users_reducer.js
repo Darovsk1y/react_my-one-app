@@ -3,7 +3,8 @@ const UNFOLLOW = "UNFOLLOW";
 const SET_USERS = "SET_USERS";
 
 let initialState = {
-	users: [
+	users: []
+/* 	users: [
 		{
 			id: 1,
 			name: "Alex",
@@ -52,7 +53,7 @@ let initialState = {
 			isfollow: false,
 			link: "#/",
 		},
-	],
+	], */
 }
 const usersReducer = (state = initialState, action) =>{
 	switch (action.type) {

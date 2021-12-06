@@ -21,8 +21,8 @@ let User = (props) => {
 			
           </div>
           <div className={s.user__right}>
-            <div className={s.user__country}>{props.adress.country}</div>
-            <div className={s.user__city}>{props.adress.city}</div>
+            <div className={s.user__country}>{"props.adress.country"}</div>
+            <div className={s.user__city}>{"props.adress.city"}</div>
           </div>
         </div>
       </div>
