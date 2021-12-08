@@ -1,9 +1,9 @@
 import User from "./User/User";
-import s from "./Users.module.css";
 import React from "react";
+import UsersPresent from "./UsersPresent";
 const axios = require("axios");
 
-class Users extends React.Component {
+class UsersApi extends React.Component {
   componentDidMount(){
     axios
       .get(`https://social-network.samuraijs.com/api/1.0/users?page=${this.props.activePage}&count=${this.props.pageSize}`)
@@ -70,25 +70,12 @@ class Users extends React.Component {
 	pages.push(t_start);
 	}
 	/* ТАкже в обработчике должна быть именно стрелочная ф-ия иначе всё равно циклится? */
-
-    return (
-      <div className={s.users}>
-        <div className={s.body}>
-			<div className={s.paginnation}>
-				{pages.map(page => {
-					return <span className={this.props.activePage === page ? s.paginpage +" "+ s.active : s.paginpage} onClick={() =>{this.clickActivePage(page)}}>{page}</span>
-				})}
-			</div>
-          <ul className={s.userList}>
-            {this.mapUsers()}
-          </ul>
-          <button type="button" className={s.button}>
-            Load more
-          </button>
-        </div>
-      </div>
-    );
+    return <UsersPresent pages={pages}
+						mapUsers={this.mapUsers}
+						clickActivePage={this.clickActivePage}
+						activePage={this.props.activePage}
+	/>
   }
 }
 
-export default Users;
+export default UsersApi;
