@@ -19,6 +19,7 @@ class Users extends React.Component {
 	.then((response) => {
 	  this.props.setUser(response.data.items);
 	});
+	this.pagesOrderingFinish(page + 20);
   }
   mapUsers = ()=>{
 	return this.props.users.map((u) => {
@@ -51,19 +52,24 @@ class Users extends React.Component {
   t_finish = 20
   pagesOrderingFinish = (t_finish) =>{
 	  /* считаем конечную точку цикла в зависимости от активной страницы */
-	this.props.activePage <=10 ? t_finish = this.props.activePage + 20 - this.props.activePage : t_finish = this.props.activePage + 10;
+	  /* считаем номер конечной страницы и исходим из него */
+	  let pagesCount = Math.ceil(this.props.totalUsersCount/this.props.pageSize);
+	  if(this.props.activePage <= pagesCount - 10){
+		this.props.activePage <=10 ? t_finish = this.props.activePage + 20 - this.props.activePage : t_finish = this.props.activePage + 10
+	  } else {
+		t_finish = pagesCount
+	  }
 	return t_finish;
   }
- 
+
   render() {
 	let t_start = this.pagesOrderingStart(this.t_start);
 	let t_finish = this.pagesOrderingFinish(this.t_finish);
-	  /* let pagesCount = Math.ceil(this.props.totalUsersCount/this.props.pageSize); */
-	  let pages = [];
-	  for(t_start; t_start <=t_finish; t_start++){
-		pages.push(t_start);
-	  }
-	  /* ТАкже в обработчике должна быть именно стрелочная ф-ия иначе всё равно циклится? */
+	let pages = [];
+	for(t_start; t_start <=t_finish; t_start++){
+	pages.push(t_start);
+	}
+	/* ТАкже в обработчике должна быть именно стрелочная ф-ия иначе всё равно циклится? */
 
     return (
       <div className={s.users}>
