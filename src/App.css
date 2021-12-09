@@ -95,4 +95,5 @@ h6 {
 }
 .main {
 	grid-area: main;
+	position: relative;
 }

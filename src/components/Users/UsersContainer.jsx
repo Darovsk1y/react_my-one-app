@@ -1,26 +1,31 @@
 
 import { connect } from "react-redux";
-import { followAC } from "../../redux/users_reducer";
+import { followAC, toggelFetching } from "../../redux/users_reducer";
 import { unfollowAC, setUsersAC, setActivePageAC, setTotalUsersCountAC } from './../../redux/users_reducer';
 import User from "./User/User";
 import React from "react";
 import UsersPresent from "./UsersPresent";
+import Fetching from './../../global/fetching';
 const axios = require("axios");
 /* КЛК перенесена сюда в КК */
 class UsersApi extends React.Component {
 	componentDidMount(){
+		this.props.toggelFetching(true);
 	  axios
 		.get(`https://social-network.samuraijs.com/api/1.0/users?page=${this.props.activePage}&count=${this.props.pageSize}`)
 		.then((response) => {
+			this.props.toggelFetching(false);
 		  this.props.setUser(response.data.items);
 		  this.props.setTotalUsersCount(response.data.totalCount);
 		});
 	}
 	clickActivePage = (page) =>{
+		this.props.toggelFetching(true);
 	  this.props.setActivePage(page);
 	  axios
 	  .get(`https://social-network.samuraijs.com/api/1.0/users?page=${page}&count=${this.props.pageSize}`)
 	  .then((response) => {
+		this.props.toggelFetching(false);
 		this.props.setUser(response.data.items);
 	  });
 	  this.pagesOrderingFinish(page + 20);
@@ -74,11 +79,16 @@ class UsersApi extends React.Component {
 	  pages.push(t_start);
 	  }
 	  /* ТАкже в обработчике должна быть именно стрелочная ф-ия иначе всё равно циклится? */
-	  return <UsersPresent pages={pages}
-						  mapUsers={this.mapUsers}
-						  clickActivePage={this.clickActivePage}
-						  activePage={this.props.activePage}
-	  />
+	  return <>
+		  {this.props.isfetching ? 
+			<Fetching/>
+		   : null}
+		<UsersPresent pages={pages}
+					mapUsers={this.mapUsers}
+					clickActivePage={this.clickActivePage}
+					activePage={this.props.activePage}
+		/>
+	  </>
 	}
   }
 
@@ -88,6 +98,7 @@ let mapStateToProps = (state) =>{
 		pageSize: state.users.pageSize,
 		totalUsersCount: state.users.totalUsersCount,
 		activePage: state.users.activePage,
+		isfetching: state.users.isfetching,
 	};
 }
 let mapDispatchToProps = (dispatch) =>{
@@ -106,6 +117,9 @@ let mapDispatchToProps = (dispatch) =>{
 		},
 		setTotalUsersCount: (usersCount) =>{
 			dispatch(setTotalUsersCountAC(usersCount));
+		},
+		toggelFetching: (isfetching) =>{
+			dispatch(toggelFetching(isfetching));
 		},
 	}
 }
