@@ -101,27 +101,13 @@ let mapStateToProps = (state) =>{
 		isfetching: state.users.isfetching,
 	};
 }
-let mapDispatchToProps = (dispatch) =>{
-	return {
-		follow: (userid) => {
-			dispatch(followAC(userid));
-		},
-		unfollow: (userid) => {
-			dispatch(unfollowAC(userid));
-		},
-		setUser: (users) =>{
-			dispatch(setUsersAC(users));
-		},
-		setActivePage: (page) =>{
-			dispatch(setActivePageAC(page));
-		},
-		setTotalUsersCount: (usersCount) =>{
-			dispatch(setTotalUsersCountAC(usersCount));
-		},
-		toggelFetching: (isfetching) =>{
-			dispatch(toggelFetching(isfetching));
-		},
-	}
-}
-const UsersContainer = connect(mapStateToProps, mapDispatchToProps)(UsersApi);
+
+const UsersContainer = connect(mapStateToProps, {
+	follow: followAC,
+	unfollow: unfollowAC,
+	setUser: setUsersAC,
+	setActivePage: setActivePageAC,
+	setTotalUsersCount: setTotalUsersCountAC,
+	toggelFetching: toggelFetching,
+})(UsersApi);
 export default UsersContainer;
