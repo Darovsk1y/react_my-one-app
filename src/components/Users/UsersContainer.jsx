@@ -1,11 +1,10 @@
 
 import { connect } from "react-redux";
-import { followAC, toggelFetching } from "../../redux/users_reducer";
-import { unfollowAC, setUsersAC, setActivePageAC, setTotalUsersCountAC } from './../../redux/users_reducer';
+import { unfollow, setUsers, setActivePage, setTotalUsersCount, follow, toggelFetching } from './../../redux/users_reducer';
 import User from "./User/User";
 import React from "react";
 import UsersPresent from "./UsersPresent";
-import Fetching from './../../global/fetching';
+import Preloader from './../../global/preloader';
 const axios = require("axios");
 /* КЛК перенесена сюда в КК */
 class UsersApi extends React.Component {
@@ -15,7 +14,7 @@ class UsersApi extends React.Component {
 		.get(`https://social-network.samuraijs.com/api/1.0/users?page=${this.props.activePage}&count=${this.props.pageSize}`)
 		.then((response) => {
 			this.props.toggelFetching(false);
-		  this.props.setUser(response.data.items);
+		  this.props.setUsers(response.data.items);
 		  this.props.setTotalUsersCount(response.data.totalCount);
 		});
 	}
@@ -26,7 +25,7 @@ class UsersApi extends React.Component {
 	  .get(`https://social-network.samuraijs.com/api/1.0/users?page=${page}&count=${this.props.pageSize}`)
 	  .then((response) => {
 		this.props.toggelFetching(false);
-		this.props.setUser(response.data.items);
+		this.props.setUsers(response.data.items);
 	  });
 	  this.pagesOrderingFinish(page + 20);
 	}
@@ -44,10 +43,10 @@ class UsersApi extends React.Component {
 				: "https://ava-24.com/_ph/98/563228947.jpg"
 			}
 			isfollow={u.followed}
-			link={u.link != null ? u.link : "#/"}
+			link={"/profile/" + u.id}
 			follow={this.props.follow}
 			unfollow={this.props.unfollow}
-			setUser={this.props.setUser}
+			setUsers={this.props.setUsers}
 		  />
 		})
 	}
@@ -81,7 +80,7 @@ class UsersApi extends React.Component {
 	  /* ТАкже в обработчике должна быть именно стрелочная ф-ия иначе всё равно циклится? */
 	  return <>
 		  {this.props.isfetching ? 
-			<Fetching/>
+			<Preloader/>
 		   : null}
 		<UsersPresent pages={pages}
 					mapUsers={this.mapUsers}
@@ -92,22 +91,22 @@ class UsersApi extends React.Component {
 	}
   }
 
-let mapStateToProps = (state) =>{
-	return {
+let mapStateToProps = (state) =>({
+
 		users: state.users.users,
 		pageSize: state.users.pageSize,
 		totalUsersCount: state.users.totalUsersCount,
 		activePage: state.users.activePage,
 		isfetching: state.users.isfetching,
-	};
-}
+
+})
 
 const UsersContainer = connect(mapStateToProps, {
-	follow: followAC,
-	unfollow: unfollowAC,
-	setUser: setUsersAC,
-	setActivePage: setActivePageAC,
-	setTotalUsersCount: setTotalUsersCountAC,
-	toggelFetching: toggelFetching,
+	follow,
+	unfollow,
+	setUsers,
+	setActivePage,
+	setTotalUsersCount,
+	toggelFetching,
 })(UsersApi);
 export default UsersContainer;

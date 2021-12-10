@@ -14,5 +14,6 @@ let reducersPack = combineReducers({
 });
 /*! теперь ф=ия getState вернет нам такие же названия для разделов как мы задали Редюсерам выше */
 let store = createStore(reducersPack);
+window.store = store;
 
 export default store;

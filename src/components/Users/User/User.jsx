@@ -1,18 +1,19 @@
+import { NavLink } from "react-router-dom";
 import s from "./User.module.css";
 let User = (props) => {
   return (
-    <li className={s.user}>
+    <li className={s.user} key={props.id}>
       <div className={s.user__body}>
         <div className={s.user__avatarBlock}>
-          <a href={props.link} className={s.user__avatar}>
+          <NavLink to={props.link} className={s.user__avatar}>
             <img src={props.avatar} alt="" />
-          </a>
+          </NavLink>
         </div>
         <div className={s.user__infoBlock}>
           <div className={s.user__main}>
-            <a href={props.link} className={s.user__nameLink}>
+            <NavLink to={props.link} className={s.user__nameLink}>
               <div className={s.user__name}>{props.name}</div>
-            </a>
+            </NavLink>
             <div className={s.user__status}>{props.status}</div>
 			{
 				props.isfollow ? <button type="button" className={s.user__button} onClick={(() => {props.unfollow(props.id)})}>UnFollow</button> : 

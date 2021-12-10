@@ -2,6 +2,7 @@
 /* в state на приходит то к чему мы обращаемя. эй профайлфайл сделай... */
 const ADD_POST = "ADD-POST";
 const TRACK_WRITE_POST = "TRACK-WRITE-POST";
+const SET_USER_PROFILE = "SET_USER_PROFILE";
 
 let initialState = {
 	posts: [
@@ -33,6 +34,7 @@ let initialState = {
 		},
 	],
 	newPostText: '',
+	profile: null,
 };
 const profileReducer =(state = initialState, action)=>{
 	switch (action.type) {
@@ -55,6 +57,11 @@ const profileReducer =(state = initialState, action)=>{
 				newPostText: action.text,
 			};
 		}
+		case SET_USER_PROFILE: {
+			return {...state,
+				profile: action.profile,
+			};
+		}
 		default:
 			return state;
 	}
@@ -68,6 +75,12 @@ export const trackWritePostActionCreator = (text) =>{
 	return {
 		type:TRACK_WRITE_POST,
 		text: text,
+	}
+}; 
+export const setUserProfile = (profile) =>{
+	return {
+		type:SET_USER_PROFILE,
+		profile
 	}
 }; 
 export default profileReducer;

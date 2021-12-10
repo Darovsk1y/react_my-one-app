@@ -118,31 +118,31 @@ const usersReducer = (state = initialState, action) =>{
 }
 
 /* action Creators */
-export const setUsersAC = (users) =>{
+export const setUsers = (users) =>{
 	return {
 		type: SET_USERS,
 		users
 	}
 }
-export const followAC = (userid) =>{
+export const follow = (userid) =>{
 	return {
 		type: FOLLOW,
 		userid
 	}
 }
-export const unfollowAC = (userid) =>{
+export const unfollow = (userid) =>{
 	return {
 		type: UNFOLLOW,
 		userid
 	}
 }
-export const setActivePageAC = (page) =>{
+export const setActivePage = (page) =>{
 	return {
 		type: SET_ACTIVE_PAGE,
 		page
 	}
 }
-export const setTotalUsersCountAC = (usersCount) =>{
+export const setTotalUsersCount = (usersCount) =>{
 	return {
 		type: SET_TOTAL_USERS_COUNT,
 		usersCount

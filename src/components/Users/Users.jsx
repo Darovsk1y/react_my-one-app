@@ -1,4 +1,4 @@
-
+/* Файл старый . нигде не используется */
 import User from "./User/User";
 import s  from "./Users.module.css";
 const axios = require('axios');
@@ -8,7 +8,7 @@ const Users = (props) =>{
 		if(props.users.length === 0){
 			axios.get("https://social-network.samuraijs.com/api/1.0/users").then(response => 
 				{
-					props.setUser(response.data.items);
+					props.setUsers(response.data.items);
 				}
 			);
 		}
@@ -17,7 +17,7 @@ const Users = (props) =>{
 	
 
 	/* if(props.users.length === 0){
-		props.setUser( [
+		props.setUsers( [
 			{
 				id: 1,
 				name: "Alex",
@@ -72,17 +72,15 @@ const Users = (props) =>{
 	let userElements = (props.users.map(u => {
 		return (
 			<User 
-				key = {u.id}
 				id = {u.id}
 				name = {u.name}
 				status = {u.status}
 				adress = {"u.adress"}
 				avatar = {u.photos.large != null ? u.photos : "https://ava-24.com/_ph/98/563228947.jpg"}
 				isfollow = {u.followed}
-				link = {u.link != null ? u.link : "#/"}
+				link = {"/profile/" + u.id}
 				follow= {props.follow}
 				unfollow= {props.unfollow}
-				setUser= {props.setUser}
 			/>
 		)
 	}));
