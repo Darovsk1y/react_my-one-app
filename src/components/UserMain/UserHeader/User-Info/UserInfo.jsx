@@ -1,4 +1,4 @@
-import s from "./User-Info.module.css";
+import s from "./UserInfo.module.css";
 const UserInfo = (props) => {
   return (
     <div className={s.info}>
@@ -13,7 +13,7 @@ const UserInfo = (props) => {
 	  	{/* Вывод только если параметр задан */}
 	  {props.profile.aboutMe ? (
 		<div className={s.line}>
-			<div className={s.param}>Status</div>
+			<div className={s.param}>About Me</div>
 			<div className={s.answer}>{props.profile.aboutMe}</div>
 		</div>
 	  ) : ''}

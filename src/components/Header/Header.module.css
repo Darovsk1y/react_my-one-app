@@ -2,8 +2,20 @@
 	grid-area: header;
 	padding: 5px 20px;
 	background: linear-gradient(to bottom left, #2F368E, #0355cf);
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
 }
 .header img{
 	max-height: 100%;
 	border-radius: 30%;
+}
+.loginBlock a{
+	color: white;
+}
+.loginBlock a:hover{
+	text-decoration: underline;
+}
+.login{
+	color: white;
 }

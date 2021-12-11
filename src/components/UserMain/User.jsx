@@ -8,7 +8,6 @@ const User = (props) => {
 	if(!props.profile){
 		return <Preloader/>
 	}
-
   return (
     <div className={s.user}>
       <UserHeader profile={props.profile}/>
