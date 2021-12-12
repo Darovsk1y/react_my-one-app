@@ -11,7 +11,8 @@ class UsersApi extends React.Component {
 	componentDidMount(){
 		this.props.toggelFetching(true);
 	  axios
-		.get(`https://social-network.samuraijs.com/api/1.0/users?page=${this.props.activePage}&count=${this.props.pageSize}`)
+		.get(`https://social-network.samuraijs.com/api/1.0/users?page=${this.props.activePage}&count=${this.props.pageSize}`,
+		{withCredentials: true})
 		.then((response) => {
 			this.props.toggelFetching(false);
 		  this.props.setUsers(response.data.items);
@@ -22,7 +23,8 @@ class UsersApi extends React.Component {
 		this.props.toggelFetching(true);
 	  this.props.setActivePage(page);
 	  axios
-	  .get(`https://social-network.samuraijs.com/api/1.0/users?page=${page}&count=${this.props.pageSize}`)
+	  .get(`https://social-network.samuraijs.com/api/1.0/users?page=${page}&count=${this.props.pageSize}`,
+	  {withCredentials: true})
 	  .then((response) => {
 		this.props.toggelFetching(false);
 		this.props.setUsers(response.data.items);
