@@ -22,7 +22,7 @@ let User = (props) => {
 				props.isfollow ? 
 				<button type="button" className={s.user__button} onClick={(() => {
 					unfollowApi(props.id)
-					.then((data) =>{debugger
+					.then((data) =>{
 						if (data.resultCode === 0){
 							props.unfollow(props.id);
 						}

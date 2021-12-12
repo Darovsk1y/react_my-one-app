@@ -1,47 +1,42 @@
 const axios = require("axios");
-const baseUrl = "https://social-network.samuraijs.com/api/1.0";
+
+const instance = axios.create({
+	baseURL: "https://social-network.samuraijs.com/api/1.0/",
+	withCredentials: true, 
+	headers:{"API-KEY": "408e3826-292f-4228-986e-4b5b9de1ce18"},
+});
 
 export const getUsers = (activePage = 1, pageSize = 10) => {
-	return axios
-	.get(baseUrl + `/users?page=${activePage}&count=${pageSize}`,
-	{withCredentials: true})
+	return instance
+	.get(`users?page=${activePage}&count=${pageSize}`)
 	.then((response) =>{
 		return response.data;
 	})
 }
 export const unfollowApi = (id) => {
-	return axios
-	.delete(baseUrl + `//follow/${id}`,
-	{withCredentials: true, 
-	   headers:{"API-KEY": "408e3826-292f-4228-986e-4b5b9de1ce18"},
-   })
+	return instance
+	.delete(`follow/${id}`)
    .then(response =>{
 		return response.data;
    })
 }
 export const followApi = (id) => {
-	return axios
-	.post(baseUrl + `//follow/${id}`,
-	{},
-	{withCredentials: true, 
-	   headers:{"API-KEY": "408e3826-292f-4228-986e-4b5b9de1ce18"},
-   })
+	return instance
+	.post(`follow/${id}`)
    .then(response =>{
 		return response.data;
    })
 }
 export const authMeApi = () => {
-	return axios
-	.get(baseUrl + `/auth/me`, {
-		withCredentials: true
-	})
+	return instance
+	.get(`auth/me`)
    .then(response =>{
 		return response.data;
    })
 }
 export const authMeGetProfileApi = (id) => {
-	return axios
-	.get(baseUrl + `/profile/${id}`)
+	return instance
+	.get(`profile/${id}`)
    .then(response =>{
 		return response.data;
    })
