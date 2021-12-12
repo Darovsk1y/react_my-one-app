@@ -1,6 +1,8 @@
 import { NavLink } from "react-router-dom";
+import { unfollowApi } from "../../../api/api";
 import s from "./User.module.css";
-const axios = require("axios");
+import { followApi } from './../../../api/api';
+
 let User = (props) => {
   return (
     <li className={s.user} key={props.id}>
@@ -19,12 +21,9 @@ let User = (props) => {
 			{
 				props.isfollow ? 
 				<button type="button" className={s.user__button} onClick={(() => {
-					axios.delete(`https://social-network.samuraijs.com/api/1.0//follow/${props.id}`,
-					 {withCredentials: true, 
-						headers:{"API-KEY": "408e3826-292f-4228-986e-4b5b9de1ce18"},
-					})
-					.then(response =>{
-						if (response.data.resultCode === 0){
+					unfollowApi(props.id)
+					.then((data) =>{debugger
+						if (data.resultCode === 0){
 							props.unfollow(props.id);
 						}
 					});
@@ -32,12 +31,9 @@ let User = (props) => {
 				})}>UnFollow</button> :
 
 				<button type="button" className={s.user__button} onClick={(() => {
-					axios.post(`https://social-network.samuraijs.com/api/1.0//follow/${props.id}`, {}, 
-					{withCredentials: true, 
-						headers:{"API-KEY": "408e3826-292f-4228-986e-4b5b9de1ce18"},
-					})
-					.then(response =>{
-						if (response.data.resultCode === 0){
+					followApi(props.id)
+					.then(data =>{
+						if (data.resultCode === 0){
 							props.follow(props.id)
 						}
 					});

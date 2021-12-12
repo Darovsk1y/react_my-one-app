@@ -5,29 +5,25 @@ import User from "./User/User";
 import React from "react";
 import UsersPresent from "./UsersPresent";
 import Preloader from './../../global/preloader';
-const axios = require("axios");
+import { getUsers } from './../../api/api';
 /* КЛК перенесена сюда в КК */
 class UsersApi extends React.Component {
 	componentDidMount(){
 		this.props.toggelFetching(true);
-	  axios
-		.get(`https://social-network.samuraijs.com/api/1.0/users?page=${this.props.activePage}&count=${this.props.pageSize}`,
-		{withCredentials: true})
-		.then((response) => {
+	  getUsers(this.props.activePage, this.props.pageSize)
+		.then((data) => {
 			this.props.toggelFetching(false);
-		  this.props.setUsers(response.data.items);
-		  this.props.setTotalUsersCount(response.data.totalCount);
+		  this.props.setUsers(data.items);
+		  this.props.setTotalUsersCount(data.totalCount);
 		});
 	}
 	clickActivePage = (page) =>{
 		this.props.toggelFetching(true);
 	  this.props.setActivePage(page);
-	  axios
-	  .get(`https://social-network.samuraijs.com/api/1.0/users?page=${page}&count=${this.props.pageSize}`,
-	  {withCredentials: true})
-	  .then((response) => {
+	  getUsers(page, this.props.pageSize)
+	  .then((data) => {
 		this.props.toggelFetching(false);
-		this.props.setUsers(response.data.items);
+		this.props.setUsers(data.items);
 	  });
 	  this.pagesOrderingFinish(page + 20);
 	}

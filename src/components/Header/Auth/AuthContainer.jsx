@@ -2,23 +2,19 @@ import React from 'react';
 import Auth from './Auth';
 import { connect } from 'react-redux';
 import { setAuthUserData, setAuthUserProfile } from './../../../redux/auth_reducer';
-
-const axios = require("axios");
+import { authMeApi } from '../../../api/api';
+import { authMeGetProfileApi } from './../../../api/api';
 
 class AuthContainer extends React.Component {
 	componentDidMount(){
-		axios
-		.get(`https://social-network.samuraijs.com/api/1.0/auth/me`, {
-			withCredentials: true
-		})
-		.then(response =>{
-			if(response.data.resultCode === 0){
-				let {id, email, login} = {...response.data.data}
+		authMeApi()
+		.then(data =>{
+			if(data.resultCode === 0){
+				let {id, email, login} = {...data.data}
 				this.props.setAuthUserData(id, email, login);
-				axios
-				.get(`https://social-network.samuraijs.com/api/1.0/profile/${response.data.data.id}`)
-				.then(response => {
-					this.props.setAuthUserProfile(response.data);
+				authMeGetProfileApi(data.data.id)
+				.then(data => {
+					this.props.setAuthUserProfile(data);
 				})
 			}
 		})
