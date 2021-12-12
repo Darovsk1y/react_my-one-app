@@ -6,39 +6,45 @@ const instance = axios.create({
 	headers:{"API-KEY": "408e3826-292f-4228-986e-4b5b9de1ce18"},
 });
 
-export const getUsers = (activePage = 1, pageSize = 10) => {
-	return instance
-	.get(`users?page=${activePage}&count=${pageSize}`)
-	.then((response) =>{
-		return response.data;
-	})
+/* создание одного общего обьекта с методами */
+export const usersAPI = {
+	getUsers (activePage = 1, pageSize = 10) {
+		return instance
+		.get(`users?page=${activePage}&count=${pageSize}`)
+		.then((response) =>{
+			return response.data;
+		})
+	},
 }
-export const unfollowApi = (id) => {
-	return instance
-	.delete(`follow/${id}`)
-   .then(response =>{
-		return response.data;
-   })
+export const followAPI = {
+	unfollowApi (id) {
+		return instance
+		.delete(`follow/${id}`)
+	   .then(response =>{
+			return response.data;
+	   })
+	},
+	followApi (id) {
+		return instance
+		.post(`follow/${id}`)
+	   .then(response =>{
+			return response.data;
+	   })
+	},
 }
-export const followApi = (id) => {
-	return instance
-	.post(`follow/${id}`)
-   .then(response =>{
-		return response.data;
-   })
+export const authAPI = {
+	authMeApi () {
+		return instance
+		.get(`auth/me`)
+	   .then(response =>{
+			return response.data;
+	   })
+	},
+	authMeGetProfileApi (id) {
+		return instance
+		.get(`profile/${id}`)
+	   .then(response =>{
+			return response.data;
+	   })
+	}
 }
-export const authMeApi = () => {
-	return instance
-	.get(`auth/me`)
-   .then(response =>{
-		return response.data;
-   })
-}
-export const authMeGetProfileApi = (id) => {
-	return instance
-	.get(`profile/${id}`)
-   .then(response =>{
-		return response.data;
-   })
-}
-

@@ -1,7 +1,6 @@
 import { NavLink } from "react-router-dom";
-import { unfollowApi } from "../../../api/api";
 import s from "./User.module.css";
-import { followApi } from './../../../api/api';
+import { followAPI } from './../../../api/api';
 
 let User = (props) => {
   return (
@@ -21,7 +20,7 @@ let User = (props) => {
 			{
 				props.isfollow ? 
 				<button type="button" className={s.user__button} onClick={(() => {
-					unfollowApi(props.id)
+					followAPI.unfollowApi(props.id)
 					.then((data) =>{
 						if (data.resultCode === 0){
 							props.unfollow(props.id);
@@ -31,7 +30,7 @@ let User = (props) => {
 				})}>UnFollow</button> :
 
 				<button type="button" className={s.user__button} onClick={(() => {
-					followApi(props.id)
+					followAPI.followApi(props.id)
 					.then(data =>{
 						if (data.resultCode === 0){
 							props.follow(props.id)

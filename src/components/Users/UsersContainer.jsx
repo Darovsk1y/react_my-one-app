@@ -5,12 +5,12 @@ import User from "./User/User";
 import React from "react";
 import UsersPresent from "./UsersPresent";
 import Preloader from './../../global/preloader';
-import { getUsers } from './../../api/api';
+import { usersAPI } from './../../api/api';
 /* КЛК перенесена сюда в КК */
 class UsersApi extends React.Component {
 	componentDidMount(){
 		this.props.toggelFetching(true);
-	  getUsers(this.props.activePage, this.props.pageSize)
+	  usersAPI.getUsers(this.props.activePage, this.props.pageSize)
 		.then((data) => {
 			this.props.toggelFetching(false);
 		  this.props.setUsers(data.items);
@@ -20,7 +20,7 @@ class UsersApi extends React.Component {
 	clickActivePage = (page) =>{
 		this.props.toggelFetching(true);
 	  this.props.setActivePage(page);
-	  getUsers(page, this.props.pageSize)
+	  usersAPI.getUsers(page, this.props.pageSize)
 	  .then((data) => {
 		this.props.toggelFetching(false);
 		this.props.setUsers(data.items);
