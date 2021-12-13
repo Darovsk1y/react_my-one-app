@@ -19,27 +19,27 @@ let User = (props) => {
             <div className={s.user__status}>{props.status}</div>
 			{
 				props.isfollow ? 
-				<button type="button" className={s.user__button} disabled={props.isfollowing} onClick={(() => {
-					props.toggelFollowDisable(true);
+				<button type="button" className={s.user__button} disabled={props.isDisabled.some(id => id === props.id)} onClick={(() => {
+					props.toggelFollowDisable(true, props.id);
 					followAPI.unfollowApi(props.id)
 					.then((data) =>{
 						if (data.resultCode === 0){
 							props.unfollow(props.id);
 						}
-						props.toggelFollowDisable(false);
+						props.toggelFollowDisable(false, props.id);
 					});
 					
 				})}>UnFollow</button> :
 
-				<button type="button" className={s.user__button} disabled={props.isfollowing} onClick={(() => {
-					props.toggelFollowDisable(true);
+				<button type="button" className={s.user__button} disabled={props.isDisabled.some(id => id === props.id)} onClick={(() => {
+					props.toggelFollowDisable(true, props.id);
 				/* 	debugger */
 					followAPI.followApi(props.id)
 					.then(data =>{
 						if (data.resultCode === 0){
 							props.follow(props.id)
 						}
-						props.toggelFollowDisable(false);
+						props.toggelFollowDisable(false, props.id);
 					});
 					props.follow(props.id)
 					

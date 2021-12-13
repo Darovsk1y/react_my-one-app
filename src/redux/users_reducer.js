@@ -12,7 +12,7 @@ let initialState = {
 	pageSize: 10,
 	activePage: 1,
 	isfetching: true,
-	isfollowing: false, /* блокировка нажатой кнопки */
+	isDisabled: [], /* блокировка нажатой кнопки */
 
 /* 	users: [
 		{
@@ -116,7 +116,7 @@ const usersReducer = (state = initialState, action) =>{
 		case FOLLOWING_DISABLE: {
 			return {
 				...state,
-				isfollowing: action.isfollowing,
+				isDisabled: action.isfetching ? [...state.isDisabled, action.id ] : state.isDisabled.filter((id) => id !== action.id),
 			}
 		}
 		default:
@@ -162,10 +162,11 @@ export const toggelFetching = (isfetching) =>{
 		isfetching
 	}
 }
-export const toggelFollowDisable = (isfollowing) =>{
+export const toggelFollowDisable = (isfetching, id) =>{
 	return {
 		type: FOLLOWING_DISABLE,
-		isfollowing
+		isfetching,
+		id
 	}
 }
 export default usersReducer;

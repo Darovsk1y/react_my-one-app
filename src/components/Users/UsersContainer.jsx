@@ -42,7 +42,7 @@ class UsersApi extends React.Component {
 			}
 			isfollow={u.followed}
 			link={"/profile/" + u.id}
-			isfollowing={this.props.isfollowing}
+			isDisabled={this.props.isDisabled}
 			follow={this.props.follow}
 			unfollow={this.props.unfollow}
 			setUsers={this.props.setUsers}
@@ -86,7 +86,7 @@ class UsersApi extends React.Component {
 					mapUsers={this.mapUsers}
 					clickActivePage={this.clickActivePage}
 					activePage={this.props.activePage}
-					isfollowing={this.props.isfollowing}
+					isDisabled={this.props.isDisabled}
 		/>
 	  </>
 	}
@@ -98,7 +98,7 @@ let mapStateToProps = (state) =>({
 		totalUsersCount: state.users.totalUsersCount,
 		activePage: state.users.activePage,
 		isfetching: state.users.isfetching,
-		isfollowing: state.users.isfollowing,
+		isDisabled: state.users.isDisabled,
 })
 
 const UsersContainer = connect(mapStateToProps, {
