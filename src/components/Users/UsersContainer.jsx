@@ -1,6 +1,6 @@
 
 import { connect } from "react-redux";
-import { unfollow, setUsers, setActivePage, setTotalUsersCount, follow, toggelFetching } from './../../redux/users_reducer';
+import { unfollow, setUsers, setActivePage, setTotalUsersCount, follow, toggelFetching, toggelFollowDisable } from './../../redux/users_reducer';
 import User from "./User/User";
 import React from "react";
 import UsersPresent from "./UsersPresent";
@@ -42,9 +42,11 @@ class UsersApi extends React.Component {
 			}
 			isfollow={u.followed}
 			link={"/profile/" + u.id}
+			isfollowing={this.props.isfollowing}
 			follow={this.props.follow}
 			unfollow={this.props.unfollow}
 			setUsers={this.props.setUsers}
+			toggelFollowDisable={this.props.toggelFollowDisable}
 		  />
 		})
 	}
@@ -84,19 +86,19 @@ class UsersApi extends React.Component {
 					mapUsers={this.mapUsers}
 					clickActivePage={this.clickActivePage}
 					activePage={this.props.activePage}
+					isfollowing={this.props.isfollowing}
 		/>
 	  </>
 	}
   }
 
 let mapStateToProps = (state) =>({
-
 		users: state.users.users,
 		pageSize: state.users.pageSize,
 		totalUsersCount: state.users.totalUsersCount,
 		activePage: state.users.activePage,
 		isfetching: state.users.isfetching,
-
+		isfollowing: state.users.isfollowing,
 })
 
 const UsersContainer = connect(mapStateToProps, {
@@ -106,5 +108,6 @@ const UsersContainer = connect(mapStateToProps, {
 	setActivePage,
 	setTotalUsersCount,
 	toggelFetching,
+	toggelFollowDisable,
 })(UsersApi);
 export default UsersContainer;

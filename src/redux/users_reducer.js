@@ -4,6 +4,7 @@ const SET_USERS = "SET_USERS";
 const SET_ACTIVE_PAGE = "SET_ACTIVE_PAGE";
 const SET_TOTAL_USERS_COUNT = "SET_TOTAL_USERS_COUNT";
 const TOGGEL_FETCHING = "TOGGEL_FETCHING";
+const FOLLOWING_DISABLE = "FOLLOWING_DISABLE";
 
 let initialState = {
 	users: [],
@@ -11,6 +12,7 @@ let initialState = {
 	pageSize: 10,
 	activePage: 1,
 	isfetching: true,
+	isfollowing: false, /* блокировка нажатой кнопки */
 
 /* 	users: [
 		{
@@ -111,6 +113,12 @@ const usersReducer = (state = initialState, action) =>{
 				isfetching: action.isfetching,
 			}
 		}
+		case FOLLOWING_DISABLE: {
+			return {
+				...state,
+				isfollowing: action.isfollowing,
+			}
+		}
 		default:
 			return state;
 	}
@@ -152,6 +160,12 @@ export const toggelFetching = (isfetching) =>{
 	return {
 		type: TOGGEL_FETCHING,
 		isfetching
+	}
+}
+export const toggelFollowDisable = (isfollowing) =>{
+	return {
+		type: FOLLOWING_DISABLE,
+		isfollowing
 	}
 }
 export default usersReducer;

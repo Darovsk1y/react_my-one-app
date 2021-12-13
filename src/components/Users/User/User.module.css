@@ -61,6 +61,11 @@
     text-align: right;
 	margin: 10px 0px 0px 0px;
 }
+.user__button:disabled{
+	cursor: none;
+	background-color: rgba(98, 0, 255, 0.4);
+	color: rgb(190, 190, 190);
+}
 .user__right {
 	flex: 0 0 30%;
 	text-align: right;
