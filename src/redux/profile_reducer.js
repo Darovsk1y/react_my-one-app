@@ -1,5 +1,5 @@
-/* файл преобразователь. он не вызывает других ф-ий */
-/* в state на приходит то к чему мы обращаемя. эй профайлфайл сделай... */
+import { usersAPI } from './../api/api';
+
 const ADD_POST = "ADD-POST";
 const TRACK_WRITE_POST = "TRACK-WRITE-POST";
 const SET_USER_PROFILE = "SET_USER_PROFILE";
@@ -82,5 +82,14 @@ export const setUserProfile = (profile) =>{
 		type:SET_USER_PROFILE,
 		profile
 	}
-}; 
+};
+/* Thusks */
+export const getProfileThusk = (userId) => {
+	return (dispatch) => {
+		usersAPI.getProfile(userId)
+		.then( response =>{
+			dispatch(setUserProfile(response.data));
+		})
+	}
+}
 export default profileReducer;

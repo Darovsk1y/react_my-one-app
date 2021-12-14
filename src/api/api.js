@@ -15,6 +15,10 @@ export const usersAPI = {
 			return response.data;
 		})
 	},
+	getProfile (id) {
+		return instance
+		.get(`/profile/${id}`)
+	}
 }
 export const followAPI = {
 	unfollowApi (id) {

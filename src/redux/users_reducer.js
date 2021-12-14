@@ -1,3 +1,4 @@
+import { usersAPI, followAPI } from './../api/api';
 const FOLLOW = "FOLLOW";
 const UNFOLLOW = "UNFOLLOW";
 const SET_USERS = "SET_USERS";
@@ -167,6 +168,54 @@ export const toggelFollowDisable = (isfetching, id) =>{
 		type: FOLLOWING_DISABLE,
 		isfetching,
 		id
+	}
+}
+/* Thunks */
+export const getUsersThunk = (activePage, pageSize) => {
+	return (dispatch) => {
+		dispatch(toggelFetching(true));
+		usersAPI.getUsers(activePage, pageSize)
+		  .then((data) => {
+			dispatch(toggelFetching(false));
+			dispatch(setUsers(data.items));
+			dispatch(setTotalUsersCount(data.totalCount));
+		  });
+	}
+}
+export const getUsersActivePageThunk = (page, pageSize, pagesOrderingFinish) => {
+	return (dispatch) => {
+		dispatch(toggelFetching(true));
+		dispatch(setActivePage(page));
+		usersAPI.getUsers(page, pageSize)
+		.then((data) => {
+			dispatch(toggelFetching(false));
+			dispatch(setUsers(data.items));
+		});
+		pagesOrderingFinish(page + 20);
+	}
+}
+export const followThunk = (id) => {
+	return (dispatch) => {
+		dispatch(toggelFollowDisable(true, id));
+		followAPI.followApi(id)
+		.then(data =>{
+			if (data.resultCode === 0){
+				dispatch(follow(id))
+			}
+			dispatch(toggelFollowDisable(false, id));
+		});
+	}
+}
+export const unfollowThunk = (id) => {
+	return (dispatch) => {
+		dispatch(toggelFollowDisable(true, id));
+		followAPI.unfollowApi(id)
+		.then(data =>{
+			if (data.resultCode === 0){
+				dispatch(unfollow(id))
+			}
+			dispatch(toggelFollowDisable(false, id));
+		});
 	}
 }
 export default usersReducer;

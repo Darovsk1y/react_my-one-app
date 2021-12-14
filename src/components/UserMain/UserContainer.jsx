@@ -1,8 +1,7 @@
 import React from "react";
-import axios from "axios";
 import User from "./User";
 import { connect } from 'react-redux';
-import { setUserProfile } from './../../redux/profile_reducer';
+import { getProfileThusk } from './../../redux/profile_reducer';
 import { useMatch } from "react-router";
 
 
@@ -10,10 +9,7 @@ import { useMatch } from "react-router";
 class UserContainer extends React.Component {
 	componentDidMount(){
 		let userId = this.props.match ? this.props.match.params.userId : "2";/* this.props.auth.activeUser.userId работает но с ошибкой. данные из пропс поздно приходят */
-		axios.get(`https://social-network.samuraijs.com/api/1.0/profile/${userId}`)
-		.then( response =>{
-			this.props.setUserProfile(response.data);
-		})
+		this.props.getProfileThusk(userId);
 	}
 
 	render () {
@@ -34,4 +30,4 @@ const ProfileMatch = (props) => {
 	)
 }
 
-export default connect (mapStateToProps, {setUserProfile}) (ProfileMatch);
+export default connect (mapStateToProps, {getProfileThusk}) (ProfileMatch);

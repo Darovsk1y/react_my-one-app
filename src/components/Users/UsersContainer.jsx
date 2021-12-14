@@ -1,31 +1,17 @@
 
 import { connect } from "react-redux";
-import { unfollow, setUsers, setActivePage, setTotalUsersCount, follow, toggelFetching, toggelFollowDisable } from './../../redux/users_reducer';
+import { getUsersThunk, getUsersActivePageThunk, unfollowThunk, followThunk } from './../../redux/users_reducer';
 import User from "./User/User";
 import React from "react";
 import UsersPresent from "./UsersPresent";
 import Preloader from './../../global/preloader';
-import { usersAPI } from './../../api/api';
-/* КЛК перенесена сюда в КК */
+
 class UsersApi extends React.Component {
 	componentDidMount(){
-		this.props.toggelFetching(true);
-	  usersAPI.getUsers(this.props.activePage, this.props.pageSize)
-		.then((data) => {
-			this.props.toggelFetching(false);
-		  this.props.setUsers(data.items);
-		  this.props.setTotalUsersCount(data.totalCount);
-		});
+		this.props.getUsersThunk(this.props.activePage, this.props.pageSize);
 	}
 	clickActivePage = (page) =>{
-		this.props.toggelFetching(true);
-	  this.props.setActivePage(page);
-	  usersAPI.getUsers(page, this.props.pageSize)
-	  .then((data) => {
-		this.props.toggelFetching(false);
-		this.props.setUsers(data.items);
-	  });
-	  this.pagesOrderingFinish(page + 20);
+		this.props.getUsersActivePageThunk(page, this.props.pageSize, this.pagesOrderingFinish);
 	}
 	mapUsers = ()=>{
 	  return this.props.users.map((u) => {
@@ -43,10 +29,8 @@ class UsersApi extends React.Component {
 			isfollow={u.followed}
 			link={"/profile/" + u.id}
 			isDisabled={this.props.isDisabled}
-			follow={this.props.follow}
-			unfollow={this.props.unfollow}
-			setUsers={this.props.setUsers}
-			toggelFollowDisable={this.props.toggelFollowDisable}
+			unfollowThunk={this.props.unfollowThunk}
+			followThunk={this.props.followThunk}
 		  />
 		})
 	}
@@ -77,7 +61,7 @@ class UsersApi extends React.Component {
 	  for(t_start; t_start <=t_finish; t_start++){
 	  pages.push(t_start);
 	  }
-	  /* ТАкже в обработчике должна быть именно стрелочная ф-ия иначе всё равно циклится? */
+	  
 	  return <>
 		  {this.props.isfetching ? 
 			<Preloader/>
@@ -102,12 +86,9 @@ let mapStateToProps = (state) =>({
 })
 
 const UsersContainer = connect(mapStateToProps, {
-	follow,
-	unfollow,
-	setUsers,
-	setActivePage,
-	setTotalUsersCount,
-	toggelFetching,
-	toggelFollowDisable,
+	getUsersThunk,
+	getUsersActivePageThunk,
+	unfollowThunk,
+	followThunk,
 })(UsersApi);
 export default UsersContainer;
