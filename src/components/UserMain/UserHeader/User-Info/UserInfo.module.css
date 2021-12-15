@@ -13,6 +13,12 @@
 	line-height: 1.4;
 	color: black;
 }
+.param_name{
+	font-size: 30px;
+}
+.answer.answer_name{
+	font-size: 28px;
+}
 .answer {
 	display: inline-flex;
 	align-items: flex-end;
@@ -24,4 +30,7 @@
 .iconJob{
 	min-width: 40px;
 	height: 40px;
+}
+.status{
+	font-size: 22px;
 }

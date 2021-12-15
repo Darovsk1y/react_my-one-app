@@ -4,6 +4,7 @@ import { connect } from 'react-redux';
 import { getProfileThusk } from './../../redux/profile_reducer';
 import { useMatch } from "react-router";
 import { withAuthRedirect } from './../../hoc/withAuthRedirect';
+import { compose } from "redux";
 
 /* Теперь это классовая компанента */
 class UserContainer extends React.Component {
@@ -28,7 +29,5 @@ const ProfileMatch = (props) => {
 		<UserContainer {...props} match={match} />
 	)
 }
-
-let AuthRedirectComponent = withAuthRedirect(ProfileMatch);
-
-export default connect (mapStateToProps, {getProfileThusk}) (AuthRedirectComponent);
+export default compose( connect (mapStateToProps, {getProfileThusk})
+		,withAuthRedirect)(ProfileMatch);

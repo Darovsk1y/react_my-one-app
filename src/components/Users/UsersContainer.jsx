@@ -5,6 +5,8 @@ import User from "./User/User";
 import React from "react";
 import UsersPresent from "./UsersPresent";
 import Preloader from './../../global/preloader';
+import { withAuthRedirect } from './../../hoc/withAuthRedirect';
+import { compose } from "redux";
 
 class UsersApi extends React.Component {
 	componentDidMount(){
@@ -85,10 +87,9 @@ let mapStateToProps = (state) =>({
 		isDisabled: state.users.isDisabled,
 })
 
-const UsersContainer = connect(mapStateToProps, {
+export default compose(connect(mapStateToProps, {
 	getUsersThunk,
 	getUsersActivePageThunk,
 	unfollowThunk,
 	followThunk,
-})(UsersApi);
-export default UsersContainer;
+}), withAuthRedirect)(UsersApi);

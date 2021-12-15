@@ -1,10 +1,14 @@
 import s from "./UserInfo.module.css";
+import UserStatus from './UserStatus/UserSatus';
 const UserInfo = (props) => {
   return (
     <div className={s.info}>
       <div className={s.line}>
-        <div className={s.param}>name</div>
-        <div className={s.answer}>{props.profile.fullName}</div>
+        <div className={s.param +" "+ s.param_name}>name</div>
+        <div className={s.answer +" "+ s.answer_name}>{props.profile.fullName}</div>
+      </div>
+	  <div className={s.line}>
+		<UserStatus status={"Hello World"}/>
       </div>
       <div className={s.line}>
         <div className={s.param}>city</div>
