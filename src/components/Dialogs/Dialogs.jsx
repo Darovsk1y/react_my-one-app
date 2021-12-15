@@ -2,7 +2,7 @@ import s from "./Dialogs.module.css";
 import DialogItem from "./DialogItem/DialogItem";
 import Message from "./Message/Message";
 import NewMessageContainer from './NewMessage/NewMessageContainer';
-import { Navigate } from 'react-router-dom';
+/* import { Navigate } from 'react-router-dom'; */
 
 const Dialogs = (props) => {
 let messagesElems = props.dialogs.messages.map((message) => {
@@ -28,7 +28,6 @@ let messagesElems = props.dialogs.messages.map((message) => {
 	);
   });
 
-if(!props.isAuth) return <Navigate to={"/login"}/>
   return (
     <div className={s.dialogs}>
       <div className={s.dialogsList}>{dialogsElements}</div>
