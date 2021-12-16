@@ -10,7 +10,7 @@ const User = (props) => {
 	}
   return (
     <div className={s.user}>
-      <UserHeader profile={props.profile}/>
+      <UserHeader {...props}/>
       <div className={s.block}>
         <UserPostsContainer />
       </div>
