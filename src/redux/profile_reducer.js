@@ -124,4 +124,14 @@ export const updateStatusThusk = (status) => {
 		})
 	}
 }
+/* export const updateAvatarThusk = (photo) => {
+	return (dispatch) => {
+		profileAPI.updateAvatar(photo)
+		.then( response =>{
+			if(response.data.resultCode === 0){
+				console.log("Photo update");
+			}
+		})
+	}
+} */
 export default profileReducer;

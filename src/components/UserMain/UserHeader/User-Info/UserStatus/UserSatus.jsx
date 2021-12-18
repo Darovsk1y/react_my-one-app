@@ -3,7 +3,7 @@ import s from "./../UserInfo.module.css";
 
 export default class UserStatus extends React.Component {
   state = {
-    editMode: true,
+    editMode: true,/* закончен ли ввод данных */
 	status: this.props.status,
   };
   activateEditMode =()=>{
@@ -11,8 +11,8 @@ export default class UserStatus extends React.Component {
 	this.setState({editMode: false});
   }
   deActivateEditMode =()=>{
-	this.setState({editMode: true});
-	this.props.updateStatusThusk(this.state.status);
+	this.setState({editMode: true}); 
+	this.props.updateStatusThusk(this.state.status);/* Обновляем глобальный стейт через запрос на сервер и таску*/
   }
   /* когда идет ввод */
   onStatusChange = (e) =>{
@@ -20,7 +20,14 @@ export default class UserStatus extends React.Component {
 		status: e.currentTarget.value
 	});
   }
+  componentDidUpdate(prevProps, prevState) {
+	  if(prevProps.status !== this.props.status){
+		this.setState({status: this.props.status});
+	  }
+	console.log("componentDidUpdate");
+  }
   render() {
+	  console.log("render");
     return (
       <div className={s.status}>
         {this.state.editMode ? (

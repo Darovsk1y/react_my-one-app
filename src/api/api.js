@@ -28,6 +28,10 @@ export const profileAPI = {
 	updateStatus (status) {
 		return instance
 		.put(`profile/status`, {status})
+	},
+	updateAvatar (photo) {
+		return instance
+		.put(`profile/photo`, {photo})
 	}
 }
 export const followAPI = {
