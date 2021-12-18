@@ -1,5 +1,6 @@
 .title{
 	font-size: 36px;
+	font-weight: bold;
 	margin: 0px 0px 20px 0px;
 }
 .form {
@@ -28,5 +29,26 @@
 	border: 1px solid rgb(14, 14, 14);
 	margin: 0px 5px 0px 0px;
 }
+.checkboxBlok span:hover {
+	text-decoration: underline;
+	cursor: pointer;
+}
+.checkbox:hover {
+	cursor: pointer;
+}
 .button {
+	min-height: 50px;
+	min-width: 150px;
+	padding: 5px 20px;
+	color: black;
+	background-color: rgb(173, 173, 173);
+	border: 1px solid rgb(14, 14, 14);
+	font-size: 30px;
+	border-radius: 10px;
+	box-shadow: 5px 5px 5px rgba(0, 0, 0, 0.24);
+	transition: all 0.3s ease 0s;
+}
+.button:hover{
+	transform: translate(2px, 2px);
+	box-shadow: none;
 }
