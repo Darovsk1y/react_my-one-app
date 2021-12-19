@@ -8,7 +8,7 @@ import Muzic from './components/Muzic/Muzic';
 import Settings from './components/Settings/Settings';
 import DialogsContainer from './components/Dialogs/DialogsContainer';
 import UsersContainer from './components/Users/UsersContainer';
-import Login from './components/Login/Login';
+import LoginContainer from './components/Login/LoginContainer';
 
 //todo Это компонента - это узел ф-ия, которая по сути является тегом
 const App = (props) => {
@@ -25,7 +25,7 @@ const App = (props) => {
 					<Route path='/music/*' element={<Muzic />} />
 					<Route path='/settings/*' element={<Settings />} />
 					<Route path='/users/*' element={<UsersContainer/>} />
-					<Route path='/login/*' element={<Login/>} />
+					<Route path='/login/*' element={<LoginContainer/>} />
 				</Routes>
 			</main>
 		</div>

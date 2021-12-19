@@ -1,28 +1,23 @@
 import PostsOld from "./PostsOld/PostsOld";
 import s from "./UserPosts.module.css";
-import React from 'react'; 
+import FormPost from './FormPost';
+import { reduxForm } from "redux-form";
 
 const UserPosts = (props) => {
-let textNewPost = React.createRef();
-/* Теперь у нас тут только ф-ии пришедшие через пропсы, т.е. кулбеки, логику отсюда убрали */
-let addPost = () =>{
-	props.createNewPost();
-};
-let trackChange = () =>{
-	let text = textNewPost.current.value
-	props.trackWritePost(text);
-}
+	
+	let onSubmit = (formData) => {
+		console.log(formData);
+
+	}
   return (
 	<div className={s.posts}>
 		My Posts
 		<div className={s.new}>
-			<form action="" className={s.form}>
-				<textarea name="textarea" className={s.textarea} ref={textNewPost} value={props.newPostText} onChange={trackChange}></textarea>
-				<button type="button" className={s.btn} onClick={addPost}>Send</button>
-			</form>
+			<FormPostRedux {...props} onSubmit={onSubmit}/>
 		</div>
 		<PostsOld posts={props.posts}/>
 	</div>
   );
 };
+const FormPostRedux = reduxForm({form: 'post'})(FormPost)
 export default UserPosts;

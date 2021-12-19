@@ -1,7 +1,7 @@
 
 import { newPostActionCreator } from "../../../redux/profile_reducer";
 import { trackWritePostActionCreator } from "../../../redux/profile_reducer";
-import UserPosts from "./UserPosts";
+import FormPostRedux from "./UserPosts";
 import { connect } from "react-redux";
 
 /* Теперь вся логика у нас тут */
@@ -24,5 +24,5 @@ let mapDispatchTopProps = (dispatch) => {
 let UserPostsContainer = connect(
   mapStateTopProps,
   mapDispatchTopProps
-)(UserPosts);
+)(FormPostRedux);
 export default UserPostsContainer;

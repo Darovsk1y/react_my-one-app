@@ -1,6 +1,7 @@
 import { authAPI } from './../api/api';
 const SET_USER_DATA = "SET_USER_DATA";
 const SET_AUTH_USER_PROFILE = "SET_AUTH_USER_PROFILE";
+const AUTCH_ME = "AUTCH_ME";
 
 let intialState = {
 	id: null,
@@ -24,6 +25,11 @@ const authReduser = (state = intialState, action) => {
 				activeUser: action.activeUser,
 			}
 		}
+		case AUTCH_ME: {
+			return {...state,
+				isAuth: true,
+			};
+		}
 		default:
 			return state;
 	}
@@ -41,8 +47,15 @@ export const setAuthUserProfile = (activeUser) => {
 		activeUser,
 	}
 }
+export const authMeLogin = (isAuth) => {
+	return {
+		type: AUTCH_ME,
+		isAuth /* нужен ли тут параметр? */
+	}
+}
+
 /* Thinks */
-export const authMeThink = () => {
+export const authMeThunk = () => {
 	return (dispatch) => {
 		authAPI.authMeApi()
 		.then(data =>{
@@ -53,6 +66,18 @@ export const authMeThink = () => {
 				.then(data => {
 					dispatch(setAuthUserProfile(data));
 				})
+			}
+		})
+	}
+}
+/* Авторизация на нашем сайте */
+export const authLoginThunk = (dataForm) => {
+	return (dispatch) => {
+		authAPI.autchMeLoginApi(dataForm)
+		.then(data =>{
+			debugger
+			if(data.resultCode === 0){
+				dispatch(authMeLogin(true));
 			}
 		})
 	}

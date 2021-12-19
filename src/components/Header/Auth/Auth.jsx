@@ -7,7 +7,6 @@ let Auth = (props) => {
 		{props.isAuth ? 
 		<div className={s.login}>User: {props.login}</div> : 
 		<NavLink to={"/login"}>Login Up</NavLink>}
-     
     </div>
   );
 };

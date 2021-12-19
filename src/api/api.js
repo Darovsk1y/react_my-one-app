@@ -32,7 +32,8 @@ export const profileAPI = {
 	updateAvatar (photo) {
 		return instance
 		.put(`profile/photo`, {photo})
-	}
+	},
+	
 }
 export const followAPI = {
 	unfollowApi (id) {
@@ -62,6 +63,14 @@ export const authAPI = {
 		return instance
 		.get(`profile/${id}`)
 	   .then(response =>{
+			return response.data;
+	   })
+	},
+	/* авторизация */
+	autchMeLoginApi (formData) {
+		return instance
+		.post(`/auth/login`, {formData})
+		.then(response =>{
 			return response.data;
 	   })
 	}

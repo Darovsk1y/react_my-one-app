@@ -1,11 +1,11 @@
 import React from 'react';
 import Auth from './Auth';
 import { connect } from 'react-redux';
-import { authMeThink } from './../../../redux/auth_reducer';
+import { authMeThunk } from './../../../redux/auth_reducer';
 
 class AuthContainer extends React.Component {
 	componentDidMount(){
-		this.props.authMeThink();
+		this.props.authMeThunk();
 	}
 	render () {
 		return <Auth {...this.props}/>
@@ -17,4 +17,4 @@ let mapStateToProps = (state) =>({
 	activeUser: state.auth.activeUser,
 })
 
-export default connect (mapStateToProps, {authMeThink})(AuthContainer);
+export default connect (mapStateToProps, {authMeThunk})(AuthContainer);

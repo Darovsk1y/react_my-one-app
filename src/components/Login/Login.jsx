@@ -1,23 +1,10 @@
-import { Field, reduxForm } from "redux-form";
 import s from "./Login.module.css";
-/* Используем устаревшую билиотеку Redux-form для практики */
+import { Field, reduxForm } from "redux-form";
 
-const Login = (props) => {
-const onSubmit = (formData) =>{
-	console.log(formData);
-}
-
-	return (
-		<div className="login">
-			<h3 className={s.title}>Login</h3>
-			<LoginFormRedux onSubmit={onSubmit}/>
-		</div>
-	)
-}
 const LoginForm = (props) =>{
 	return <form className={s.form} onSubmit={props.handleSubmit}>
 		<div className={s.line}>
-			<Field component={"input"} name={"login"} placeholder="login" autoFocus={true}/>
+			<Field component={"input"} name={"email"} placeholder="login" autoFocus={true}/>
 		</div>
 		<div className={s.line}>
 			<Field component={"input"} name={"password"} placeholder="password"/>
@@ -32,7 +19,7 @@ const LoginForm = (props) =>{
 	</form>
 }
 const LoginFormRedux = reduxForm({
-	  // a unique name for the form
-	form: 'login'
-  })(LoginForm)
-export default Login;
+	// a unique name for the form
+  form: 'login'
+})(LoginForm)
+export default LoginFormRedux;

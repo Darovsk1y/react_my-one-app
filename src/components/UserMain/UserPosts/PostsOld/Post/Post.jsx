@@ -1,13 +1,14 @@
 import Like from "./Like/Like";
 import s from "./Post.module.css";
+import { NavLink } from "react-router-dom";
 const Post = (props) => {
   return (
     <div className={s.post}>
       <div className={s.row}>
         <div className={s.avatar}>
-          <a href={props.link}>
+          <NavLink to={props.link}>
             <img src={props.avatar} alt=""></img>
-          </a>
+          </NavLink>
         </div>
         <div className={s.block}>
           <div className={s.name}>{props.name}</div>

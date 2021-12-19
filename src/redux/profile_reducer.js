@@ -4,7 +4,7 @@ const ADD_POST = "ADD-POST";
 const TRACK_WRITE_POST = "TRACK-WRITE-POST";
 const SET_USER_PROFILE = "SET_USER_PROFILE";
 const SET_STATUS = "SET_STATUS";
-/* const UPDATE_STATUS = "UPDATE_STATUS"; */
+
 
 let initialState = {
 	posts: [
@@ -42,18 +42,21 @@ let initialState = {
 const profileReducer =(state = initialState, action)=>{
 	switch (action.type) {
 		case ADD_POST: {
-			let newPost = {
-				id: 4,
-				likes: 0,
-				name: "Raketa",
-				avatar: "https://scontent.fdnk5-1.fna.fbcdn.net/v/t1.6435-9/71788193_525812181517269_1225717343393415168_n.jpg?_nc_cat=101&ccb=1-5&_nc_sid=09cbfe&_nc_ohc=Sk5ngR6CQa4AX-YK48H&tn=cowQwI4GI2N4ygpU&_nc_ht=scontent.fdnk5-1.fna&oh=1c6d0f524bfa3b80e7e77a8ab7c5b805&oe=61BCB1BD",
-				text: state.newPostText,
-				link: "#/",
+			if (state.profile){
+				let newPost = {
+					id: 4,
+					likes: 0,
+					name: state.profile.fullName ? state.profile.fullName : "Nou Name",
+					avatar: state.profile.photos.large ? state.profile.photos.large :"https://i0.wp.com/slovami.net/wp-content/uploads/2018/04/1-36-1024x1024.jpg",
+					text: state.newPostText,
+					link: `/profile/${state.profile.userId}`,
+				}
+				return {...state,
+					posts: [...state.posts, newPost],
+					newPostText: '',
+				};
 			}
-			return {...state,
-				posts: [...state.posts, newPost],
-				newPostText: '',
-			};
+			else return alert("Кто вы?");
 		}
 		case TRACK_WRITE_POST: {
 			return {...state,
@@ -70,6 +73,7 @@ const profileReducer =(state = initialState, action)=>{
 				status: action.status,
 			};
 		}
+
 		default:
 			return state;
 	}
@@ -97,6 +101,7 @@ export const setStatus = (status) =>{
 		status
 	}
 };
+
 /* Thusks */
 export const getProfileThusk = (userId) => {
 	return (dispatch) => {
