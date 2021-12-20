@@ -4,9 +4,9 @@ import { getUsersThunk, getUsersActivePageThunk, unfollowThunk, followThunk } fr
 import User from "./User/User";
 import React from "react";
 import UsersPresent from "./UsersPresent";
-import Preloader from './../../global/preloader';
 import { withAuthRedirect } from './../../hoc/withAuthRedirect';
 import { compose } from "redux";
+import Preloader from './../global/Preloader/preloader';
 
 class UsersApi extends React.Component {
 	componentDidMount(){

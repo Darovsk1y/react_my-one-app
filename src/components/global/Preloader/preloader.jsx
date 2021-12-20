@@ -1,5 +1,5 @@
 import s from "./preloader.module.css";
-import preloader from "../assets/Spin-1s-200px.svg";
+import preloader from "../../../assets/Spin-1s-200px.svg";
 let Preloader = (props) => {
   return (
     <div className={s.block}>

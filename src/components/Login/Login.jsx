@@ -1,13 +1,17 @@
 import s from "./Login.module.css";
 import { Field, reduxForm } from "redux-form";
+import { Input } from "../global/FormControls/FormControls";
+import { maxLengthCreator } from "../../utils/validators/validators";
+import { required } from './../../utils/validators/validators';
 
+let maxLength20 = maxLengthCreator(20);
 const LoginForm = (props) =>{
 	return <form className={s.form} onSubmit={props.handleSubmit}>
 		<div className={s.line}>
-			<Field component={"input"} name={"email"} placeholder="login" autoFocus={true}/>
+			<Field component={Input} name={"email"} validate={[required, maxLength20]} placeholder="login" autoFocus={true}/>
 		</div>
 		<div className={s.line}>
-			<Field component={"input"} name={"password"} placeholder="password"/>
+			<Field component={Input} name={"password"} validate={[required, maxLength20]} placeholder="password"/>
 		</div>
 		<div className={s.line}>
 			<label className={s.checkboxBlok}>

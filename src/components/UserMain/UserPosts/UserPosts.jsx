@@ -8,7 +8,8 @@ const UserPosts = (props) => {
 		console.log(formData);
 		debugger
 		props.newPostActionCreator(formData.textarea);
-		formData.textarea = "";
+		formData.textarea = ""; 
+		/* возможно из за такого способа валидация не видит пустоты */
 	}
   return (
 	<div className={s.posts}>
