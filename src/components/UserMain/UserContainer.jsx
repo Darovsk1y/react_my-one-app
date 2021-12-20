@@ -14,7 +14,7 @@ class UserContainer extends React.Component {
 		this.props.setStatusThusk(userId);
 	}
 	render () {
-		/* debugger */
+
 		return (
 			<User profile={this.props.profile}  
 			updateStatusThusk={this.props.updateStatusThusk}

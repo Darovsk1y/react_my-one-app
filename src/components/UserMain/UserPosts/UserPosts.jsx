@@ -4,10 +4,11 @@ import FormPost from './FormPost';
 import { reduxForm } from "redux-form";
 
 const UserPosts = (props) => {
-	
 	let onSubmit = (formData) => {
 		console.log(formData);
-
+		debugger
+		props.newPostActionCreator(formData.textarea);
+		formData.textarea = "";
 	}
   return (
 	<div className={s.posts}>

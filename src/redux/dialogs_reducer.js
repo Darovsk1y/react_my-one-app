@@ -1,5 +1,4 @@
 const ADD_MESSAGE = "ADD-MESSAGE";
-const TRACK_WRITE_MESSAGE = "TRACK-WRITE-MESSAGE";
 
 let initialState = {
 	messages: [
@@ -40,7 +39,6 @@ let initialState = {
 			message: `I heal in raids, inexpensive! Fast healing without problems! Help and leveling characters!`,
 		},
 	],
-	newMessageText: "",
 	dialogs: [
 		{
 			id: "1",
@@ -81,31 +79,21 @@ const dialogsReducer =(state = initialState, action)=>{
 				image: "http://cs622426.vk.me/v622426834/409d/baLqspYwi84.jpg",
 				link: "#/",
 				position: "right",
-				message: state.newMessageText,
+				message: action.text,
 			}
 			return {...state,
 				messages: [...state.messages, newMessage],
-				newMessageText: '',
-			};
-		}
-		case TRACK_WRITE_MESSAGE: {
-			return {...state,
-				newMessageText: action.message,
 			};
 		}
 		default:
 			return state;
 	}
 }
-export const newMessageActionCreator = () =>{
+export const newMessageActionCreator = (text) =>{
 	return {
-		type:ADD_MESSAGE
+		type:ADD_MESSAGE,
+		text
 	}
 };
-export const trackMessageActionCreator = (message) =>{
-	return {
-		type:TRACK_WRITE_MESSAGE,
-		message: message,
-	}
-};
+
 export default dialogsReducer;

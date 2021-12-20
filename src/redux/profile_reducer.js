@@ -35,7 +35,6 @@ let initialState = {
 			link: "#/",
 		},
 	],
-	newPostText: '',
 	profile: null,
 	status: "",
 };
@@ -48,12 +47,11 @@ const profileReducer =(state = initialState, action)=>{
 					likes: 0,
 					name: state.profile.fullName ? state.profile.fullName : "Nou Name",
 					avatar: state.profile.photos.large ? state.profile.photos.large :"https://i0.wp.com/slovami.net/wp-content/uploads/2018/04/1-36-1024x1024.jpg",
-					text: state.newPostText,
+					text: action.text,
 					link: `/profile/${state.profile.userId}`,
 				}
 				return {...state,
 					posts: [...state.posts, newPost],
-					newPostText: '',
 				};
 			}
 			else return alert("Кто вы?");
@@ -78,17 +76,12 @@ const profileReducer =(state = initialState, action)=>{
 			return state;
 	}
 }
-export const newPostActionCreator = () =>{
+export const newPostActionCreator = (text) =>{
 	return {
-		type:ADD_POST
+		type:ADD_POST,
+		text
 	}
 };
-export const trackWritePostActionCreator = (text) =>{
-	return {
-		type:TRACK_WRITE_POST,
-		text: text,
-	}
-}; 
 export const setUserProfile = (profile) =>{
 	return {
 		type:SET_USER_PROFILE,

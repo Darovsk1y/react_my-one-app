@@ -24,10 +24,8 @@ export default class UserStatus extends React.Component {
 	  if(prevProps.status !== this.props.status){
 		this.setState({status: this.props.status});
 	  }
-	console.log("componentDidUpdate");
   }
   render() {
-	  console.log("render");
     return (
       <div className={s.status}>
         {this.state.editMode ? (

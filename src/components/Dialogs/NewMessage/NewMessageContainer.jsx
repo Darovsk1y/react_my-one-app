@@ -1,10 +1,14 @@
-
-import NewMessage from './NewMessage';
+import LoginFormRedux from './NewMessage';
 
 const NewMessageContainer = (props) => {
-
+	const onSubmit = (formData) => {
+		console.log(formData);
+		props.newMessageActionCreator(formData.message);
+		formData.message = "";
+	}
   return (
-	<NewMessage newMessageSend={props.NewMessageSend} trackMessage={props.trackMessage} newMessageText={props.newMessageText}/>
+	<LoginFormRedux onSubmit={onSubmit}/>
   );
 };
+
 export default NewMessageContainer;

@@ -1,31 +1,24 @@
 import s from "./NewMessage.module.css";
 import  React  from 'react';
+import { Field, reduxForm } from "redux-form";
 
 const NewMessage = (props) => {
 
-let newMessage = React.createRef();
-	/* Обработчик кнопки */
-let NewMessageSend = () =>{
-	props.newMessageSend();
-};
-let trackMessage =() =>{
-	let text = newMessage.current.value;
-	props.trackMessage(text);
-};
-
   return (
-    <form action="" className={s.newmessage}>
-      <textarea
-        name="textarea"
+    <form action="" className={s.newmessage} onSubmit={props.handleSubmit}>
+      <Field
+	  component={"textarea"}
+        name="message"
         className={s.textarea}
-        value={props.newMessageText}
-		ref={newMessage}
-		onChange={trackMessage}
-      ></textarea>
-      <button type="button" className={s.btn} onClick={NewMessageSend}>
+      ></Field>
+      <button className={s.btn}>
         Send
       </button>
     </form>
   );
 };
-export default NewMessage;
+const LoginFormRedux = reduxForm({
+	// a unique name for the form
+  form: 'message'
+})(NewMessage)
+export default LoginFormRedux;
