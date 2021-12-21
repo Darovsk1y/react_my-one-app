@@ -9,7 +9,7 @@ import { compose } from "redux";
 /* Теперь это классовая компанента */
 class UserContainer extends React.Component {
 	componentDidMount(){
-		let userId = this.props.match ? this.props.match.params.userId : this.props.auth.activeUser.userId;/* this.props.auth.activeUser.userId работает но с ошибкой. данные из пропс поздно приходят */
+		let userId = this.props.match ? this.props.match.params.userId : this.props.auth.id;/* this.props.auth.activeUser.userId работает но с ошибкой. данные из пропс поздно приходят */
 		this.props.getProfileThusk(userId);
 		this.props.setStatusThusk(userId);
 	}

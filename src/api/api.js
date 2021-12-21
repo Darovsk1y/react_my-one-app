@@ -67,11 +67,15 @@ export const authAPI = {
 	   })
 	},
 	/* авторизация */
-	autchMeLoginApi (formData) {
+	autchMeLoginApi (email, password, rememberMe) {
 		return instance
-		.post(`/auth/login`, {formData})
+		.post(`/auth/login`, {email, password, rememberMe})
 		.then(response =>{
 			return response.data;
 	   })
+	},
+	LogoutApi () {
+		return instance
+		.delete(`/auth/login`); /* сервер удалит куку */
 	}
 }

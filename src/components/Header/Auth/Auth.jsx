@@ -5,7 +5,11 @@ let Auth = (props) => {
   return (
     <div className={s.loginBlock}>
 		{props.isAuth ? 
-		<div className={s.login}>User: {props.login}</div> : 
+		<div className={s.authLine}>
+			<button className={s.logout} onClick={props.onOut}>Log out</button>
+			<div className={s.login}>User: {props.login}</div>
+		</div>
+		 : 
 		<NavLink to={"/login"}>Login Up</NavLink>}
     </div>
   );

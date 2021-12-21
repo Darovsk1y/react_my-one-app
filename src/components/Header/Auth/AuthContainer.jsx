@@ -1,14 +1,18 @@
 import React from 'react';
 import Auth from './Auth';
 import { connect } from 'react-redux';
-import { authMeThunk } from './../../../redux/auth_reducer';
+import { authMeThunk, LogoutThunk } from './../../../redux/auth_reducer';
 
 class AuthContainer extends React.Component {
+	
 	componentDidMount(){
 		this.props.authMeThunk();
 	}
+	onOut = () =>{
+		this.props.LogoutThunk();
+	}
 	render () {
-		return <Auth {...this.props}/>
+		return <Auth {...this.props} onOut={this.onOut}/>
 	}
 }
 let mapStateToProps = (state) =>({
@@ -17,4 +21,4 @@ let mapStateToProps = (state) =>({
 	activeUser: state.auth.activeUser,
 })
 
-export default connect (mapStateToProps, {authMeThunk})(AuthContainer);
+export default connect (mapStateToProps, {authMeThunk,LogoutThunk})(AuthContainer);

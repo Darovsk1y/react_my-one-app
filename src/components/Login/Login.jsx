@@ -13,7 +13,7 @@ const LoginForm = (props) =>{
 			<Field component={Input} name={"email"} validate={[required, maxLength20]} placeholder="login" autoFocus={true}/>
 		</div>
 		<div className={s.line}>
-			<Field component={Input} name={"password"} validate={[required, maxLength20]} placeholder="password"/>
+			<Field component={Input} name={"password"} validate={[required, maxLength20]} placeholder="password" type="password"/>
 		</div>
 		<div className={s.line}>
 			<label className={s.checkboxBlok}>

@@ -1,7 +1,6 @@
 import { authAPI } from './../api/api';
 const SET_USER_DATA = "SET_USER_DATA";
 const SET_AUTH_USER_PROFILE = "SET_AUTH_USER_PROFILE";
-const AUTCH_ME = "AUTCH_ME";
 
 let intialState = {
 	id: null,
@@ -16,7 +15,6 @@ const authReduser = (state = intialState, action) => {
 		case SET_USER_DATA: {
 			return {
 				...state, ...action.data,
-				isAuth: true
 			}
 		}
 		case SET_AUTH_USER_PROFILE: {
@@ -25,32 +23,22 @@ const authReduser = (state = intialState, action) => {
 				activeUser: action.activeUser,
 			}
 		}
-		case AUTCH_ME: {
-			return {...state,
-				isAuth: true,
-			};
-		}
+
 		default:
 			return state;
 	}
 }
 
-export const setAuthUserData = (id, email, login) => {
+export const setAuthUserData = (id, email, login, isAuth) => {
 	return {
 		type: SET_USER_DATA,
-		data: {id, email, login}
+		data: {id, email, login, isAuth},
 	}
 }
 export const setAuthUserProfile = (activeUser) => {
 	return {
 		type: SET_AUTH_USER_PROFILE,
 		activeUser,
-	}
-}
-export const authMeLogin = (isAuth) => {
-	return {
-		type: AUTCH_ME,
-		isAuth /* нужен ли тут параметр? */
 	}
 }
 
@@ -61,7 +49,7 @@ export const authMeThunk = () => {
 		.then(data =>{
 			if(data.resultCode === 0){
 				let {id, email, login} = {...data.data}
-				dispatch(setAuthUserData(id, email, login));
+				dispatch(setAuthUserData(id, email, login, true));
 				authAPI.authMeGetProfileApi(data.data.id)
 				.then(data => {
 					dispatch(setAuthUserProfile(data));
@@ -71,15 +59,25 @@ export const authMeThunk = () => {
 	}
 }
 /* Авторизация на нашем сайте */
-export const authLoginThunk = (dataForm) => {
+export const authLoginThunk = (email, password, rememberMe) => {
 	return (dispatch) => {
-		authAPI.autchMeLoginApi(dataForm)
+		authAPI.autchMeLoginApi(email, password, rememberMe)
 		.then(data =>{
-			debugger
-			if(data.resultCode === 0){
-				dispatch(authMeLogin(true));
+			if(data.resultCode === 0){ /* Если я залогинен то запустить Санку Авторизации моих данных */
+				dispatch(authMeThunk());
 			}
 		})
+	}
+}
+export const LogoutThunk = () => {
+	return (dispatch) => {
+		authAPI.LogoutApi()
+		.then(response =>{
+			if(response.data.resultCode === 0){
+				dispatch(setAuthUserData(null, null, null, false));
+			}
+		})
+	
 	}
 }
 

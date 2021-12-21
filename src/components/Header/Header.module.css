@@ -13,9 +13,22 @@
 .loginBlock a{
 	color: white;
 }
-.loginBlock a:hover{
-	text-decoration: underline;
+.authLine{
+	display: flex;
+	align-items: center;
 }
 .login{
 	color: white;
+	cursor: pointer;
+}
+.login:hover{
+	text-decoration: underline;
+}
+.logout{
+	color: white;
+	margin: 0px 20px 0px 0px;
+	border: 1px solid black;
+	border-radius: 5px;
+	background-color: rgb(34, 16, 100);
+	padding: 3px 15px;
 }

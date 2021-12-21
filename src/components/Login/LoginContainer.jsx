@@ -3,20 +3,18 @@ import LoginFormRedux from "./Login";
 import React from "react";
 import { connect } from 'react-redux';
 import { authLoginThunk } from './../../redux/auth_reducer';
+import { Navigate } from "react-router-dom";
 /* Используем устаревшую билиотеку Redux-form для практики */
 
 class LoginContainer extends React.Component {
 	onSubmit = (formData) => {
-		console.log(formData)
-		debugger
 		if(this.props.isAuth === false){
-			this.props.authLoginThunk(formData);
+			this.props.authLoginThunk(formData.email, formData.password, formData.rememberMe);
 		}
-		debugger
 	}
-
+	
   render() {
-/* 	  debugger */
+	if(this.props.isAuth) return <Navigate to={"/profile"}/>
     return (
       <div className="login">
         <h3 className={s.title}>Login</h3>
