@@ -1,7 +1,10 @@
 import s from "./UserPosts.module.css";
 import { Field } from "redux-form";
 import { required, maxLengthCreator } from './../../../utils/validators/validators';
-import { Textarea } from '../../global/FormControls/FormControls';
+import { FormControls } from '../../global/FormControls/FormControls';
+
+const Textarea = FormControls("textarea");
+
 let maxLength10 = maxLengthCreator(10);
 const FormPost = (props) => {
 	

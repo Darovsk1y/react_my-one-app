@@ -1,8 +1,10 @@
 import s from "./Login.module.css";
 import { Field, reduxForm } from "redux-form";
-import { Input } from "../global/FormControls/FormControls";
+import { FormControls } from "../global/FormControls/FormControls";
 import { maxLengthCreator } from "../../utils/validators/validators";
 import { required } from './../../utils/validators/validators';
+
+const Input = FormControls("input");
 
 let maxLength20 = maxLengthCreator(20);
 const LoginForm = (props) =>{
