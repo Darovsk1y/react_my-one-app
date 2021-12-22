@@ -7,7 +7,7 @@ let mapStateToProps = (state) =>({
 })
 
 export const withAuthRedirect = (Component) => {
-
+/* HOC оборачивает переданную в него кампаненту и выплевывает обратно */
 	class RedirectComponent extends React.Component {
 		render(){
 			if(!this.props.isAuth) return <Navigate to={"/login"}/>

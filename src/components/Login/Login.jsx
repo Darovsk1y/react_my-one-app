@@ -6,14 +6,14 @@ import { required } from './../../utils/validators/validators';
 
 const Input = FormControls("input");
 
-let maxLength20 = maxLengthCreator(20);
+let maxLength30 = maxLengthCreator(30);
 const LoginForm = (props) =>{
 	return <form className={s.form} onSubmit={props.handleSubmit}>
 		<div className={s.line}>
-			<Field component={Input} name={"email"} validate={[required, maxLength20]} placeholder="login" autoFocus={true}/>
+			<Field component={Input} name={"email"} validate={[required, maxLength30]} placeholder="login" autoFocus={true}/>
 		</div>
 		<div className={s.line}>
-			<Field component={Input} name={"password"} validate={[required, maxLength20]} placeholder="password" type="password"/>
+			<Field component={Input} name={"password"} validate={[required, maxLength30]} placeholder="password" type="password"/>
 		</div>
 		<div className={s.line}>
 			<label className={s.checkboxBlok}>
@@ -21,6 +21,15 @@ const LoginForm = (props) =>{
 				<span >запомнить меня</span>
 			</label>
 		</div>
+		{props.error ? 
+		<div>
+			<div className={s.formError}>
+				{props.error}
+			</div>
+		</div>
+		 : ""
+		}
+		
 		<button className={s.button}>Login</button>
 	</form>
 }

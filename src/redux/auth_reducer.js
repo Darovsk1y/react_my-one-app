@@ -1,3 +1,4 @@
+import { stopSubmit } from 'redux-form';
 import { authAPI } from './../api/api';
 const SET_USER_DATA = "SET_USER_DATA";
 const SET_AUTH_USER_PROFILE = "SET_AUTH_USER_PROFILE";
@@ -65,6 +66,9 @@ export const authLoginThunk = (email, password, rememberMe) => {
 		.then(data =>{
 			if(data.resultCode === 0){ /* Если я залогинен то запустить Санку Авторизации моих данных */
 				dispatch(authMeThunk());
+			} else {
+				let message = data.messages.length > 0 ?  data.messages[0] : "Some error";
+				dispatch(stopSubmit("login", {_error: message}));
 			}
 		})
 	}
