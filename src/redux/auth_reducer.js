@@ -45,8 +45,8 @@ export const setAuthUserProfile = (activeUser) => {
 
 /* Thinks */
 export const authMeThunk = () => {
-	return (dispatch) => {
-		authAPI.authMeApi()
+	return (dispatch) => { /* нам нужен здесь return что бы следить когда завершится запрос */
+		return authAPI.authMeApi()
 		.then(data =>{
 			if(data.resultCode === 0){
 				let {id, email, login} = {...data.data}
@@ -56,7 +56,7 @@ export const authMeThunk = () => {
 					dispatch(setAuthUserProfile(data));
 				})
 			}
-		})
+		});
 	}
 }
 /* Авторизация на нашем сайте */

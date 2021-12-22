@@ -6,6 +6,7 @@ import usersReducer from "./users_reducer";
 import authReduser from "./auth_reducer";
 import thunkMiddleware from 'redux-thunk';
 import { reducer as formReducer } from 'redux-form'
+import appReducer from './app_reducer';
 
 /* Наши редьюсеры */
 /* и наши данные имен блоков для state */
@@ -16,6 +17,7 @@ let reducersPack = combineReducers({
 	users: usersReducer,
 	auth: authReduser,
 	form: formReducer,
+	app: appReducer,
 });
 /*! теперь ф=ия getState вернет нам такие же названия для разделов как мы задали Редюсерам выше */
 let store = createStore(reducersPack, applyMiddleware(thunkMiddleware));
