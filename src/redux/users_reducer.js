@@ -182,7 +182,7 @@ export const getUsersThunk = (activePage, pageSize) => {
 		  });
 	}
 }
-export const getUsersActivePageThunk = (page, pageSize, pagesOrderingFinish) => {
+export const getUsersActivePageThunk = (page, pageSize) => {
 	return (dispatch) => {
 		dispatch(toggelFetching(true));
 		dispatch(setActivePage(page));
@@ -191,7 +191,6 @@ export const getUsersActivePageThunk = (page, pageSize, pagesOrderingFinish) => 
 			dispatch(toggelFetching(false));
 			dispatch(setUsers(data.items));
 		});
-		pagesOrderingFinish(page + 20);
 	}
 }
 export const followThunk = (id) => {

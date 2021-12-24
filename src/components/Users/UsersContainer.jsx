@@ -7,13 +7,15 @@ import UsersPresent from "./UsersPresent";
 import { withAuthRedirect } from './../../hoc/withAuthRedirect';
 import { compose } from "redux";
 import Preloader from './../global/Preloader/preloader';
+import { getUsersIsDisabled, getUsersUsers, getUsersIsfetching, 
+	getUsersActivePage, getUsersTotalUsersCount, getUsersPageSize } from './../../redux/selectors/users_selectors';
 
 class UsersApi extends React.Component {
 	componentDidMount(){
 		this.props.getUsersThunk(this.props.activePage, this.props.pageSize);
 	}
 	clickActivePage = (page) =>{
-		this.props.getUsersActivePageThunk(page, this.props.pageSize, this.pagesOrderingFinish);
+		this.props.getUsersActivePageThunk(page, this.props.pageSize);
 	}
 	mapUsers = ()=>{
 	  return this.props.users.map((u) => {
@@ -49,7 +51,7 @@ class UsersApi extends React.Component {
 		/* считаем номер конечной страницы и исходим из него */
 		let pagesCount = Math.ceil(this.props.totalUsersCount/this.props.pageSize);
 		if(this.props.activePage <= pagesCount - 10){
-		  this.props.activePage <=10 ? t_finish = this.props.activePage + 20 - this.props.activePage : t_finish = this.props.activePage + 10
+		  this.props.activePage <=10 ? t_finish = 20 : t_finish = this.props.activePage + 10
 		} else {
 		  t_finish = pagesCount
 		}
@@ -63,7 +65,6 @@ class UsersApi extends React.Component {
 	  for(t_start; t_start <=t_finish; t_start++){
 	  pages.push(t_start);
 	  }
-	  
 	  return <>
 		  {this.props.isfetching ? 
 			<Preloader/>
@@ -79,12 +80,12 @@ class UsersApi extends React.Component {
   }
 
 let mapStateToProps = (state) =>({
-		users: state.users.users,
-		pageSize: state.users.pageSize,
-		totalUsersCount: state.users.totalUsersCount,
-		activePage: state.users.activePage,
-		isfetching: state.users.isfetching,
-		isDisabled: state.users.isDisabled,
+		users: getUsersUsers(state),
+		pageSize: getUsersPageSize(state),
+		totalUsersCount: getUsersTotalUsersCount(state),
+		activePage: getUsersActivePage(state),
+		isfetching: getUsersIsfetching(state),
+		isDisabled: getUsersIsDisabled(state),
 })
 
 export default compose(connect(mapStateToProps, {
