@@ -1,5 +1,6 @@
 import s from "./UserInfo.module.css";
-import UserStatus from './UserStatus/UserSatus';
+/* import UserStatus from './UserStatus/UserSatus'; */
+import UserStatusWithHooks from './UserStatus/UserSatusWithHooks';
 
 const UserInfo = (props) => {
   return (
@@ -8,7 +9,7 @@ const UserInfo = (props) => {
         <div className={s.param +" "+ s.param_name}>name</div>
         <div className={s.answer +" "+ s.answer_name}>{props.profile.fullName}</div>
       </div>
-	  <UserStatus {...props}/>
+	  <UserStatusWithHooks {...props}/>
       <div className={s.line}>
         <div className={s.param}>city</div>
         <div className={s.answer}>{props.profile.city ? props.profile.city : "Gotham City"}</div>
