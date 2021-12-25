@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import s from "./../UserInfo.module.css"; /* Наш первый ХУК */
 
 const UserStatusWithHooks = (props) => {
@@ -6,6 +6,9 @@ const UserStatusWithHooks = (props) => {
 	/* ДЕструктуризация */
 	let [editMode, setEditMode] = useState(false);
 	let [status, setStatus] = useState(props.status);
+	useEffect( () => {
+		setStatus(props.status);
+	}, [props.status]);
 	/* Больше мы можем не хранить локальный стэйт он хранится на стороне реакт */
 	let activateEditMode = () => {
 		setEditMode(true);
