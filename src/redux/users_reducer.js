@@ -1,11 +1,11 @@
 import { usersAPI, followAPI } from './../api/api';
-const FOLLOW = "FOLLOW";
-const UNFOLLOW = "UNFOLLOW";
-const SET_USERS = "SET_USERS";
-const SET_ACTIVE_PAGE = "SET_ACTIVE_PAGE";
-const SET_TOTAL_USERS_COUNT = "SET_TOTAL_USERS_COUNT";
-const TOGGEL_FETCHING = "TOGGEL_FETCHING";
-const FOLLOWING_DISABLE = "FOLLOWING_DISABLE";
+const FOLLOW = "react_my-one-app/users/FOLLOW";
+const UNFOLLOW = "react_my-one-app/users/UNFOLLOW";
+const SET_USERS = "react_my-one-app/users/SET_USERS";
+const SET_ACTIVE_PAGE = "react_my-one-app/users/SET_ACTIVE_PAGE";
+const SET_TOTAL_USERS_COUNT = "react_my-one-app/users/SET_TOTAL_USERS_COUNT";
+const TOGGEL_FETCHING = "react_my-one-app/users/TOGGEL_FETCHING";
+const FOLLOWING_DISABLE = "react_my-one-app/users/FOLLOWING_DISABLE";
 
 let initialState = {
 	users: [],

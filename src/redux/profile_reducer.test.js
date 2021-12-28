@@ -40,7 +40,7 @@ let state = {
 it(' lendth should be changed at added new post', ()=>{
 	// 1. test data
 	let action = newPostActionCreator("it-camasutra.com");
-	// 2.action
+	// 2.new state
 	let newState = profileReducer(state, action);
 	// 3. expectation
 	expect(newState.posts.length).toBe(4);
@@ -49,7 +49,7 @@ it(' lendth should be changed at added new post', ()=>{
 it(' message of new post should be correct', ()=>{
 	// 1. test data
 	let action = newPostActionCreator("it-camasutra.com");
-	// 2.action
+	// 2.new state
 	let newState = profileReducer(state, action);
 	// 3. expectation
 	expect(newState.posts[3].text).toBe("it-camasutra.com");
@@ -58,7 +58,7 @@ it(' message of new post should be correct', ()=>{
 it(' lenght should be changed at delete post', ()=>{
 	// 1. test data
 	let action = deletePostAC(1);
-	// 2.action
+	// 2.new state
 	let newState = profileReducer(state, action);
 	// 3. expectation
 	expect(newState.posts.length).toBe(2);
@@ -67,7 +67,7 @@ it(' lenght should be changed at delete post', ()=>{
 it(` after deleted post lenght shouldn't be changed if id incorrect`, ()=>{
 	// 1. test data
 	let action = deletePostAC(1000);
-	// 2.action
+	// 2.new state
 	let newState = profileReducer(state, action);
 	// 3. expectation
 	expect(newState.posts.length).toBe(3);
