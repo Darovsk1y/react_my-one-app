@@ -1,6 +1,6 @@
 
 import { authMeThunk } from './auth_reducer';
-const INITIALIZE_APP = "INITIALIZE_APP";
+const INITIALIZE_APP = "react_my-one-app/app/INITIALIZE_APP";
 
 let intialState = {
 	initialized: false,

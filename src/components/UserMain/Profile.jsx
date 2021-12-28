@@ -1,9 +1,9 @@
 import MainImage from "./MainImage";
-import s from "./UserMain.module.css";
+import s from "./Profile.module.css";
 /* import User from "./User"; */
 import UserContainer from './UserContainer';
 
-const UserMain = (props) => {
+const Profile = (props) => {
   return (
     <div className={s.main}>
       <MainImage />
@@ -14,4 +14,4 @@ const UserMain = (props) => {
   );
 };
 
-export default UserMain;
+export default Profile;

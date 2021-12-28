@@ -1,10 +1,10 @@
 import { profileAPI } from './../api/api';
 
-const ADD_POST = "ADD-POST";
-const TRACK_WRITE_POST = "TRACK-WRITE-POST";
-const SET_USER_PROFILE = "SET_USER_PROFILE";
-const SET_STATUS = "SET_STATUS";
-const DELETE_POST = "DELETE_POST";
+const ADD_POST = "react_my-one-app/profile/ADD-POST";
+const TRACK_WRITE_POST = "react_my-one-app/profile/TRACK-WRITE-POST";
+const SET_USER_PROFILE = "react_my-one-app/profile/SET_USER_PROFILE";
+const SET_STATUS = "react_my-one-app/profile/SET_STATUS";
+const DELETE_POST = "react_my-one-app/profile/DELETE_POST";
 
 let initialState = {
 	posts: [

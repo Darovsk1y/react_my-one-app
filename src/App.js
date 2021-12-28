@@ -1,7 +1,7 @@
 import './App.css';
 import Header from './components/Header/Header';
 import Asside from './components/Asside/Asside';
-import Profile from './components/UserMain/UserMain';
+import Profile from './components/UserMain/Profile';
 import { Routes, Route } from 'react-router-dom';
 import News from './components/News/News';
 import Muzic from './components/Muzic/Muzic';

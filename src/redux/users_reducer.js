@@ -1,3 +1,4 @@
+import { mapItemsUpdateHelper } from '../utils/validators/object-helpers';
 import { usersAPI, followAPI } from './../api/api';
 const FOLLOW = "react_my-one-app/users/FOLLOW";
 const UNFOLLOW = "react_my-one-app/users/UNFOLLOW";
@@ -71,23 +72,13 @@ const usersReducer = (state = initialState, action) =>{
 		case FOLLOW: {
 			return {
 				...state,
-				users: state.users.map(u => {
-					if ( u.id === action.userid){
-						return {...u, followed: true}
-					}
-					return u;
-				}),
+				users: mapItemsUpdateHelper(state.users, "id", action.userid, {followed: true}),
 			}
 		}
 		case UNFOLLOW: {
 			return {
 				...state,
-				users: state.users.map(u => {
-					if ( u.id === action.userid){
-						return {...u, followed: false}
-					}
-					return u;
-				}),
+				users: mapItemsUpdateHelper(state.users, "id", action.userid, {followed: false}),
 			}
 		}
 		case SET_USERS: {
@@ -172,49 +163,47 @@ export const toggelFollowDisable = (isfetching, id) =>{
 }
 /* Thunks */
 export const getUsersThunk = (activePage, pageSize) => {
-	return (dispatch) => {
+	return async (dispatch) => {
 		dispatch(toggelFetching(true));
-		usersAPI.getUsers(activePage, pageSize)
-		  .then((data) => {
+		let data = await usersAPI.getUsers(activePage, pageSize);
+		  if(data) {
 			dispatch(toggelFetching(false));
 			dispatch(setUsers(data.items));
 			dispatch(setTotalUsersCount(data.totalCount));
-		  });
+		  };
 	}
 }
 export const getUsersActivePageThunk = (page, pageSize) => {
-	return (dispatch) => {
+	return async (dispatch) => {
 		dispatch(toggelFetching(true));
 		dispatch(setActivePage(page));
-		usersAPI.getUsers(page, pageSize)
-		.then((data) => {
+		let data = await usersAPI.getUsers(page, pageSize);
+		if(data) {
 			dispatch(toggelFetching(false));
 			dispatch(setUsers(data.items));
-		});
+		};
 	}
 }
-export const followThunk = (id) => {
-	return (dispatch) => {
+//todo выносим общую логику в методах подписки
+	const followUnfollowFlow = async (dispatch, id, apiMethod, actionCreator) =>{
 		dispatch(toggelFollowDisable(true, id));
-		followAPI.followApi(id)
-		.then(data =>{
-			if (data.resultCode === 0){
-				dispatch(follow(id))
-			}
-			dispatch(toggelFollowDisable(false, id));
-		});
+		let data = await apiMethod(id);
+		if (data.resultCode === 0){
+			dispatch(actionCreator(id))
+		}
+		dispatch(toggelFollowDisable(false, id));
+	}
+//todo
+export const followThunk = (id) => {
+	return async (dispatch) => {
+		let apiMethod = followAPI.followApi.bind(followAPI);
+		followUnfollowFlow(dispatch, id, apiMethod, follow);
 	}
 }
 export const unfollowThunk = (id) => {
-	return (dispatch) => {
-		dispatch(toggelFollowDisable(true, id));
-		followAPI.unfollowApi(id)
-		.then(data =>{
-			if (data.resultCode === 0){
-				dispatch(unfollow(id))
-			}
-			dispatch(toggelFollowDisable(false, id));
-		});
+	return async (dispatch) => {
+		let apiMethod = followAPI.unfollowApi.bind(followAPI);
+		followUnfollowFlow(dispatch, id, apiMethod, unfollow);
 	}
 }
 export default usersReducer;

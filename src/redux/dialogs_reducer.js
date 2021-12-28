@@ -1,4 +1,4 @@
-const ADD_MESSAGE = "ADD-MESSAGE";
+const ADD_MESSAGE = "react_my-one-app/dialogs/ADD-MESSAGE";
 
 let initialState = {
 	messages: [
