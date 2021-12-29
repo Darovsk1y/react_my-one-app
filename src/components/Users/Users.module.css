@@ -25,22 +25,3 @@
     cursor: pointer;
 	margin: 0 auto;
 }
-.paginnation{
-	display: flex;
-    flex-wrap: wrap;
-    justify-content: center;
-    align-items: center;
-    max-height: 35px;
-/* 	overflow: auto; */
-	margin: 0px 0px 10px 0px;
-}
-.paginpage{
-	cursor: pointer;
-	font-size: 18px;
-	color: white;
-	margin: 0px 15px 0px 0px;
-}
-.active{
-	color: orange;
-	font-weight: 700;
-}

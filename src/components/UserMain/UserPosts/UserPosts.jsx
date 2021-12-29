@@ -5,7 +5,6 @@ import { reduxForm } from "redux-form";
 
 const UserPosts = (props) => {
 	let onSubmit = (formData) => {
-		console.log(formData);
 		props.newPostActionCreator(formData.textarea);
 		formData.textarea = ""; 
 		/* возможно из за такого способа валидация не видит пустоты */

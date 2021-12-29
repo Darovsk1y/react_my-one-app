@@ -38,41 +38,18 @@ class UsersApi extends React.Component {
 		  />
 		})
 	}
-	/* Global ut */
-	t_start = 1
-	pagesOrderingStart = (t_start) =>{
-		/* считаем точку начала цикла относительно активоной страницы */
-	  this.props.activePage <=10 ? t_start = 1 : t_start = this.props.activePage - 10;
-	  return t_start;
-	}
-	t_finish = 20
-	pagesOrderingFinish = (t_finish) =>{
-		/* считаем конечную точку цикла в зависимости от активной страницы */
-		/* считаем номер конечной страницы и исходим из него */
-		let pagesCount = Math.ceil(this.props.totalUsersCount/this.props.pageSize);
-		if(this.props.activePage <= pagesCount - 10){
-		  this.props.activePage <=10 ? t_finish = 20 : t_finish = this.props.activePage + 10
-		} else {
-		  t_finish = pagesCount
-		}
-	  return t_finish;
-	}
   
 	render() {
-	  let t_start = this.pagesOrderingStart(this.t_start);
-	  let t_finish = this.pagesOrderingFinish(this.t_finish);
-	  let pages = [];
-	  for(t_start; t_start <=t_finish; t_start++){
-	  pages.push(t_start);
-	  }
 	  return <>
 		  {this.props.isfetching ? 
 			<Preloader/>
 		   : null}
-		<UsersPresent pages={pages}
+		<UsersPresent 
 					mapUsers={this.mapUsers}
 					clickActivePage={this.clickActivePage}
 					activePage={this.props.activePage}
+					totalUsersCount={this.props.totalUsersCount}
+					pageSize={this.props.pageSize}
 					isDisabled={this.props.isDisabled}
 		/>
 	  </>

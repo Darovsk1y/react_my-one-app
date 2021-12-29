@@ -1,15 +1,18 @@
 /* Презентационная компонента */
+import { Paginator } from "../global/Paginator/Paginator";
 import s from "./Users.module.css";
 
 let UsersPresent = (props) => {
 	return (
 		<div className={s.users}>
 		  <div className={s.body}>
-			  <div className={s.paginnation}>
-				  {props.pages.map(page => {
-					  return <span className={props.activePage === page ? s.paginpage +" "+ s.active : s.paginpage} onClick={() =>{props.clickActivePage(page)}}>{page}</span>
-				  })}
-			  </div>
+			  {/* вынесена в отдельный файл*/}
+			  <Paginator 
+			  	activePage={props.activePage}
+				totalUsersCount={props.totalUsersCount}
+				pageSize={props.pageSize}
+				clickActivePage={props.clickActivePage}
+			  />
 			<ul className={s.userList}>
 			  {props.mapUsers()}
 			</ul>

@@ -1,7 +1,6 @@
 import { profileAPI } from './../api/api';
 
 const ADD_POST = "react_my-one-app/profile/ADD-POST";
-const TRACK_WRITE_POST = "react_my-one-app/profile/TRACK-WRITE-POST";
 const SET_USER_PROFILE = "react_my-one-app/profile/SET_USER_PROFILE";
 const SET_STATUS = "react_my-one-app/profile/SET_STATUS";
 const DELETE_POST = "react_my-one-app/profile/DELETE_POST";
@@ -43,7 +42,8 @@ const profileReducer =(state = initialState, action)=>{
 		case ADD_POST: {
 			if (state.profile){
 				let newPost = {
-					id: 4,
+					/* id: 4, */
+					id: state.posts.length +1,
 					likes: 0,
 					name: state.profile.fullName ? state.profile.fullName : "Nou Name",
 					avatar: state.profile.photos.large ? state.profile.photos.large :"https://i0.wp.com/slovami.net/wp-content/uploads/2018/04/1-36-1024x1024.jpg",
@@ -55,11 +55,6 @@ const profileReducer =(state = initialState, action)=>{
 				};
 			}
 			else return alert("Кто вы?");
-		}
-		case TRACK_WRITE_POST: {
-			return {...state,
-				newPostText: action.text,
-			};
 		}
 		case SET_USER_PROFILE: {
 			return {...state,
