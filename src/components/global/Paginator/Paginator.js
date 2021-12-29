@@ -28,7 +28,7 @@ export const Paginator = ({activePage, totalUsersCount, pageSize, clickActivePag
 	return (
 	<div className={s.paginnation}>
 		{pages.map(page => {
-			return <span className={activePage === page ? s.paginpage +" "+ s.active : s.paginpage} onClick={() =>{clickActivePage(page)}}>{page}</span>
+			return <span className={activePage === page ? s.paginpage +" "+ s.active : s.paginpage} key={page} onClick={() =>{clickActivePage(page)}}>{page}</span>
 		})}
 	</div>
 	)

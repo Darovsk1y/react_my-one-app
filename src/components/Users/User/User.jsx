@@ -3,7 +3,7 @@ import s from "./User.module.css";
 
 let User = (props) => {
   return (
-    <li className={s.user} key={props.id.toString()}>
+    <li className={s.user}>
       <div className={s.user__body}>
         <div className={s.user__avatarBlock}>
           <NavLink to={props.link} className={s.user__avatar}>
