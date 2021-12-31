@@ -1,4 +1,4 @@
-import { combineReducers, createStore, applyMiddleware } from "redux";
+import { combineReducers, createStore, applyMiddleware, compose } from "redux";
 import profileReducer from './profile_reducer';
 import dialogsReducer from './dialogs_reducer';
 import assideReducer from './asside_reducer';
@@ -19,8 +19,11 @@ let reducersPack = combineReducers({
 	form: formReducer,
 	app: appReducer,
 });
-/*! теперь ф=ия getState вернет нам такие же названия для разделов как мы задали Редюсерам выше */
-let store = createStore(reducersPack, applyMiddleware(thunkMiddleware));
-window.store = store;
+//todo Подключение для плагина
+const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
+const store = createStore(reducersPack, composeEnhancers(applyMiddleware(thunkMiddleware)));
+    
+/* let store = createStore(reducersPack, applyMiddleware(thunkMiddleware)); */
+window.__store__ = store;
 
 export default store;

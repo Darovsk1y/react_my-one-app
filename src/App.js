@@ -13,6 +13,9 @@ import React from 'react';
 import { initializeAppThunk } from './redux/app_reducer';
 import { connect } from 'react-redux';
 import Preloader from './components/global/Preloader/preloader';
+import { BrowserRouter } from 'react-router-dom';
+import { Provider } from 'react-redux';
+import store from './redux/redux_store';
 
 class App extends React.Component {
 	componentDidMount(){
@@ -22,7 +25,7 @@ class App extends React.Component {
 	render(){
 		if(!this.props.initialized) return <Preloader/>
 		return (
-			<div className="app-wrapper">
+			<div className="app-wrapper" role='main'>
 				<Header />
 				<Asside />
 				<main className="main">
@@ -43,4 +46,14 @@ class App extends React.Component {
 const mapDispathToProps = (state) => ({
 	initialized: state.app.initialized,
 })
-export default connect(mapDispathToProps, {initializeAppThunk})(App);
+const AppContainer = connect(mapDispathToProps, {initializeAppThunk})(App);
+//todo Эта глобал.обертка была создана для коррект.работы теста App
+let GlobalApp = (props) => {
+	return(
+	<BrowserRouter>
+		<Provider store={store}>
+			<AppContainer />
+		</Provider>
+	</BrowserRouter>)
+}
+export default GlobalApp;

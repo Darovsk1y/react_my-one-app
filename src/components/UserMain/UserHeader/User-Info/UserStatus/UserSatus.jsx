@@ -26,7 +26,6 @@ export default class UserStatus extends React.Component {
 	  }
   }
   render() {
-	  debugger
     return (
       <div className={s.status}>
         {this.state.editMode ? (
