@@ -8,13 +8,16 @@ import { withAuthRedirect } from './../../hoc/withAuthRedirect';
 import { compose } from "redux";
 import Preloader from './../global/Preloader/preloader';
 import { getUsersIsDisabled, getUsersUsers, getUsersIsfetching, 
-	getUsersActivePage, getUsersTotalUsersCount, getUsersPageSize } from './../../redux/selectors/users_selectors';
+	getUsersActivePage, getUsersTotalUsersCount, getUsersPageSize, getUsersMaxbaselight } from './../../redux/selectors/users_selectors';
 
 class UsersApi extends React.Component {
+	pagesCount = Math.ceil(this.props.totalItemsCount/this.props.pageSize);
 	componentDidMount(){
 		this.props.getUsersThunk(this.props.activePage, this.props.pageSize);
 	}
 	clickActivePage = (page) =>{
+		if(page<1){return}
+		if(page>this.pagesCount){return}
 		this.props.getUsersActivePageThunk(page, this.props.pageSize);
 	}
 	mapUsers = ()=>{
@@ -51,6 +54,7 @@ class UsersApi extends React.Component {
 					totalUsersCount={this.props.totalUsersCount}
 					pageSize={this.props.pageSize}
 					isDisabled={this.props.isDisabled}
+					maxbaselight={this.props.maxbaselight}
 		/>
 	  </>
 	}
@@ -63,6 +67,7 @@ let mapStateToProps = (state) =>({
 		activePage: getUsersActivePage(state),
 		isfetching: getUsersIsfetching(state),
 		isDisabled: getUsersIsDisabled(state),
+		maxbaselight: getUsersMaxbaselight(state),
 })
 
 export default compose(connect(mapStateToProps, {

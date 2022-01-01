@@ -17,3 +17,6 @@ export const getUsersIsfetching = (state) => {
 export const getUsersIsDisabled = (state) => {
 	return state.users.isDisabled;
 }
+export const getUsersMaxbaselight = (state) => {
+	return state.users.maxbaselight;
+}

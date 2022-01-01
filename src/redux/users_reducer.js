@@ -15,7 +15,7 @@ let initialState = {
 	activePage: 1,
 	isfetching: true,
 	isDisabled: [], /* блокировка нажатой кнопки */
-
+	maxbaselight: 20,/* количество точек пагинации страниц */
 /* 	users: [
 		{
 			id: 1,

@@ -9,9 +9,10 @@ let UsersPresent = (props) => {
 			  {/* вынесена в отдельный файл*/}
 			  <Paginator 
 			  	activePage={props.activePage}
-				totalUsersCount={props.totalUsersCount}
+				totalItemsCount={props.totalUsersCount}
 				pageSize={props.pageSize}
 				clickActivePage={props.clickActivePage}
+				maxbaselight={props.maxbaselight}
 			  />
 			<ul className={s.userList}>
 			  {props.mapUsers()}

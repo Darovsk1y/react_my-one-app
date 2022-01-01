@@ -17,3 +17,16 @@
 	color: orange;
 	font-weight: 700;
 }
+.button img{
+	position: absolute;width: 100%;height: 100%;top: 0;left: 0;
+	object-fit: cover;
+}
+.button{
+	width: 30px;
+	height: 25px;
+	position: relative;
+}
+.button.buttonLeft{
+	transform: rotate(180deg);
+	margin: 0px 15px 0px 0px;
+}
