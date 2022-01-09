@@ -28,6 +28,7 @@ export const Paginator = ({activePage, totalItemsCount, pageSize, clickActivePag
 	for(tс_start; tс_start <=tс_finish; tс_start++){
 	pages.push(tс_start);
 	}
+	console.log(pages.length);
 	return (
 	<div className={s.paginnation}>
 		{activePage >1 ?
