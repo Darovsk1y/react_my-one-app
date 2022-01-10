@@ -30,10 +30,17 @@ export const profileAPI = {
 		.put(`profile/status`, {status})
 	},
 	updateAvatar (photo) {
+		//todo отправка файла на сервер имеет свои особенности
+		const formData = new FormData();
+		formData.append("image", photo);
+
 		return instance
-		.put(`profile/photo`, {photo})
+		.put(`profile/photo`, formData, {
+			headers: {
+			  'Content-Type': 'multipart/form-data'
+			}
+		});
 	},
-	
 }
 export const followAPI = {
 	unfollowApi (id) {

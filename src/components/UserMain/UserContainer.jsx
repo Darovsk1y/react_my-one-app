@@ -1,7 +1,7 @@
 import React from "react";
 import User from "./User";
 import { connect } from 'react-redux';
-import { getProfileThusk, setStatusThusk, updateStatusThusk } from './../../redux/profile_reducer';
+import { getProfileThusk, setStatusThusk, updateStatusThusk, savePhotoThunk } from './../../redux/profile_reducer';
 import { useMatch } from "react-router";
 import { withAuthRedirect } from './../../hoc/withAuthRedirect';
 import { compose } from "redux";
@@ -27,9 +27,8 @@ class UserContainer extends React.Component {
 	}
 	
 	render () {
-
 		if(this.props.profile){
-			if(this.props.auth.id == this.props.profile.userId){
+			if(this.props.auth.id === this.props.profile.userId){
 				this.isOwner = true
 			}else{
 				this.isOwner = false
@@ -41,6 +40,7 @@ class UserContainer extends React.Component {
 			updateStatusThusk={this.props.updateStatusThusk}
 			status={this.props.status}
 			isOwner={this.isOwner}
+			savePhotoThunk={this.props.savePhotoThunk}
 			/>
 		  )
 		}
@@ -57,5 +57,5 @@ const ProfileMatch = (props) => {
 		<UserContainer {...props} match={match}/>
 	)
 }
-export default compose( connect (mapStateToProps, {getProfileThusk, setStatusThusk, updateStatusThusk})
+export default compose( connect (mapStateToProps, {getProfileThusk, setStatusThusk, updateStatusThusk, savePhotoThunk})
 		,withAuthRedirect)(ProfileMatch);

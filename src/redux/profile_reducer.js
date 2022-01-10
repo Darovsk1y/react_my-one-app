@@ -4,6 +4,7 @@ const ADD_POST = "react_my-one-app/profile/ADD-POST";
 const SET_USER_PROFILE = "react_my-one-app/profile/SET_USER_PROFILE";
 const SET_STATUS = "react_my-one-app/profile/SET_STATUS";
 const DELETE_POST = "react_my-one-app/profile/DELETE_POST";
+const SAVE_PHOTO = "react_my-one-app/profile/SAVE_PHOTO";
 
 let initialState = {
 	posts: [
@@ -73,6 +74,12 @@ const profileReducer =(state = initialState, action)=>{
 				posts: state.posts.filter(p => p.id !== action.id)
 			}
 		}
+		case SAVE_PHOTO: {
+			return{
+				...state,
+				profile: {...state.profile, photos: action.photos}
+			}
+		}
 		default:
 			return state;
 	}
@@ -101,42 +108,49 @@ export const deletePostAC = (id) =>{
 		id
 	}
 }
-
+/* после санки загрузки фото обновим его*/
+export const savePhotoSuccsess = (photos) =>{
+	return{
+		type: SAVE_PHOTO,
+		photos
+	}
+}
 /* Thusks */
 export const getProfileThusk = (userId) => {
-	return (dispatch) => {
-		profileAPI.getProfile(userId)
-		.then( response =>{
-			dispatch(setUserProfile(response.data));
-		})
+	return async (dispatch) => {
+		let data = await profileAPI.getProfile(userId)
+		if(data){
+			dispatch(setUserProfile(data.data));
+		}
 	}
 }
 export const setStatusThusk = (userId) => {
-	return (dispatch) => {
-		profileAPI.getStatus(userId)
-		.then( response =>{
-			dispatch(setStatus(response.data));
-		})
+	return async (dispatch) => {
+		let data = await profileAPI.getStatus(userId)
+		if(data){
+			dispatch(setStatus(data.data));
+		}
 	}
 }
 export const updateStatusThusk = (status) => {
-	return (dispatch) => {
-		profileAPI.updateStatus(status)
-		.then( response =>{
-			if(response.data.resultCode === 0){
+	return async (dispatch) => {
+		let data = await profileAPI.updateStatus(status);
+		if(data){
+			if(data.data.resultCode === 0){
 				dispatch(setStatus(status));
 			}
-		})
+		}
 	}
 }
-/* export const updateAvatarThusk = (photo) => {
-	return (dispatch) => {
-		profileAPI.updateAvatar(photo)
-		.then( response =>{
-			if(response.data.resultCode === 0){
-				console.log("Photo update");
+export const savePhotoThunk = (photo) => {
+	return async (dispatch) => {
+		let data = await profileAPI.updateAvatar(photo)
+		if(data){
+			debugger
+			if(data.data.resultCode === 0){
+				dispatch(savePhotoSuccsess(data.data.data.photos))
 			}
-		})
+		}
 	}
-} */
+}
 export default profileReducer;

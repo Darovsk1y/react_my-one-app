@@ -4,7 +4,7 @@ import s from "./UserHeader.module.css";
 const UserHeader = (props) =>{
 	return(
 		<div className={s.header}>
-		<UserAvatar avatar={props.profile.photos.large}/>
+		<UserAvatar avatar={props.profile.photos.large} isOwner={props.isOwner} savePhotoThunk={props.savePhotoThunk}/>
 		<UserInfo {...props}/>
 	  </div>
 	);
