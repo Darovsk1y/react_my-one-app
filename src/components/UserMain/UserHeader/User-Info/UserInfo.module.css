@@ -5,13 +5,17 @@
 	display: grid;
 	grid-template-rows: 1fr;
 	grid-template-columns: 150px 1fr;
+	margin-bottom: 10px;
 }
 .param {
 	display: inline-flex;
 	align-items: flex-end;
 	font-size: 20px;
-	line-height: 1.4;
+	line-height: 1.2;
 	color: black;
+}
+.form .param{
+	align-items: flex-start;
 }
 .param_name{
 	font-size: 30px;
@@ -23,9 +27,12 @@
 	display: inline-flex;
 	align-items: flex-end;
 	font-size: 23px;
-	line-height: 1.4;
+	line-height: 1.2;
 	color: black;
 	padding: 0px 0px 0px 20px;
+}
+a.answer:hover{
+	text-decoration: underline;
 }
 .iconJob{
 	min-width: 40px;
@@ -34,4 +41,36 @@
 .status{
 	font-size: 22px;
 	margin: 10px 0;
+}
+/* Form */
+.form{}
+.param_input{
+	padding: 0 10px;
+}
+.param_checkboxBlock{
+	position: relative;
+}
+.param_checkbox{
+	position: absolute;
+	top: 50%;left: 0;
+	transform: translateY(-50%);
+	width: 20px;
+	height: 20px;
+}
+.button {
+	min-height: 20px;
+	min-width: 100px;
+	padding: 5px 20px;
+	color: rgb(255, 255, 255);
+	background-color: rgb(66, 0, 121);
+	border: 1px solid rgb(28, 0, 44);
+	font-size: 16px;
+	border-radius: 10px;
+	transition: all 0.3s ease 0s;
+	margin-left: auto;
+	margin-right: auto;
+    display: block;
+}
+.button:hover{
+	background-color: rgb(118, 6, 209);
 }

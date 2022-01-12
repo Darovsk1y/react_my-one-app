@@ -1,7 +1,7 @@
 import React from "react";
 import User from "./User";
 import { connect } from 'react-redux';
-import { getProfileThusk, setStatusThusk, updateStatusThusk, savePhotoThunk } from './../../redux/profile_reducer';
+import { getProfileThusk, setStatusThusk, updateStatusThusk, savePhotoThunk, setFormThunk } from './../../redux/profile_reducer';
 import { useMatch } from "react-router";
 import { withAuthRedirect } from './../../hoc/withAuthRedirect';
 import { compose } from "redux";
@@ -41,6 +41,7 @@ class UserContainer extends React.Component {
 			status={this.props.status}
 			isOwner={this.isOwner}
 			savePhotoThunk={this.props.savePhotoThunk}
+			setFormThunk={this.props.setFormThunk}
 			/>
 		  )
 		}
@@ -57,5 +58,5 @@ const ProfileMatch = (props) => {
 		<UserContainer {...props} match={match}/>
 	)
 }
-export default compose( connect (mapStateToProps, {getProfileThusk, setStatusThusk, updateStatusThusk, savePhotoThunk})
+export default compose( connect (mapStateToProps, {getProfileThusk, setStatusThusk, updateStatusThusk, savePhotoThunk, setFormThunk})
 		,withAuthRedirect)(ProfileMatch);

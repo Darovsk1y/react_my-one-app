@@ -41,6 +41,10 @@ export const profileAPI = {
 			}
 		});
 	},
+	setForm(profile){
+		return instance
+		.put(`profile`, profile)
+	},
 }
 export const followAPI = {
 	unfollowApi (id) {

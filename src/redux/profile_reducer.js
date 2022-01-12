@@ -120,6 +120,7 @@ export const getProfileThusk = (userId) => {
 	return async (dispatch) => {
 		let data = await profileAPI.getProfile(userId)
 		if(data){
+			debugger
 			dispatch(setUserProfile(data.data));
 		}
 	}
@@ -146,9 +147,21 @@ export const savePhotoThunk = (photo) => {
 	return async (dispatch) => {
 		let data = await profileAPI.updateAvatar(photo)
 		if(data){
-			debugger
 			if(data.data.resultCode === 0){
 				dispatch(savePhotoSuccsess(data.data.data.photos))
+			}
+		}
+	}
+}
+export const setFormThunk = (formData) =>{
+	//! если редюсер видит dispatch, то он увидит и getState
+	return async (dispatch, getState) => {
+		const userId = getState().auth.id;
+		const data = await profileAPI.setForm(formData)
+		if(data){
+			debugger
+			if(data.data.resultCode === 0){
+				dispatch(getProfileThusk(userId));
 			}
 		}
 	}

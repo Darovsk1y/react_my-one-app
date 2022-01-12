@@ -3,4 +3,17 @@
 	display: flex;
 	margin: 0px 0px 20px 0px;
 	padding: 20px 20px;
+	position: relative;
+	padding-right: 120px;
+}
+.editMode{
+	position: absolute;
+	top: 20px;right: 20px;
+	min-width: 60px;
+	padding: 5px;
+	font-size: 12px;
+	border-radius: 10px;
+	color: white;
+	border: 1px solid rgb(82, 82, 82);
+	background-color: rgb(111, 62, 247);
 }
