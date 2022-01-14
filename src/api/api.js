@@ -78,9 +78,9 @@ export const authAPI = {
 	   })
 	},
 	/* авторизация */
-	autchMeLoginApi (email, password, rememberMe) {
+	autchMeLoginApi (email, password, rememberMe, captcha) {
 		return instance
-		.post(`/auth/login`, {email, password, rememberMe})
+		.post(`/auth/login`, {email, password, rememberMe, captcha})
 		.then(response =>{
 			return response.data;
 	   })
@@ -88,5 +88,12 @@ export const authAPI = {
 	LogoutApi () {
 		return instance
 		.delete(`/auth/login`); /* сервер удалит куку */
+	}
+}
+export const securityAPI = {
+	/* капча */
+	getCaptchaUrl () {
+		return instance
+		.get(`/security/get-captcha-url`);
 	}
 }

@@ -9,7 +9,7 @@ import { Navigate } from "react-router-dom";
 class LoginContainer extends React.Component {
 	onSubmit = (formData) => {
 		if(this.props.isAuth === false){
-			this.props.authLoginThunk(formData.email, formData.password, formData.rememberMe);
+			this.props.authLoginThunk(formData.email, formData.password, formData.rememberMe, formData.captcha);
 		}
 	}
 	
@@ -18,13 +18,14 @@ class LoginContainer extends React.Component {
     return (
       <div className="login">
         <h3 className={s.title}>Login</h3>
-        <LoginFormRedux onSubmit={this.onSubmit} />
+        <LoginFormRedux onSubmit={this.onSubmit} captchaUrl={this.props.captchaUrl}/>
       </div>
     );
   }
 }
 let mapDispathToProps = (state) => ({
 	isAuth: state.auth.isAuth,
+	captchaUrl: state.auth.captchaUrl,
 })
 const LoginConnect = connect(mapDispathToProps, {authLoginThunk})(LoginContainer);
 

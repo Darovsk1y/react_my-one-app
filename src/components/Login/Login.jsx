@@ -22,6 +22,13 @@ const LoginForm = (props) =>{
 				<span >запомнить меня</span>
 			</label>
 		</div>
+		{/* Хитрый способ задания условия через && */}
+		{props.captchaUrl && <img src={props.captchaUrl} alt="captcha" className={s.captcha}/>}
+		{props.captchaUrl && <div className={s.line +" "+s.captchaInput}>
+			<Field component={Input} name={"captcha"} type="text" autoFocus={true} validate={[required]}/>
+		</div>
+		}
+
 		{props.error ? 
 		<div>
 			<div className={f.formError}>
