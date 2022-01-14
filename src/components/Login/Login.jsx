@@ -1,4 +1,5 @@
 import s from "./Login.module.css";
+import f from "../global/FormControls/FormControls.module.css";
 import { Field, reduxForm } from "redux-form";
 import { FormControls } from "../global/FormControls/FormControls";
 import { maxLengthCreator } from "../../utils/validators/validators";
@@ -23,7 +24,7 @@ const LoginForm = (props) =>{
 		</div>
 		{props.error ? 
 		<div>
-			<div className={s.formError}>
+			<div className={f.formError}>
 				{props.error}
 			</div>
 		</div>

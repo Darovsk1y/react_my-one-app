@@ -1,14 +1,15 @@
 import s from "./../User-Info/UserInfo.module.css";
+import f from "../../../global/FormControls/FormControls.module.css";
 import { Field, reduxForm } from 'redux-form';
 import { FormControls } from "../../../global/FormControls/FormControls";
 import { maxLengthCreator } from "../../../../utils/validators/validators";
-import { required } from './../../../../utils/validators/validators';
+/* import { required } from './../../../../utils/validators/validators'; */
 
 const Input = FormControls("input");
 const Textarea = FormControls("textarea");
 let maxLength30 = maxLengthCreator(30);
 
-const ProfileForm = ({handleSubmit, status, profile}) => {
+const ProfileForm = ({handleSubmit, status, profile, error}) => {
 
   return (
     <form className={s.form} onSubmit={handleSubmit}>
@@ -63,6 +64,11 @@ const ProfileForm = ({handleSubmit, status, profile}) => {
 			</div>
 		  )
 		})}
+		{/* обработка ошибок */}
+		{error ? 
+		<div className={f.formError}>{error}</div>
+		 : ""
+		}
 		<button className={s.button} type="submit">Save</button>
 	</form>
   )

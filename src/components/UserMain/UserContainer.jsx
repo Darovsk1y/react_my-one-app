@@ -8,6 +8,7 @@ import { compose } from "redux";
 
 /* Теперь это классовая компанента */
 class UserContainer extends React.Component {
+	isOwner;
 	refreshProfile(){
 		let userId = this.props.match ? this.props.match.params.userId : this.props.auth.id;
 		/* this.props.auth.activeUser.userId работает но с ошибкой. данные из пропс поздно приходят */
@@ -16,7 +17,7 @@ class UserContainer extends React.Component {
 	}
 	componentDidMount(){
 		this.refreshProfile();
-		let isOwner;
+		
 	}
 	componentDidUpdate(prevProps, prevState, snapshot){
 		if(this.props.match && this.props.match.params.userId !== prevProps.match.params.userId){

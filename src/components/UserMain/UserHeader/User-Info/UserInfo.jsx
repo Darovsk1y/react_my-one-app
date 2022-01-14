@@ -23,15 +23,10 @@ const UserInfo = ({status, profile, updateStatusThusk}) => {
 				<div className={s.answer}>{profile.aboutMe}</div>
 			</div>
 		) : ''}
-
-	  <div className={s.param}>contacts: </div>
-	  {Object.keys(profile.contacts).map(key => {
-		  return <Contact key={key} contactTitle={key} contactValue={profile.contacts[key]}/>
-		})}
-	  	
-	  	<div className={s.line}>
-			<div className={s.param}>Looking for a job</div>
-			{profile.lookingForAJob ? (
+			  	
+			<div className={s.line}>
+				<div className={s.param}>Looking for a job</div>
+				{profile.lookingForAJob ? (
 				<div className={s.answer}>
 					<img src="https://www.aura.ge/uploads/gantvirtva/didi_smailebi/samili.162.gif" alt="" className={s.iconJob}/>
 				</div>
@@ -44,6 +39,11 @@ const UserInfo = ({status, profile, updateStatusThusk}) => {
 			<div className={s.param}></div>
 			<div className={s.answer}>{profile.lookingForAJobDescription}</div>
 		</div>
+	  <div className={s.param}>contacts: </div>
+	  {Object.keys(profile.contacts).map(key => {
+		  return <Contact key={key} contactTitle={key} contactValue={profile.contacts[key]}/>
+		})}
+
     </div>
   );
 };

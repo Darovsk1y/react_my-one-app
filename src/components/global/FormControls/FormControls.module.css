@@ -8,10 +8,20 @@
 	display: inline-block;
 	background: rgba(255, 255, 255, 0.479);
 	border-radius: 5px;
+	margin-left: 5px;
 }
 .error{
 
 }
 .controls.error .errMessage{
 	color: red;
+}
+.formError{
+	display: inline-block;
+	padding: 5px 10px;
+	color: brown;
+	border: 1px solid brown;
+	border-radius: 10px;
+	font-size: 16px;
+	margin: 0px 0px 10px 0px;
 }

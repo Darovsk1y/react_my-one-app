@@ -11,8 +11,11 @@ const UserHeader = (props) =>{
 	}
 	let onSubmit=(formData)=>{
 		console.log(formData)
-		props.setFormThunk(formData);
-		setEditMode(false);
+		props.setFormThunk(formData).then(
+			()=>{
+				setEditMode(false);
+			}
+		);
 	}
 	return(
 		<div className={s.header}>

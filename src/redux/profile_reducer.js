@@ -1,3 +1,4 @@
+import { stopSubmit } from 'redux-form';
 import { profileAPI } from './../api/api';
 
 const ADD_POST = "react_my-one-app/profile/ADD-POST";
@@ -120,7 +121,7 @@ export const getProfileThusk = (userId) => {
 	return async (dispatch) => {
 		let data = await profileAPI.getProfile(userId)
 		if(data){
-			debugger
+			//debugger
 			dispatch(setUserProfile(data.data));
 		}
 	}
@@ -162,8 +163,34 @@ export const setFormThunk = (formData) =>{
 			debugger
 			if(data.data.resultCode === 0){
 				dispatch(getProfileThusk(userId));
+			} else {
+				const message = data.data.messages.length > 0 ? data.data.messages[0] : "Some error";
+				//общая ошибка
+				dispatch(stopSubmit("profile", {_error: message}));
+				return Promise.reject(message);
+				//todo ошибка поля
+				/* dispatch(stopSubmit("profile", {"contacts":{"twitter": message}})); */
+				/* let{textError, section, subSection} = getFormatErrors(message); */
+			/* 	const textError = parseError.textError;
+				const section = parseError.section;
+				const subSection = parseError.subSection; */
+				/* debugger
+				dispatch(stopSubmit("profile", {section:{subSection: textError}})); */
 			}
 		}
 	}
 }
+//todo функция извлечения значений поля из ошибки
+// Invalid url format (Contacts->Twitter)
+/* const getFormatErrors = (message) =>{
+	let formaterMessage = message.split(/\(/);
+	const textError = formaterMessage[0].trim();
+	const twoSplit = formaterMessage[1].split(/\)/);
+	const sectionSubsection = twoSplit[0].trim().split(/\->/);
+	const section = sectionSubsection[0].trim();
+	const subSection = sectionSubsection[1].trim();
+	return {textError, section, subSection}
+} */
+/* getFormatErrors("Invalid url format (Contacts->Twitter)"); */
+
 export default profileReducer;
