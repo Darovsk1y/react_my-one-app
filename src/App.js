@@ -1,21 +1,15 @@
 import './App.css';
 import Header from './components/Header/Header';
 import Asside from './components/Asside/Asside';
-//import Profile from './components/UserMain/Profile';
-import { Routes, Route } from 'react-router-dom';
-//import News from './components/News/News';
-//import Muzic from './components/Muzic/Muzic';
-//import Settings from './components/Settings/Settings';
-//import DialogsContainer from './components/Dialogs/DialogsContainer';
-//import UsersContainer from './components/Users/UsersContainer';
-//import LoginContainer from './components/Login/LoginContainer';
-import React, { Suspense } from 'react';
-import { initializeAppThunk } from './redux/app_reducer';
+import { Routes, Route, Navigate } from 'react-router-dom';
+import React, { Component, Suspense } from 'react';
+import { initializeAppThunk, handlingGlobalErrorThunk, clearGlobalErrorThunk } from './redux/app_reducer';
 import { connect } from 'react-redux';
 import Preloader from './components/global/Preloader/preloader';
 import { BrowserRouter } from 'react-router-dom';
 import { Provider } from 'react-redux';
 import store from './redux/redux_store';
+import GlobalError from './components/global/GlobalError/GlobalError';
 //todo lazy Loading
 const Profile = React.lazy(() => import('./components/UserMain/Profile'));
 const DialogsContainer = React.lazy(() => import('./components/Dialogs/DialogsContainer'));
@@ -25,10 +19,23 @@ const Settings = React.lazy(() => import('./components/Settings/Settings'));
 const UsersContainer = React.lazy(() => import('./components/Users/UsersContainer'));
 const LoginContainer = React.lazy(() => import('./components/Login/LoginContainer'));
 
-class App extends React.Component {
+
+class App extends Component {
+	catchAllUnhandleErrors = (PromiseRejectionEvent) => {
+		//? логика обработки Глобальной необработанной ошибки
+		this.props.handlingGlobalErrorThunk(PromiseRejectionEvent);
+	}
+	clearError = () => {
+		this.props.clearGlobalErrorThunk();
+	}
 	componentDidMount(){
 		/* Теперь проверка на логинизацию выполняется здесь а не в Header AuthContainer */
 		this.props.initializeAppThunk();
+		//todo Глобальный обработчик ошибок с сервера
+		window.addEventListener('unhandledrejection', this.catchAllUnhandleErrors);
+	}
+	componentWillUnmount(){
+		window.removeEventListener('unhandledrejection', this.catchAllUnhandleErrors);
 	}
 	render(){
 		if(!this.props.initialized) return <Preloader/>
@@ -39,6 +46,7 @@ class App extends React.Component {
 				<main className="main">
 					<Suspense fallback={<Preloader/>}>
 						<Routes>
+							<Route path='/' element={<Navigate to={'/profile'}/>} />
 							<Route path='/profile/*' element={<Profile />} />
 							<Route path='/dialogs/*' element={<DialogsContainer />} />
 							<Route path='/news/*' element={<News />} />
@@ -50,14 +58,16 @@ class App extends React.Component {
 					</Suspense>
 				
 				</main>
+				{(this.props.globalError) ? <GlobalError globalError={this.props.globalError} clearError={this.clearError}/> : ""}
 			</div>
 		);
 	}
 }
 const mapDispathToProps = (state) => ({
 	initialized: state.app.initialized,
+	globalError: state.app.globalError,
 })
-const AppContainer = connect(mapDispathToProps, {initializeAppThunk})(App);
+const AppContainer = connect(mapDispathToProps, {initializeAppThunk, handlingGlobalErrorThunk, clearGlobalErrorThunk})(App);
 //todo Эта глобал.обертка была создана для коррект.работы теста App
 let GlobalApp = (props) => {
 	return(

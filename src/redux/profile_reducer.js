@@ -160,7 +160,6 @@ export const setFormThunk = (formData) =>{
 		const userId = getState().auth.id;
 		const data = await profileAPI.setForm(formData)
 		if(data){
-			debugger
 			if(data.data.resultCode === 0){
 				dispatch(getProfileThusk(userId));
 			} else {
@@ -170,12 +169,9 @@ export const setFormThunk = (formData) =>{
 				return Promise.reject(message);
 				//todo ошибка поля
 				/* dispatch(stopSubmit("profile", {"contacts":{"twitter": message}})); */
-				/* let{textError, section, subSection} = getFormatErrors(message); */
-			/* 	const textError = parseError.textError;
-				const section = parseError.section;
-				const subSection = parseError.subSection; */
-				/* debugger
-				dispatch(stopSubmit("profile", {section:{subSection: textError}})); */
+				/* let{textError, section, subSection} = getFormatErrors(message);
+				dispatch(stopSubmit("profile", {[section]:{[subSection]: textError}}));
+				debugger */
 			}
 		}
 	}

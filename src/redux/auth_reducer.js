@@ -98,8 +98,6 @@ export const getCaptchaUrlThunk = () => async (dispatch) =>{
 	const responce = await securityAPI.getCaptchaUrl();
 	//вернется по любому. см.докум на сервере. проверка не нужна
 	const captchaUrl = responce.data.url;
-	console.log(captchaUrl);
-	debugger
 	dispatch(getCaptchaUrlSuccsess(captchaUrl));
 }
 
