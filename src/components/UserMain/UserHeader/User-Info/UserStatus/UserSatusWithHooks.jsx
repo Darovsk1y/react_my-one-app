@@ -2,7 +2,6 @@ import { useEffect, useState } from "react";
 import s from "./../UserInfo.module.css"; /* Наш первый ХУК */
 
 const UserStatusWithHooks = (props) => {
-
 	/* ДЕструктуризация */
 	let [editMode, setEditMode] = useState(false);
 	let [status, setStatus] = useState(props.status);
@@ -24,7 +23,8 @@ const UserStatusWithHooks = (props) => {
       <div className={s.status}>
         {!editMode ? (
           <div>
-            <span onDoubleClick={activateEditMode}>{props.status || "----"}</span>
+			{props.isOwner ? <span onDoubleClick={activateEditMode}>{props.status || "----"}</span>
+			: <span>{props.status || "----"}</span>}
           </div>
         ) : (
           <div>

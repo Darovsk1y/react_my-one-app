@@ -1,5 +1,6 @@
 import { mapItemsUpdateHelper } from '../utils/validators/object-helpers';
-import { usersAPI, followAPI } from './../api/api';
+import { usersAPI, followAPI } from '../api/api';
+import { UserType } from '../types/types';
 const FOLLOW = "react_my-one-app/users/FOLLOW";
 const UNFOLLOW = "react_my-one-app/users/UNFOLLOW";
 const SET_USERS = "react_my-one-app/users/SET_USERS";
@@ -9,65 +10,16 @@ const TOGGEL_FETCHING = "react_my-one-app/users/TOGGEL_FETCHING";
 const FOLLOWING_DISABLE = "react_my-one-app/users/FOLLOWING_DISABLE";
 
 let initialState = {
-	users: [],
+	users: [] as Array<UserType>,
 	totalUsersCount: 0,
 	pageSize: 10,
 	activePage: 1,
 	isfetching: true,
-	isDisabled: [], /* блокировка нажатой кнопки */
+	isDisabled: [] as Array<number>, /* блокировка нажатой кнопки */ //todo Array of Users id
 	maxbaselight: 20,/* количество точек пагинации страниц */
-/* 	users: [
-		{
-			id: 1,
-			name: "Alex",
-			status: "введен Э. Эвансом в его »",
-			adress: {
-				country: "Italy",
-				city: "Barselona",
-			},
-			avatar: "https://ava-24.com/_ph/98/563228947.jpg",
-			isfollow: true,
-			link: "#/",
-		},
-		{
-			id: 2,
-			name: "Dimon",
-			status: "введен Э. Эвансом в его книге с таким же названием «Domain-Driven Design. введен Э. Эвансом в его книге с таким же названием «Domain-Driven Design»",
-			adress: {
-				country: "Italy",
-				city: "Barselona",
-			},
-			avatar: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSGte8KLfMOmnVn67KS6LldaFP0XWAMfTKNJQ&usqp=CAU",
-			isfollow: false,
-			link: "#/",
-		},
-		{
-			id: 3,
-			name: "Tonny Gat",
-			status: "введен Э. Эвансом в его книге с таким же названием «Domain-Driven Design»",
-			adress: {
-				country: "Italy",
-				city: "Barselona",
-			},
-			avatar: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSh36h4s7bAqe7En8FdKfKJ1MUax-E0WdCmdQ&usqp=CAU",
-			isfollow: true,
-			link: "#/",
-		},
-		{
-			id: 4,
-			name: "Silver Stowm",
-			status: "Всем привет друзья! Жду вас в рейдах!",
-			adress: {
-				country: "Italy",
-				city: "Barselona",
-			},
-			avatar: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR0pLSGspy6-x9Ih29O3aEP1_Y3ZITOWgh2oA&usqp=CAU",
-			isfollow: false,
-			link: "#/",
-		},
-	], */
 }
-const usersReducer = (state = initialState, action) =>{
+type initialStateType = typeof initialState;
+const usersReducer = (state = initialState, action:any):initialStateType =>{
 	switch (action.type) {
 		case FOLLOW: {
 			return {
@@ -118,43 +70,72 @@ const usersReducer = (state = initialState, action) =>{
 }
 
 /* action Creators */
-export const setUsers = (users) =>{
+type setUsersType = {
+	type: typeof SET_USERS,
+		users:Array<UserType>
+}
+export const setUsers = (users:Array<UserType>):setUsersType =>{
 	return {
 		type: SET_USERS,
 		users
 	}
 }
-export const follow = (userid) =>{
+type followType = {
+	type: typeof FOLLOW,
+	userid:number
+}
+export const follow = (userid:number):followType =>{
 	return {
 		type: FOLLOW,
 		userid
 	}
 }
-export const unfollow = (userid) =>{
+type unfollowType = {
+	type: typeof UNFOLLOW,
+	userid:number
+}
+export const unfollow = (userid:number):unfollowType =>{
 	return {
 		type: UNFOLLOW,
 		userid
 	}
 }
-export const setActivePage = (page) =>{
+type setActivePageType = {
+	type: typeof SET_ACTIVE_PAGE,
+	page:number
+}
+export const setActivePage = (page:number):setActivePageType =>{
 	return {
 		type: SET_ACTIVE_PAGE,
 		page
 	}
 }
-export const setTotalUsersCount = (usersCount) =>{
+type setTotalUsersCountType = {
+	type: typeof SET_TOTAL_USERS_COUNT,
+	usersCount:number
+}
+export const setTotalUsersCount = (usersCount:number):setTotalUsersCountType =>{
 	return {
 		type: SET_TOTAL_USERS_COUNT,
 		usersCount
 	}
 }
-export const toggelFetching = (isfetching) =>{
+type toggelFetchingType = {
+	type: typeof TOGGEL_FETCHING,
+	isfetching:boolean
+}
+export const toggelFetching = (isfetching:boolean):toggelFetchingType =>{
 	return {
 		type: TOGGEL_FETCHING,
 		isfetching
 	}
 }
-export const toggelFollowDisable = (isfetching, id) =>{
+type toggelFollowDisableType = {
+	type: typeof FOLLOWING_DISABLE,
+	isfetching:boolean
+	id:number
+}
+export const toggelFollowDisable = (isfetching:boolean, id:number):toggelFollowDisableType =>{
 	return {
 		type: FOLLOWING_DISABLE,
 		isfetching,
@@ -162,8 +143,8 @@ export const toggelFollowDisable = (isfetching, id) =>{
 	}
 }
 /* Thunks */
-export const getUsersThunk = (activePage, pageSize) => {
-	return async (dispatch) => {
+export const getUsersThunk = (activePage:number, pageSize:number) => {
+	return async (dispatch:any) => {
 		dispatch(toggelFetching(true));
 		let data = await usersAPI.getUsers(activePage, pageSize);
 		  if(data) {
@@ -173,8 +154,8 @@ export const getUsersThunk = (activePage, pageSize) => {
 		  };
 	}
 }
-export const getUsersActivePageThunk = (page, pageSize) => {
-	return async (dispatch) => {
+export const getUsersActivePageThunk = (page:number, pageSize:number) => {
+	return async (dispatch:any) => {
 		dispatch(toggelFetching(true));
 		dispatch(setActivePage(page));
 		let data = await usersAPI.getUsers(page, pageSize);
@@ -185,7 +166,7 @@ export const getUsersActivePageThunk = (page, pageSize) => {
 	}
 }
 //todo выносим общую логику в методах подписки
-	const followUnfollowFlow = async (dispatch, id, apiMethod, actionCreator) =>{
+	const followUnfollowFlow = async (dispatch:any, id:number, apiMethod:any, actionCreator:any) =>{
 		dispatch(toggelFollowDisable(true, id));
 		let data = await apiMethod(id);
 		if (data.resultCode === 0){
@@ -194,14 +175,14 @@ export const getUsersActivePageThunk = (page, pageSize) => {
 		dispatch(toggelFollowDisable(false, id));
 	}
 //todo
-export const followThunk = (id) => {
-	return async (dispatch) => {
+export const followThunk = (id:number) => {
+	return async (dispatch:any) => {
 		let apiMethod = followAPI.followApi.bind(followAPI);
 		followUnfollowFlow(dispatch, id, apiMethod, follow);
 	}
 }
-export const unfollowThunk = (id) => {
-	return async (dispatch) => {
+export const unfollowThunk = (id:number) => {
+	return async (dispatch:any) => {
 		let apiMethod = followAPI.unfollowApi.bind(followAPI);
 		followUnfollowFlow(dispatch, id, apiMethod, unfollow);
 	}

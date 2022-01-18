@@ -31,7 +31,7 @@ class UsersApi extends React.Component {
 			avatar={
 			  u.photos.large != null
 				? u.photos.small
-				: "https://ava-24.com/_ph/98/563228947.jpg"
+				: "https://i0.wp.com/slovami.net/wp-content/uploads/2018/04/1-36-1024x1024.jpg"
 			}
 			isfollow={u.followed}
 			link={"/profile/" + u.id}

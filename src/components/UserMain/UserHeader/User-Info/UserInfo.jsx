@@ -3,7 +3,7 @@ import s from "./UserInfo.module.css";
 /* import UserStatus from './UserStatus/UserSatus'; */
 import UserStatusWithHooks from './UserStatus/UserSatusWithHooks';
 
-const UserInfo = ({status, profile, updateStatusThusk}) => {
+const UserInfo = ({status, profile, updateStatusThusk, isOwner}) => {
 
   return (
     <div className={s.info}>
@@ -11,7 +11,7 @@ const UserInfo = ({status, profile, updateStatusThusk}) => {
         <div className={s.param +" "+ s.param_name}>name</div>
         <div className={s.answer +" "+ s.answer_name}>{profile.fullName}</div>
       </div>
-	  <UserStatusWithHooks status={status} updateStatusThusk={updateStatusThusk}/>
+	  <UserStatusWithHooks status={status} updateStatusThusk={updateStatusThusk} isOwner={isOwner}/>
       <div className={s.line}>
         <div className={s.param}>city</div>
         <div className={s.answer}>{profile.city ? profile.city : "Gotham City"}</div>

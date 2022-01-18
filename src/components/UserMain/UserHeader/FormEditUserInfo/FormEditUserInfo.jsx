@@ -20,13 +20,6 @@ const ProfileForm = ({handleSubmit, status, profile, error}) => {
 			placeholder={profile.fullName}/>
      	</div>
 		 <div className={s.status}>{status}</div>
-		 
-		<div className={s.line}>
-			<div className={s.param}>city</div>
-			<Field component={Input} className={s.answer+" "+ s.param_input} 
-			type="text" name={"city"} validate={[maxLength30]} 
-			placeholder={profile.city}/>
-     	</div>
 
 		<div className={s.line}>
 			<div className={s.param}>About Me</div>

@@ -1,5 +1,6 @@
 import { stopSubmit } from 'redux-form';
-import { profileAPI } from './../api/api';
+import { profileAPI } from '../api/api';
+import { PhotosType, PostType, ProfileType } from '../types/types';
 
 const ADD_POST = "react_my-one-app/profile/ADD-POST";
 const SET_USER_PROFILE = "react_my-one-app/profile/SET_USER_PROFILE";
@@ -11,7 +12,7 @@ let initialState = {
 	posts: [
 		{
 			id: 1,
-			likes: "2",
+			likes: 2,
 			name: "Raketa",
 			avatar: "http://cs622426.vk.me/v622426834/409d/baLqspYwi84.jpg",
 			text: "Hellow friend!",
@@ -19,7 +20,7 @@ let initialState = {
 		},
 		{
 			id: 2,
-			likes: "8",
+			likes: 8,
 			name: "Lola Flex",
 			avatar:
 				"https://cs11.pikabu.ru/post_img/big/2020/04/12/9/1586704514168132921.png",
@@ -28,19 +29,20 @@ let initialState = {
 		},
 		{
 			id: 3,
-			likes: "34",
+			likes: 34,
 			name: "Fransua Ewently",
 			avatar:
 				"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSJbnEIzrjyxxOY0epeMS4hYgqan30wNAZsIQ&usqp=CAU",
 			text: `asperiores nobis, temporibus consequatur ipsa incidunt tempore quam deleniti eum quisquam excepturi quis omnis officiis quas officia illum placeat dolorum?`,
 			link: "#/",
 		},
-	],
-	profile: null,
+	] as Array<PostType>,
+	profile: null as ProfileType | null,
 	status: "",
 };
-
-const profileReducer =(state = initialState, action)=>{
+//todo вынесли особо нужные Type от сюда во внешний файл /types/types
+export type InitialStateType = typeof initialState;
+const profileReducer = (state = initialState, action:any):InitialStateType => {
 	switch (action.type) {
 		case ADD_POST: {
 			if (state.profile){
@@ -56,8 +58,9 @@ const profileReducer =(state = initialState, action)=>{
 				return {...state,
 					posts: [...state.posts, newPost],
 				};
+			} else {
+				return {...state};
 			}
-			else return alert("Кто вы?");
 		}
 		case SET_USER_PROFILE: {
 			return {...state,
@@ -78,64 +81,84 @@ const profileReducer =(state = initialState, action)=>{
 		case SAVE_PHOTO: {
 			return{
 				...state,
-				profile: {...state.profile, photos: action.photos}
+				//! Исправить позже с Димычем
+				profile: {...state.profile, photos: action.photos} as ProfileType
 			}
 		}
 		default:
 			return state;
 	}
 }
-export const newPostActionCreator = (text) =>{
+type newPostActionCreatorAСType ={
+	type: typeof ADD_POST,
+	text: string
+}
+export const newPostActionCreator = (text:string):newPostActionCreatorAСType =>{
 	return {
 		type:ADD_POST,
 		text
 	}
 };
-export const setUserProfile = (profile) =>{
+type setUserProfileAСType ={
+	type: typeof SET_USER_PROFILE,
+	profile: ProfileType
+}
+export const setUserProfile = (profile:ProfileType):setUserProfileAСType =>{
 	return {
 		type:SET_USER_PROFILE,
 		profile
 	}
 };
-export const setStatus = (status) =>{
+type setStatusAСType ={
+	type: typeof SET_STATUS,
+	status: string
+}
+export const setStatus = (status:string):setStatusAСType =>{
 	return {
 		type:SET_STATUS,
 		status
 	}
 };
-export const deletePostAC = (id) =>{
+type deletePostACAСType ={
+	type: typeof DELETE_POST,
+	id: number
+}
+export const deletePostAC = (id:number):deletePostACAСType =>{
 	return{
 		type: DELETE_POST,
 		id
 	}
 }
 /* после санки загрузки фото обновим его*/
-export const savePhotoSuccsess = (photos) =>{
+type savePhotoSuccsessAСType ={
+	type: typeof SAVE_PHOTO,
+	photos: PhotosType
+}
+export const savePhotoSuccsess = (photos:PhotosType):savePhotoSuccsessAСType =>{
 	return{
 		type: SAVE_PHOTO,
 		photos
 	}
 }
 /* Thusks */
-export const getProfileThusk = (userId) => {
-	return async (dispatch) => {
+export const getProfileThusk = (userId:number) => {
+	return async (dispatch:any) => {
 		let data = await profileAPI.getProfile(userId)
 		if(data){
-			//debugger
 			dispatch(setUserProfile(data.data));
 		}
 	}
 }
-export const setStatusThusk = (userId) => {
-	return async (dispatch) => {
+export const setStatusThusk = (userId:number) => {
+	return async (dispatch:any) => {
 		let data = await profileAPI.getStatus(userId)
 		if(data){
 			dispatch(setStatus(data.data));
 		}
 	}
 }
-export const updateStatusThusk = (status) => {
-	return async (dispatch) => {
+export const updateStatusThusk = (status:string) => {
+	return async (dispatch:any) => {
 		let data = await profileAPI.updateStatus(status);
 		if(data){
 			if(data.data.resultCode === 0){
@@ -144,8 +167,8 @@ export const updateStatusThusk = (status) => {
 		}
 	}
 }
-export const savePhotoThunk = (photo) => {
-	return async (dispatch) => {
+export const savePhotoThunk = (photo:any) => {
+	return async (dispatch:any) => {
 		let data = await profileAPI.updateAvatar(photo)
 		if(data){
 			if(data.data.resultCode === 0){
@@ -154,9 +177,9 @@ export const savePhotoThunk = (photo) => {
 		}
 	}
 }
-export const setFormThunk = (formData) =>{
+export const setFormThunk = (formData:ProfileType) =>{
 	//! если редюсер видит dispatch, то он увидит и getState
-	return async (dispatch, getState) => {
+	return async (dispatch:any, getState:any) => {
 		const userId = getState().auth.id;
 		const data = await profileAPI.setForm(formData)
 		if(data){

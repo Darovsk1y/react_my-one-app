@@ -1,44 +1,49 @@
-
+type FrendType = {
+	id: number
+	name: string | null
+	image: string | null
+	online: boolean
+}
 let initialState = {
 	friends: [
 		{
-			id: "1",
+			id: 1,
 			name: "Raketa",
 			image: "http://cs622426.vk.me/v622426834/409d/baLqspYwi84.jpg",
-			online: "on",
+			online: true,
 		},
 		{
-			id: "2",
+			id: 2,
 			name: "Mivina Mivina",
 			image:
 				"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT7K1e0KwkmpYpPFLGFYejuBWA-6YMCLsrn-_Rs4MUchBIITZpVBjlAz_kJaUdUvcBp18I&usqp=CAU",
-			online: "off",
+			online: false,
 		},
 		{
-			id: "3",
+			id: 3,
 			name: "Lola Flex",
 			image:
 				"https://cs11.pikabu.ru/post_img/big/2020/04/12/9/1586704514168132921.png",
-			online: "on",
+			online: true,
 		},
 		{
-			id: "4",
+			id: 4,
 			name: "Ruslan Prist",
 			image:
 				"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ3ODnhtS6QYwUbinYjsHNdfadmy7KWSJ9vNEqa_W1QWIXxSwDmo175xTs8Kaicb_e7BaQ&usqp=CAU",
-			online: "off",
+			online: false,
 		},
 		{
-			id: "5",
+			id: 5,
 			name: "Artas Minetil",
 			image:
 				"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSAxmS6SY-5v4iZOtTcTuD83nFN0z-u28x2PDos98gyJHcLj8z8Bq2N7o0XORMnjebpwM0&usqp=CAU",
-			online: "on",
+			online: true,
 		},
-	],
+	] as Array<FrendType>,
 };
-
-const assideReducer =(state = initialState, action)=>{
+type initialStateType = typeof initialState;
+const assideReducer =(state = initialState, action:any):initialStateType=>{
 	/* пока нет данных */
 	return state;
 }

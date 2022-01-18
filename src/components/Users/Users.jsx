@@ -14,61 +14,6 @@ const Users = (props) =>{
 		}
 	}
 
-	
-
-	/* if(props.users.length === 0){
-		props.setUsers( [
-			{
-				id: 1,
-				name: "Alex",
-				status: "введен Э. Эвансом в его »",
-				adress: {
-					country: "Italy",
-					city: "Barselona",
-				},
-				avatar: "https://ava-24.com/_ph/98/563228947.jpg",
-				isfollow: true,
-				link: "#/",
-			},
-			{
-				id: 2,
-				name: "Dimon",
-				status: "введен Э. Эвансом в его книге с таким же названием «Domain-Driven Design. введен Э. Эвансом в его книге с таким же названием «Domain-Driven Design»",
-				adress: {
-					country: "Italy",
-					city: "Barselona",
-				},
-				avatar: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSGte8KLfMOmnVn67KS6LldaFP0XWAMfTKNJQ&usqp=CAU",
-				isfollow: false,
-				link: "#/",
-			},
-			{
-				id: 3,
-				name: "Tonny Gat",
-				status: "введен Э. Эвансом в его книге с таким же названием «Domain-Driven Design»",
-				adress: {
-					country: "Italy",
-					city: "Barselona",
-				},
-				avatar: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSh36h4s7bAqe7En8FdKfKJ1MUax-E0WdCmdQ&usqp=CAU",
-				isfollow: true,
-				link: "#/",
-			},
-			{
-				id: 4,
-				name: "Silver Stowm",
-				status: "Всем привет друзья! Жду вас в рейдах!",
-				adress: {
-					country: "Italy",
-					city: "Barselona",
-				},
-				avatar: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR0pLSGspy6-x9Ih29O3aEP1_Y3ZITOWgh2oA&usqp=CAU",
-				isfollow: false,
-				link: "#/",
-			},
-		]);
-	} */
-
 	let userElements = (props.users.map(u => {
 		return (
 			<User 
@@ -76,7 +21,7 @@ const Users = (props) =>{
 				name = {u.name}
 				status = {u.status}
 				adress = {"u.adress"}
-				avatar = {u.photos.large != null ? u.photos : "https://ava-24.com/_ph/98/563228947.jpg"}
+				avatar = {u.photos.large != null ? u.photos : "https://i0.wp.com/slovami.net/wp-content/uploads/2018/04/1-36-1024x1024.jpg"}
 				isfollow = {u.followed}
 				link = {"/profile/" + u.id}
 				follow= {props.follow}

@@ -4,11 +4,15 @@ const INITIALIZE_APP = "react_my-one-app/app/INITIALIZE_APP";
 const SAVED_GLOGAL_ERROR = "react_my-one-app/app/SAVED_GLOGAL_ERROR";
 const CLEAR_GLOGAL_ERROR = "react_my-one-app/app/CLEAR_GLOGAL_ERROR";
 
-let intialState = {
+type intialStateType = {
+	initialized: boolean
+	globalError: string | null
+}
+let intialState:intialStateType = {
 	initialized: false,
 	globalError: null,
 }
-const appReducer = (state = intialState, action) => {
+const appReducer = (state = intialState, action:any):intialStateType => {
 	switch (action.type){
 		case INITIALIZE_APP: {
 			return {
@@ -33,18 +37,28 @@ const appReducer = (state = intialState, action) => {
 	}
 }
 
-export const initializeApp = () => {
+type initializeAppACType = {
+	type: typeof INITIALIZE_APP
+}
+export const initializeApp = ():initializeAppACType => {
 	return {
 		type:INITIALIZE_APP,
 	}
 }
-export const savedGlobalError = (error) => {
+type savedGlobalErrorACType = {
+	type: typeof SAVED_GLOGAL_ERROR
+	error:string
+}
+export const savedGlobalError = (error:string):savedGlobalErrorACType => {
 	return {
 		type: SAVED_GLOGAL_ERROR,
 		error
 	}
 }
-export const clearGlobalError = () => {
+type clearGlobalErrorACType = {
+	type: typeof CLEAR_GLOGAL_ERROR
+}
+export const clearGlobalError = ():clearGlobalErrorACType => {
 	return {
 		type: CLEAR_GLOGAL_ERROR,
 	}
@@ -53,7 +67,7 @@ export const clearGlobalError = () => {
 const addBodyClassLock = () => document.body.classList.add('_lock');
 const removeBodyClassLock = () => document.body.classList.remove('_lock');
 
-export const initializeAppThunk = () => (dispatch) => {
+export const initializeAppThunk = () => (dispatch:any) => {
 	const promise = dispatch(authMeThunk()); /* или несколько диспатчей и промисов */
 	/* dispatch(authMeThunk()); */
 	Promise.all([promise])
@@ -62,12 +76,12 @@ export const initializeAppThunk = () => (dispatch) => {
 	})
 }
 //todo для обработки ошибки запуска попапа и убирания скролла
-export const handlingGlobalErrorThunk = (PromiseRejectionEvent) => (dispatch) => {
+export const handlingGlobalErrorThunk = (PromiseRejectionEvent:any) => (dispatch:any) => {
 	const reason = String(PromiseRejectionEvent.reason);
 	dispatch(savedGlobalError(reason));
 	addBodyClassLock();
 }
-export const clearGlobalErrorThunk = () => (dispatch) => {
+export const clearGlobalErrorThunk = () => (dispatch:any) => {
 	dispatch(clearGlobalError());
 	removeBodyClassLock();
 }

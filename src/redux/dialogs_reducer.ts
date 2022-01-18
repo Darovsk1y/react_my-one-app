@@ -1,9 +1,21 @@
 const ADD_MESSAGE = "react_my-one-app/dialogs/ADD-MESSAGE";
-
+type MessageObjectType = {
+	id: number
+	image: string
+	link: string
+	position: string
+	message: string
+}
+type DialogObjectType = {
+	id: number
+	name: string
+	image: string
+	text: string
+}
 let initialState = {
 	messages: [
 		{
-			id: "1",
+			id: 1,
 			image: "http://cs622426.vk.me/v622426834/409d/baLqspYwi84.jpg",
 			link: "#/",
 			position: "left",
@@ -13,14 +25,14 @@ let initialState = {
 		  consequuntur dicta quo.`,
 		},
 		{
-			id: "2",
+			id: 2,
 			image: "http://cs622426.vk.me/v622426834/409d/baLqspYwi84.jpg",
 			link: "#/",
 			position: "right",
 			message: `Lorem ipsum dolor sit amet consectetur adipisicing elit. Ipsum, nulla.`,
 		},
 		{
-			id: "3",
+			id: 3,
 			image: "http://cs622426.vk.me/v622426834/409d/baLqspYwi84.jpg",
 			link: "#/",
 			position: "left",
@@ -32,50 +44,51 @@ let initialState = {
 		  tempore modi animi consequuntur dicta quo.`,
 		},
 		{
-			id: "4",
+			id: 4,
 			image: "http://cs622426.vk.me/v622426834/409d/baLqspYwi84.jpg",
 			link: "#/",
 			position: "right",
 			message: `I heal in raids, inexpensive! Fast healing without problems! Help and leveling characters!`,
 		},
-	],
+	] as Array<MessageObjectType>,
 	dialogs: [
 		{
-			id: "1",
+			id: 1,
 			name: "Raketa",
 			image: "http://cs622426.vk.me/v622426834/409d/baLqspYwi84.jpg",
 			text: "Hellow dear friend!",
 		},
 		{
-			id: "2",
+			id: 2,
 			name: "Mivina Mivina",
 			image:
 				"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT7K1e0KwkmpYpPFLGFYejuBWA-6YMCLsrn-_Rs4MUchBIITZpVBjlAz_kJaUdUvcBp18I&usqp=CAU",
 			text: "Hi. I am the best of the best paladin!",
 		},
 		{
-			id: "3",
+			id: 3,
 			name: "Lola Flex",
 			image:
 				"https://cs11.pikabu.ru/post_img/big/2020/04/12/9/1586704514168132921.png",
 			text: "Lorem ipsum dolor sit amet consectetur adipisicing elit. Ullam voluptates ",
 		},
 		{
-			id: "4",
+			id: 4,
 			name: "Ruslan Prist",
 			image:
 				"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ3ODnhtS6QYwUbinYjsHNdfadmy7KWSJ9vNEqa_W1QWIXxSwDmo175xTs8Kaicb_e7BaQ&usqp=CAU",
 			text: "I heal in raids, inexpensive! Fast healing without problems! Help and leveling characters!",
 		},
-	],
-};
-
-const dialogsReducer =(state = initialState, action)=>{
+	] as Array<DialogObjectType>,
+}
+//todo быстрый способ получения типа из готового обьекта
+export type initialStateType = typeof initialState
+const dialogsReducer =(state = initialState, action:any):initialStateType=>{
 
 	switch(action.type) {
 		case ADD_MESSAGE: {
 			let newMessage = {
-				id: "5",
+				id: 5,
 				image: "http://cs622426.vk.me/v622426834/409d/baLqspYwi84.jpg",
 				link: "#/",
 				position: "right",
@@ -89,7 +102,11 @@ const dialogsReducer =(state = initialState, action)=>{
 			return state;
 	}
 }
-export const newMessageActionCreator = (text) =>{
+type newMessageACType = {
+	type:typeof ADD_MESSAGE,
+	text:string
+}
+export const newMessageActionCreator = (text:string):newMessageACType =>{
 	return {
 		type:ADD_MESSAGE,
 		text
