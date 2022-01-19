@@ -35,3 +35,16 @@ export type UserType = {
     status: string | null
     followed: boolean
 }
+export type UserOnMap= {
+	key:number
+	id:number
+	name:string | null
+	status:string | null
+	adress:string | null
+	avatar:string
+	isfollow:boolean
+	link:string
+	isDisabled:Array<number>
+	unfollowThunk:(id:number)=>void
+	followThunk:(id:number)=>void
+}

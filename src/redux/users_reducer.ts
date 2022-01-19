@@ -11,7 +11,7 @@ const FOLLOWING_DISABLE = "react_my-one-app/users/FOLLOWING_DISABLE";
 
 let initialState = {
 	users: [] as Array<UserType>,
-	totalUsersCount: 0,
+	totalItemsCount: 0,
 	pageSize: 10,
 	activePage: 1,
 	isfetching: true,
@@ -48,7 +48,7 @@ const usersReducer = (state = initialState, action:any):initialStateType =>{
 		case SET_TOTAL_USERS_COUNT: {
 			return {
 				...state,
-				totalUsersCount: action.usersCount,
+				totalItemsCount: action.usersCount,
 			}
 		}
 		case TOGGEL_FETCHING: {

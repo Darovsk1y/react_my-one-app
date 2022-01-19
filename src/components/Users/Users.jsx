@@ -1,5 +1,5 @@
-/* Файл старый . нигде не используется */
-import User from "./User/User";
+//! Файл старый . нигде не используется
+import User from "./User/User.tsx";
 import s  from "./Users.module.css";
 const axios = require('axios');
 const Users = (props) =>{

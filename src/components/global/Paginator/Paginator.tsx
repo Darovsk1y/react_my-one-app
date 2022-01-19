@@ -1,17 +1,24 @@
 import s from "./Paginator.module.css";
 import arrow from "../../../assets/sliderArr.png";
-export const Paginator = ({activePage, totalItemsCount, pageSize, clickActivePage, maxbaselight = 10}) => {
-	let pagesCount = Math.ceil(totalItemsCount/pageSize);
 
+type PropsType = {
+	activePage:number
+	totalItemsCount:number
+	pageSize:number
+	clickActivePage:(page:number)=>void
+	maxbaselight:number
+}
+export const Paginator: React.FC<PropsType> = ({activePage, totalItemsCount, pageSize, clickActivePage, maxbaselight = 10}) => {
+	let pagesCount = Math.ceil(totalItemsCount/pageSize);
 	const base1 = Math.ceil(maxbaselight/2);
 	let t_start = 1
 	let t_finish = 20
-	let pagesOrderingStart = (t_start) =>{
+	let pagesOrderingStart = (t_start:number) =>{
 		/* считаем точку начала цикла относительно активоной страницы */
 		activePage <=base1 ? t_start = 1 : t_start = activePage - base1;
 		return t_start;
 	}
-	let pagesOrderingFinish = (t_finish) =>{
+	let pagesOrderingFinish = (t_finish:number) =>{
 		/* считаем конечную точку цикла в зависимости от активной страницы */
 		/* считаем номер конечной страницы и исходим из него */
 		if(activePage <= pagesCount - base1){
@@ -20,6 +27,12 @@ export const Paginator = ({activePage, totalItemsCount, pageSize, clickActivePag
 			t_finish = pagesCount
 		}
 		return t_finish;
+	}
+	let OnclickActivePage = (page:number) =>{
+		//todo логика проверки перенесена сюда
+		if(page<1){return}
+		if(page>pagesCount){return}
+		clickActivePage(page)
 	}
 	//todo Формирование массива страниц
 	let tс_start = pagesOrderingStart(t_start);
@@ -31,7 +44,7 @@ export const Paginator = ({activePage, totalItemsCount, pageSize, clickActivePag
 	return (
 	<div className={s.paginnation}>
 		{activePage >1 ?
-		<button type="button" className={s.button +" "+ s.buttonLeft}  onClick={() =>{clickActivePage(activePage-1)}}>
+		<button type="button" className={s.button +" "+ s.buttonLeft}  onClick={() =>{OnclickActivePage(activePage-1)}}>
 			<img src={arrow} alt=""/>
 		</button>
 		: null

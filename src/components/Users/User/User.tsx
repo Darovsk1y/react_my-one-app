@@ -1,13 +1,27 @@
 import { NavLink } from "react-router-dom";
 import s from "./User.module.css";
 
-let User = (props) => {
+type UserType = {
+	key:number
+	id:number
+	name:string | null
+	status:string | null
+	adress:string | null
+	avatar:string | null
+	isfollow:boolean
+	link:string
+	isDisabled:Array<number>
+	unfollowThunk:(id:number)=>void
+	followThunk:(id:number)=>void
+}
+let User = (props:UserType) => {
   return (
     <li className={s.user}>
       <div className={s.user__body}>
         <div className={s.user__avatarBlock}>
           <NavLink to={props.link} className={s.user__avatar}>
-            <img src={props.avatar} alt="" />
+            <img src={props.avatar ? props.avatar 
+				: "https://i0.wp.com/slovami.net/wp-content/uploads/2018/04/1-36-1024x1024.jpg"} alt="" />
           </NavLink>
         </div>
         <div className={s.user__infoBlock}>
@@ -27,10 +41,6 @@ let User = (props) => {
 				})}>Follow</button>
 			}
 			
-          </div>
-          <div className={s.user__right}>
-            <div className={s.user__country}>{"props.adress.country"}</div>
-            <div className={s.user__city}>{"props.adress.city"}</div>
           </div>
         </div>
       </div>
