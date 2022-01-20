@@ -19,8 +19,9 @@ let reducersPack = combineReducers({
 	form: formReducer,
 	app: appReducer,
 });
-//todo Извлечение стэйта из Глобального редюсера
+//todo Извлечение стэйта из Глобального редюсера функции
 type RootReduserType = typeof reducersPack;
+//todo нам нужно то что она возвращает это можно получить с пом. ReturnType
 export type AppStateType = ReturnType<RootReduserType>
 //todo Подключение для плагина
 // @ts-ignore

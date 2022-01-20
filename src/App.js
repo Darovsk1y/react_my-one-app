@@ -52,7 +52,7 @@ class App extends Component {
 							<Route path='/news/*' element={<News />} />
 							<Route path='/music/*' element={<Muzic />} />
 							<Route path='/settings/*' element={<Settings />} />
-							<Route path='/users/*' element={<UsersContainer/>} />
+							<Route path='/users/*' element={<UsersContainer pageTitle={"Sumuray test props"}/>} />
 							<Route path='/login/*' element={<LoginContainer/>} />
 						</Routes>
 					</Suspense>

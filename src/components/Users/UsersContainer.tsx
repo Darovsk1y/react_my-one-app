@@ -10,7 +10,9 @@ import { getUsersIsDisabled, getUsersUsers, getUsersIsfetching,
 	getUsersActivePage, getUsersTotalUsersCount, getUsersPageSize, getUsersMaxbaselight } from '../../redux/selectors/users_selectors';
 import { UserType } from "../../types/types";
 import { AppStateType } from "../../redux/redux_store";
-type PropsType = {
+
+//todo разделение входящих пропсов по разделам
+type MapStatePropsType = {
 	users:Array<UserType>
 	pageSize:number
 	totalItemsCount:number
@@ -18,11 +20,18 @@ type PropsType = {
 	isfetching:boolean
 	isDisabled:Array<number>
 	maxbaselight:number
+	
+}
+type MapDispatchPropsType = {
 	getUsersThunk:(activePage:number, pageSize:number) => void
 	getUsersActivePageThunk:(activePage:number, pageSize:number) => void
 	unfollowThunk:(id:number)=>void
 	followThunk:(id:number)=>void
 }
+type OwnPropsType = {
+	pageTitle:string
+}
+type PropsType = MapStatePropsType & MapDispatchPropsType & OwnPropsType
 
 class UsersApi extends React.Component<PropsType> {
 	pagesCount = Math.ceil(this.props.totalItemsCount/this.props.pageSize);
@@ -50,11 +59,13 @@ class UsersApi extends React.Component<PropsType> {
 			unfollowThunk={this.props.unfollowThunk}
 			followThunk={this.props.followThunk}
 		/>
+		{/* Для теста передачи прямых пропсов не через коннект */}
+		<h2>{this.props.pageTitle}</h2>
 	  </>
 	}
   }
 
-let mapStateToProps = (state: AppStateType) =>({
+let mapStateToProps = (state: AppStateType):MapStatePropsType =>({
 	//это селекторы
 		users: getUsersUsers(state),
 		pageSize: getUsersPageSize(state),
@@ -65,7 +76,10 @@ let mapStateToProps = (state: AppStateType) =>({
 		maxbaselight: getUsersMaxbaselight(state),
 })
 
-export default compose(connect(mapStateToProps, {
+//? cntrl + click on connect что бы увидеть что сидит в ожидаемых react-redux типах
+//TStateProps = {}, TDispatchProps = {}, TOwnProps = {}, State = DefaultState
+//! т.е. Оказалось connect содержит всё сразу, вернее это то что в него приходит
+export default compose(connect<MapStatePropsType, MapDispatchPropsType, OwnPropsType, AppStateType>(mapStateToProps, {
 	getUsersThunk,
 	getUsersActivePageThunk,
 	unfollowThunk,
