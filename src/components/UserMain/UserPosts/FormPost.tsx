@@ -1,12 +1,14 @@
 import s from "./UserPosts.module.css";
 import { Field } from "redux-form";
-import { required, maxLengthCreator } from './../../../utils/validators/validators';
+import { required, maxLengthCreator } from '../../../utils/validators/validators';
 import { FormControls } from '../../global/FormControls/FormControls';
-
+type PropsType = {
+	handleSubmit:(object:any)=>void
+}
 const Textarea = FormControls("textarea");
 
 let maxLength10 = maxLengthCreator(10);
-const FormPost = (props) => {
+const FormPost = (props:PropsType) => {
 	
   return (
 	<form className={s.form} onSubmit={props.handleSubmit}>

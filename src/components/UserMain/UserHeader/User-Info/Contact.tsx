@@ -1,6 +1,9 @@
 import s from "./UserInfo.module.css";
-
-const Contact = ({contactTitle, contactValue}) => {
+type PropsType = {
+	contactTitle: string
+	contactValue: string
+}
+const Contact: React.FC<PropsType> = ({contactTitle, contactValue}) => {
   return (
 		<div className=''>
 			{contactValue ? 

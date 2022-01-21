@@ -1,21 +1,23 @@
+import { ProfileType } from "../../../../types/types";
 import Contact from "./Contact";
 import s from "./UserInfo.module.css";
 /* import UserStatus from './UserStatus/UserSatus'; */
 import UserStatusWithHooks from './UserStatus/UserSatusWithHooks';
-
-const UserInfo = ({status, profile, updateStatusThusk, isOwner}) => {
+type PropsType = {
+	status: string
+	profile: ProfileType
+	updateStatusThusk: (status:string)=>void
+	isOwner: boolean
+}
+const UserInfo: React.FC<PropsType> = ({status, profile, updateStatusThusk, isOwner}) => {
 
   return (
     <div className={s.info}>
       <div className={s.line}>
-        <div className={s.param +" "+ s.param_name}>name</div>
+        <div className={s.param +" "+ s.param_name}>My name</div>
         <div className={s.answer +" "+ s.answer_name}>{profile.fullName}</div>
       </div>
 	  <UserStatusWithHooks status={status} updateStatusThusk={updateStatusThusk} isOwner={isOwner}/>
-      <div className={s.line}>
-        <div className={s.param}>city</div>
-        <div className={s.answer}>{profile.city ? profile.city : "Gotham City"}</div>
-      </div>
 		{/* Вывод только если параметр задан */}
 		{profile.aboutMe ? (
 			<div className={s.line}>
@@ -41,6 +43,7 @@ const UserInfo = ({status, profile, updateStatusThusk, isOwner}) => {
 		</div>
 	  <div className={s.param}>contacts: </div>
 	  {Object.keys(profile.contacts).map(key => {
+		  // @ts-ignore //!!! Димыч помоги
 		  return <Contact key={key} contactTitle={key} contactValue={profile.contacts[key]}/>
 		})}
 

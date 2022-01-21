@@ -1,7 +1,10 @@
+import { PostType } from "../../../../types/types";
 import Post from "./Post/Post";
 import s from "./PostsOld.module.css";
-
-const PostsOld = (props) => {
+type PropsType = {
+	posts:Array<PostType>
+}
+const PostsOld = (props:PropsType) => {
 /* Далее мы преобразовали в элементы массива */
 let postElements = props.posts.map((dialog) => {
 	return (

@@ -1,5 +1,8 @@
 import s from "./Like.module.css";
-const Like = (props) => {
+type PropsType = {
+	likes: number
+}
+const Like = (props:PropsType) => {
   return (
     <button type="button" className={s.like}>
       <span>{props.likes}</span>

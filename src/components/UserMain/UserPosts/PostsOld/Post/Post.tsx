@@ -1,7 +1,15 @@
 import Like from "./Like/Like";
 import s from "./Post.module.css";
 import { NavLink } from "react-router-dom";
-const Post = (props) => {
+type PropsType = {
+	key:number
+	likes:number
+	name:string
+	avatar:string
+	text:string
+	link:string
+}
+const Post = (props:PropsType) => {
   return (
     <div className={s.post}>
       <div className={s.row}>

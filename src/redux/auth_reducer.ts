@@ -1,5 +1,6 @@
 import { stopSubmit } from 'redux-form';
 import { authAPI, securityAPI } from '../api/api';
+import { ProfileType } from '../types/types';
 const SET_USER_DATA = "react_my-one-app/auth/SET_USER_DATA";
 const SET_AUTH_USER_PROFILE = "react_my-one-app/auth/SET_AUTH_USER_PROFILE";
 const GET_CAPTCHA_URL_SUCCESS = "react_my-one-app/auth/GET_CAPTCHA_URL_SUCCESS";
@@ -10,7 +11,7 @@ type intialStateType = {
 	email: string | null,
 	login: string | null,
 	isAuth: boolean | false,
-	activeUser: any | null,
+	activeUser: ProfileType | null,
 	captchaUrl: string | null,
 }
 let intialState:intialStateType = {

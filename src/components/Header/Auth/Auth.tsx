@@ -1,7 +1,14 @@
 import s from "./../Header.module.css";
 import { NavLink } from 'react-router-dom';
-
-let Auth = (props) => {
+import { ProfileType } from "../../../types/types";
+type PropsType = {
+	onOut: ()=>void
+	login: string | null
+	isAuth: boolean
+	//todo наверное его брали что бы вывести данные акт. пользователя такие как аватар и имя
+	activeUser: ProfileType | null
+}
+let Auth = (props:PropsType) => {
   return (
     <div className={s.loginBlock}>
 		{props.isAuth ? 

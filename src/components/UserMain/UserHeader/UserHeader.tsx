@@ -3,13 +3,23 @@ import UserInfo from "./User-Info/UserInfo";
 import s from "./UserHeader.module.css";
 import { useState } from "react";
 import FormEditUserInfo from './FormEditUserInfo/FormEditUserInfo';
-const UserHeader = (props) =>{
+import { ProfileType } from "../../../types/types";
+type PropsType = {
+	profile:ProfileType
+	updateStatusThusk: (status:string)=>void
+	status:string
+	isOwner:boolean
+	savePhotoThunk:(file:any)=>void
+	//! писал сам проверить с Димычем
+	setFormThunk:(formData:any)=>Promise<Object>
+}
+const UserHeader = (props:PropsType) =>{
 
 	let [editMode, setEditMode] = useState(false);
 	const changeEditMode = () => {
 		setEditMode(!editMode);
 	}
-	let onSubmit=(formData)=>{
+	let onSubmit=(formData:any)=>{
 		console.log(formData)
 		props.setFormThunk(formData).then(
 			()=>{

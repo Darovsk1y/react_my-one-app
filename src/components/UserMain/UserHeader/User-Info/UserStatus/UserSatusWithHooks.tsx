@@ -1,7 +1,12 @@
-import { useEffect, useState } from "react";
+import { ChangeEvent, useEffect, useState } from "react";
 import s from "./../UserInfo.module.css"; /* Наш первый ХУК */
-
-const UserStatusWithHooks = (props) => {
+type PropsType = {
+	status:string
+	updateStatusThusk: (status:string)=>any
+	isOwner: boolean
+}
+//? StateType не нужен? хукам не нужно ничего предавать видимо
+const UserStatusWithHooks = (props:PropsType) => {
 	/* ДЕструктуризация */
 	let [editMode, setEditMode] = useState(false);
 	let [status, setStatus] = useState(props.status);
@@ -16,7 +21,7 @@ const UserStatusWithHooks = (props) => {
 		setEditMode(false);
 		props.updateStatusThusk(status);
 	  }
-	const onStatusChange = (e) => {
+	const onStatusChange = (e: ChangeEvent<HTMLInputElement>) => {
 		setStatus(e.currentTarget.value);
 	}
     return (

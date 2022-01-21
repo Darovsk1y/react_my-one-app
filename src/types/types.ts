@@ -19,14 +19,15 @@ export type ProfileType = {
 	fullName: string
 	contacts: ContactsType
 	photos: PhotosType
+	aboutMe: string
 }
 export type PostType = {
 	id: number
-	likes: number | null
-	name: string | null
-	avatar: string | null
-	text: string | null
-	link: string | null
+	likes: number
+	name: string
+	avatar: string
+	text: string
+	link: string
 }
 export type UserType = {
 	name: string
