@@ -1,5 +1,7 @@
 
+import { ThunkAction } from 'redux-thunk';
 import { authMeThunk } from './auth_reducer';
+import { AppStateType } from './redux_store';
 const INITIALIZE_APP = "react_my-one-app/app/INITIALIZE_APP";
 const SAVED_GLOGAL_ERROR = "react_my-one-app/app/SAVED_GLOGAL_ERROR";
 const CLEAR_GLOGAL_ERROR = "react_my-one-app/app/CLEAR_GLOGAL_ERROR";
@@ -12,7 +14,8 @@ let intialState:intialStateType = {
 	initialized: false,
 	globalError: null,
 }
-const appReducer = (state = intialState, action:any):intialStateType => {
+type ActionType = initializeAppACType|savedGlobalErrorACType|clearGlobalErrorACType
+const appReducer = (state = intialState, action:ActionType):intialStateType => {
 	switch (action.type){
 		case INITIALIZE_APP: {
 			return {
@@ -66,7 +69,9 @@ export const clearGlobalError = ():clearGlobalErrorACType => {
 	//лочим боди при попапе убираем скролл
 const addBodyClassLock = () => document.body.classList.add('_lock');
 const removeBodyClassLock = () => document.body.classList.remove('_lock');
-
+//Thunks
+type ThunkType = ThunkAction<Promise<void>, AppStateType, unknown, ActionType>
+//! void не дает работать dispatch
 export const initializeAppThunk = () => (dispatch:any) => {
 	const promise = dispatch(authMeThunk()); /* или несколько диспатчей и промисов */
 	/* dispatch(authMeThunk()); */

@@ -1,6 +1,11 @@
 import s from "./Friend.module.css";
-
-const Friend = (props) => {
+type Props = {
+	key:number
+	image?:string
+	name:string |null
+	online:boolean
+}
+const Friend = (props:Props) => {
   return (
     <li className={s.friend}>
       <a href="#/" className={s.item}>

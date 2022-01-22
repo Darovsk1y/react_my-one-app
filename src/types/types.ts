@@ -49,3 +49,9 @@ export type UserOnMap= {
 	unfollowThunk:(id:number)=>void
 	followThunk:(id:number)=>void
 }
+export type FriendType = {
+	id: number
+	name: string | null
+	image: string | null
+	online: boolean
+}

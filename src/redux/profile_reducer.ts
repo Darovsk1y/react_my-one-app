@@ -1,6 +1,8 @@
 import { stopSubmit } from 'redux-form';
+import { ThunkAction } from 'redux-thunk';
 import { profileAPI } from '../api/api';
 import { PhotosType, PostType, ProfileType } from '../types/types';
+import { AppStateType } from './redux_store';
 
 const ADD_POST = "react_my-one-app/profile/ADD-POST";
 const SET_USER_PROFILE = "react_my-one-app/profile/SET_USER_PROFILE";
@@ -41,8 +43,9 @@ let initialState = {
 	status: "",
 };
 //todo вынесли особо нужные Type от сюда во внешний файл /types/types
+type ActionType = newPostActionCreatorAСType|setUserProfileAСType|setStatusAСType|deletePostACAСType|savePhotoSuccsessAСType
 export type InitialStateType = typeof initialState;
-const profileReducer = (state = initialState, action:any):InitialStateType => {
+const profileReducer = (state = initialState, action:ActionType):InitialStateType => {
 	switch (action.type) {
 		case ADD_POST: {
 			if (state.profile){
@@ -141,24 +144,25 @@ export const savePhotoSuccsess = (photos:PhotosType):savePhotoSuccsessAСType =>
 	}
 }
 /* Thusks */
-export const getProfileThusk = (userId:number) => {
-	return async (dispatch:any) => {
+type ThunkType = ThunkAction<Promise<void>, AppStateType, unknown, ActionType>
+export const getProfileThusk = (userId:number):ThunkType => {
+	return async (dispatch) => {
 		let data = await profileAPI.getProfile(userId)
 		if(data){
 			dispatch(setUserProfile(data.data));
 		}
 	}
 }
-export const setStatusThusk = (userId:number) => {
-	return async (dispatch:any) => {
+export const setStatusThusk = (userId:number):ThunkType => {
+	return async (dispatch) => {
 		let data = await profileAPI.getStatus(userId)
 		if(data){
 			dispatch(setStatus(data.data));
 		}
 	}
 }
-export const updateStatusThusk = (status:string) => {
-	return async (dispatch:any) => {
+export const updateStatusThusk = (status:string):ThunkType => {
+	return async (dispatch) => {
 		let data = await profileAPI.updateStatus(status);
 		if(data){
 			if(data.data.resultCode === 0){
@@ -167,8 +171,8 @@ export const updateStatusThusk = (status:string) => {
 		}
 	}
 }
-export const savePhotoThunk = (photo:any) => {
-	return async (dispatch:any) => {
+export const savePhotoThunk = (photo:any):ThunkType => {
+	return async (dispatch) => {
 		let data = await profileAPI.updateAvatar(photo)
 		if(data){
 			if(data.data.resultCode === 0){
@@ -177,8 +181,8 @@ export const savePhotoThunk = (photo:any) => {
 		}
 	}
 }
-export const setFormThunk = (formData:ProfileType) =>{
-	//! если редюсер видит dispatch, то он увидит и getState
+export const setFormThunk = (formData:ProfileType):ThunkType =>{
+	//! проблема с передачей конкретного userId number а в auth.id может быть null
 	return async (dispatch:any, getState:any) => {
 		const userId = getState().auth.id;
 		const data = await profileAPI.setForm(formData)

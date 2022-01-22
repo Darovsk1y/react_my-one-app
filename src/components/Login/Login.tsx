@@ -1,14 +1,20 @@
 import s from "./Login.module.css";
 import f from "../global/FormControls/FormControls.module.css";
-import { Field, reduxForm } from "redux-form";
+import { Field, reduxForm, SubmitHandler } from "redux-form";
 import { FormControls } from "../global/FormControls/FormControls";
 import { maxLengthCreator } from "../../utils/validators/validators";
-import { required } from './../../utils/validators/validators';
+import { required } from '../../utils/validators/validators';
 
 const Input = FormControls("input");
 
 let maxLength30 = maxLengthCreator(30);
-const LoginForm = (props) =>{
+type Props = {
+	handleSubmit:SubmitHandler<{}, {}, string>
+	captchaUrl?:string | null
+	error?:string | null
+}
+//! мы не знаем что на выходе?
+const LoginForm = (props:Props) =>{
 	return <form className={s.form} onSubmit={props.handleSubmit}>
 		<div className={s.line}>
 			<Field component={Input} name={"email"} validate={[required, maxLength30]} placeholder="login" autoFocus={true}/>

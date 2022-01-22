@@ -1,6 +1,6 @@
 import './App.css';
 import Header from './components/Header/Header';
-import Asside from './components/Asside/Asside';
+import Asside from './components/Asside/Asside.tsx';
 import { Routes, Route, Navigate } from 'react-router-dom';
 import React, { Component, Suspense } from 'react';
 import { initializeAppThunk, handlingGlobalErrorThunk, clearGlobalErrorThunk } from './redux/app_reducer';
@@ -17,7 +17,7 @@ const News = React.lazy(() => import('./components/News/News'));
 const Muzic = React.lazy(() => import('./components/Muzic/Muzic'));
 const Settings = React.lazy(() => import('./components/Settings/Settings'));
 const UsersContainer = React.lazy(() => import('./components/Users/UsersContainer'));
-const LoginContainer = React.lazy(() => import('./components/Login/LoginContainer'));
+const LoginContainer = React.lazy(() => import('./components/Login/LoginContainer.jsx'));
 
 
 class App extends Component {

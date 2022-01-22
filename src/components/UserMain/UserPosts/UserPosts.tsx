@@ -7,6 +7,7 @@ type PropsType = {
 	posts:Array<PostType>
 	newPostActionCreator:(text:string)=>void
 }
+//! formData я не знаю что туда поступает
 const UserPosts = (props:PropsType) => {
 	let onSubmit = (formData:any) => {
 		props.newPostActionCreator(formData.textarea);

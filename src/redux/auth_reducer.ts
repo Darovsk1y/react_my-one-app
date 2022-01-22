@@ -1,12 +1,15 @@
 import { stopSubmit } from 'redux-form';
-import { authAPI, securityAPI } from '../api/api';
+import { ThunkAction } from 'redux-thunk';
+import { authAPI, ResultCodeEnum, ResultCodeForCaptcha, securityAPI } from '../api/api';
 import { ProfileType } from '../types/types';
+import { AppStateType } from './redux_store';
 const SET_USER_DATA = "react_my-one-app/auth/SET_USER_DATA";
 const SET_AUTH_USER_PROFILE = "react_my-one-app/auth/SET_AUTH_USER_PROFILE";
 const GET_CAPTCHA_URL_SUCCESS = "react_my-one-app/auth/GET_CAPTCHA_URL_SUCCESS";
 //пока что капчу мы рассмотрим только для случая логинизации
 
 type intialStateType = {
+	//! null нельзя пишет profile thunk setFormThunk
 	id: number | null,
 	email: string | null,
 	login: string | null,
@@ -22,8 +25,10 @@ let intialState:intialStateType = {
 	activeUser: null,
 	captchaUrl: null,//если пришла капча выведем её в UI
 }
+type ActionType = setAuthUserDataACType|getCaptchaUrlSuccsessACType|setAuthUserProfileACType
+
 //! В этом редюсоре тайпскрипт работает некорректно Как и у Димыча 4ур 46мин
-const authReduser = (state = intialState, action:any):intialStateType => {
+const authReduser = (state = intialState, action:ActionType):intialStateType => {
 	switch (action.type) {
 		case SET_USER_DATA: {
 			return {
@@ -60,7 +65,11 @@ export const setAuthUserData = (id:number | null, email:string | null, login:str
 		data: {id, email, login, isAuth},
 	}
 }
-export const setAuthUserProfile = (activeUser:any) => {
+type setAuthUserProfileACType = {
+	type: typeof SET_AUTH_USER_PROFILE,
+	data: {activeUser:ProfileType}
+}
+export const setAuthUserProfile = (activeUser:ProfileType):setAuthUserProfileACType => {
 	return {
 		type: SET_AUTH_USER_PROFILE,
 		data: {activeUser},
@@ -77,12 +86,12 @@ export const getCaptchaUrlSuccsess = (captchaUrl:string):getCaptchaUrlSuccsessAC
 	}
 }
 /* Thinks */
-export const authMeThunk = () => {
-	return async (dispatch:any) => {
+type ThunkType = ThunkAction<Promise<void>, AppStateType, unknown, ActionType>
+export const authMeThunk = ():ThunkType => {
+	return async (dispatch) => {
 		let response = await authAPI.authMeApi();
-	
-			if(response.resultCode === 0){
-				//!let {id, email, login} = {...response.data}
+
+			if(response.resultCode === ResultCodeEnum.Success){
 				let {id, email, login} = response.data
 				dispatch(setAuthUserData(id, email, login, true));
 				let responseProfile = await authAPI.authMeGetProfileApi(response.data.id);
@@ -94,14 +103,15 @@ export const authMeThunk = () => {
 	}
 }
 /* Авторизация на нашем сайте */
-export const authLoginThunk = (email:string, password:string, rememberMe:boolean, captcha:string) => {
+export const authLoginThunk = (email:string, password:string, rememberMe:boolean, captcha:string):ThunkType => {
+	//! error stopSubmit если убрать any
 	return async (dispatch:any) => {
 		let response = await authAPI.autchMeLoginApi(email, password, rememberMe, captcha);
-			if(response.resultCode === 0){ /* Если я залогинен то запустить Санку Авторизации моих данных */
-				dispatch(authMeThunk());
+			if(response.resultCode === ResultCodeEnum.Success){ /* Если я залогинен то запустить Санку Авторизации моих данных */
+				dispatch(authMeThunk()); 
 			} else {
 				/* dispatch(getCaptchaUrlThunk()); */
-				if (response.resultCode === 10){/* когда будет капча */
+				if (response.resultCode === ResultCodeForCaptcha.CapchaError){/* когда будет капча */
 					dispatch(getCaptchaUrlThunk());
 				} 
 				let message = response.messages.length > 0 ?  response.messages[0] : "Some error";
@@ -109,16 +119,16 @@ export const authLoginThunk = (email:string, password:string, rememberMe:boolean
 			}
 	}
 }
-export const LogoutThunk = () => {
-	return async (dispatch:any) => {
+export const LogoutThunk = ():ThunkType => {
+	return async (dispatch) => {
 		let response = await authAPI.LogoutApi();
-			if(response.data.resultCode === 0){
+			if(response.data.resultCode === ResultCodeEnum.Success){
 				dispatch(setAuthUserData(null, null, null, false));
 			}
 	}
 }
 /* Captcha */
-export const getCaptchaUrlThunk = () => async (dispatch:any) =>{
+export const getCaptchaUrlThunk = ():ThunkType => async (dispatch) =>{
 	const responce = await securityAPI.getCaptchaUrl();
 	//вернется по любому. см.докум на сервере. проверка не нужна
 	const captchaUrl = responce.data.url;

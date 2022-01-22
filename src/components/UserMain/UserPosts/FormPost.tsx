@@ -1,9 +1,9 @@
 import s from "./UserPosts.module.css";
-import { Field } from "redux-form";
+import { Field, SubmitHandler } from "redux-form";
 import { required, maxLengthCreator } from '../../../utils/validators/validators';
 import { FormControls } from '../../global/FormControls/FormControls';
 type PropsType = {
-	handleSubmit:(object:any)=>void
+	handleSubmit:SubmitHandler<{}, {}, string>
 }
 const Textarea = FormControls("textarea");
 

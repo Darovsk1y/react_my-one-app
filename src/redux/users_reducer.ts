@@ -1,6 +1,9 @@
 import { mapItemsUpdateHelper } from '../utils/validators/object-helpers';
 import { usersAPI, followAPI } from '../api/api';
 import { UserType } from '../types/types';
+import { Dispatch } from 'redux';
+import { AppStateType } from './redux_store';
+import { ThunkAction } from 'redux-thunk';
 const FOLLOW = "react_my-one-app/users/FOLLOW";
 const UNFOLLOW = "react_my-one-app/users/UNFOLLOW";
 const SET_USERS = "react_my-one-app/users/SET_USERS";
@@ -19,7 +22,10 @@ let initialState = {
 	maxbaselight: 20,/* количество точек пагинации страниц */
 }
 type initialStateType = typeof initialState;
-const usersReducer = (state = initialState, action:any):initialStateType =>{
+type ActionType = setUsersType | followType | unfollowType |
+setActivePageType | setTotalUsersCountType | toggelFetchingType |
+toggelFollowDisableType;
+const usersReducer = (state = initialState, action:ActionType):initialStateType =>{
 	switch (action.type) {
 		case FOLLOW: {
 			return {
@@ -142,9 +148,17 @@ export const toggelFollowDisable = (isfetching:boolean, id:number):toggelFollowD
 		id
 	}
 }
+
+/* Thunks Types*/
+type DispatchType = Dispatch<ActionType>
+//type GetStateType = ()=> AppStateType
+//todo 1-что возвращает, 2-Наша глобал.Стэйт,
+//todo 3-ExtraThunkArg(третий параметр если он нужен идет после getState)
+//todo 4-базовый экшен Redux-а (или наш родной ActionType)
+type ThunkType = ThunkAction<Promise<void>, AppStateType, unknown, ActionType>
 /* Thunks */
-export const getUsersThunk = (activePage:number, pageSize:number) => {
-	return async (dispatch:any) => {
+export const getUsersThunk = (activePage:number, pageSize:number):ThunkType => {
+	return async (dispatch, getState) => {
 		dispatch(toggelFetching(true));
 		let data = await usersAPI.getUsers(activePage, pageSize);
 		  if(data) {
@@ -154,8 +168,8 @@ export const getUsersThunk = (activePage:number, pageSize:number) => {
 		  };
 	}
 }
-export const getUsersActivePageThunk = (page:number, pageSize:number) => {
-	return async (dispatch:any) => {
+export const getUsersActivePageThunk = (page:number, pageSize:number):ThunkType => {
+	return async (dispatch) => {
 		dispatch(toggelFetching(true));
 		dispatch(setActivePage(page));
 		let data = await usersAPI.getUsers(page, pageSize);
@@ -166,25 +180,28 @@ export const getUsersActivePageThunk = (page:number, pageSize:number) => {
 	}
 }
 //todo выносим общую логику в методах подписки
-	const followUnfollowFlow = async (dispatch:any, id:number, apiMethod:any, actionCreator:any) =>{
-		dispatch(toggelFollowDisable(true, id));
-		let data = await apiMethod(id);
-		if (data.resultCode === 0){
-			dispatch(actionCreator(id))
+	const _followUnfollowFlow = async (dispatch:DispatchType, 
+		id:number, 
+		apiMethod:any, 
+		actionCreator:(id:number)=>unfollowType|followType) =>{
+			dispatch(toggelFollowDisable(true, id));
+			let data = await apiMethod(id);
+			if (data.resultCode === 0){
+				dispatch(actionCreator(id))
+			}
+			dispatch(toggelFollowDisable(false, id));
 		}
-		dispatch(toggelFollowDisable(false, id));
-	}
 //todo
-export const followThunk = (id:number) => {
-	return async (dispatch:any) => {
+export const followThunk = (id:number):ThunkType => {
+	return async (dispatch) => {
 		let apiMethod = followAPI.followApi.bind(followAPI);
-		followUnfollowFlow(dispatch, id, apiMethod, follow);
+		_followUnfollowFlow(dispatch, id, apiMethod, follow);
 	}
 }
-export const unfollowThunk = (id:number) => {
-	return async (dispatch:any) => {
+export const unfollowThunk = (id:number):ThunkType => {
+	return async (dispatch) => {
 		let apiMethod = followAPI.unfollowApi.bind(followAPI);
-		followUnfollowFlow(dispatch, id, apiMethod, unfollow);
+		_followUnfollowFlow(dispatch, id, apiMethod, unfollow);
 	}
 }
 export default usersReducer;

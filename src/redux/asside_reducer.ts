@@ -1,9 +1,5 @@
-type FrendType = {
-	id: number
-	name: string | null
-	image: string | null
-	online: boolean
-}
+import { FriendType } from "../types/types";
+
 let initialState = {
 	friends: [
 		{
@@ -40,7 +36,7 @@ let initialState = {
 				"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSAxmS6SY-5v4iZOtTcTuD83nFN0z-u28x2PDos98gyJHcLj8z8Bq2N7o0XORMnjebpwM0&usqp=CAU",
 			online: true,
 		},
-	] as Array<FrendType>,
+	] as Array<FriendType>,
 };
 type initialStateType = typeof initialState;
 const assideReducer =(state = initialState, action:any):initialStateType=>{

@@ -83,7 +83,8 @@ let initialState = {
 }
 //todo быстрый способ получения типа из готового обьекта
 export type initialStateType = typeof initialState
-const dialogsReducer =(state = initialState, action:any):initialStateType=>{
+type ActionType = newMessageACType
+const dialogsReducer =(state = initialState, action:ActionType):initialStateType=>{
 
 	switch(action.type) {
 		case ADD_MESSAGE: {
