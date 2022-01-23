@@ -1,20 +1,21 @@
 import s from "./Login.module.css";
 import f from "../global/FormControls/FormControls.module.css";
-import { Field, reduxForm, SubmitHandler } from "redux-form";
+import { Field, InjectedFormProps, reduxForm } from "redux-form";
 import { FormControls } from "../global/FormControls/FormControls";
 import { maxLengthCreator } from "../../utils/validators/validators";
 import { required } from '../../utils/validators/validators';
+import { LoginFormDataValuesType } from "./LoginContainer";
 
 const Input = FormControls("input");
 
 let maxLength30 = maxLengthCreator(30);
-type Props = {
-	handleSubmit:SubmitHandler<{}, {}, string>
-	captchaUrl?:string | null
-	error?:string | null
+type OwnProps = {
+	captchaUrl:string |null
 }
-//! мы не знаем что на выходе?
-const LoginForm = (props:Props) =>{
+//todo InjectedFormProps содержит все нужные обьекты родные для формы
+// todo а передав ему конкретный тип формы мы уточнили её параметры
+
+const LoginForm: React.FC<InjectedFormProps<LoginFormDataValuesType, OwnProps> & OwnProps> = (props) =>{
 	return <form className={s.form} onSubmit={props.handleSubmit}>
 		<div className={s.line}>
 			<Field component={Input} name={"email"} validate={[required, maxLength30]} placeholder="login" autoFocus={true}/>
@@ -47,7 +48,8 @@ const LoginForm = (props:Props) =>{
 		<button className={s.button}>Login</button>
 	</form>
 }
-const LoginFormRedux = reduxForm({
+//todo настраиваем ПЕРЕДАВ наши Параметры формы и Пропсы формы на входе
+const LoginFormRedux = reduxForm<LoginFormDataValuesType, OwnProps>({
 	// a unique name for the form
   form: 'login'
 })(LoginForm)

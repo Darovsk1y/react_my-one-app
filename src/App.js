@@ -17,7 +17,7 @@ const News = React.lazy(() => import('./components/News/News'));
 const Muzic = React.lazy(() => import('./components/Muzic/Muzic'));
 const Settings = React.lazy(() => import('./components/Settings/Settings'));
 const UsersContainer = React.lazy(() => import('./components/Users/UsersContainer'));
-const LoginContainer = React.lazy(() => import('./components/Login/LoginContainer.jsx'));
+const LoginContainer = React.lazy(() => import('./components/Login/LoginContainer'));
 
 
 class App extends Component {
