@@ -1,16 +1,22 @@
 import s from "./../User-Info/UserInfo.module.css";
 import f from "../../../global/FormControls/FormControls.module.css";
-import { Field, reduxForm } from 'redux-form';
+import { Field, reduxForm, SubmitHandler } from 'redux-form';
 import { FormControls } from "../../../global/FormControls/FormControls";
 import { maxLengthCreator } from "../../../../utils/validators/validators";
+import { ProfileType } from "../../../../types/types";
 /* import { required } from './../../../../utils/validators/validators'; */
 
 const Input = FormControls("input");
 const Textarea = FormControls("textarea");
 let maxLength30 = maxLengthCreator(30);
-
+//! нельзя
+/* type Props = {
+	handleSubmit: SubmitHandler<{}, {}, string>
+	status: string
+	profile: ProfileType
+	error: string
+} */ 
 const ProfileForm = ({handleSubmit, status, profile, error}) => {
-
   return (
     <form className={s.form} onSubmit={handleSubmit}>
 		<div className={s.line}>

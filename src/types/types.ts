@@ -55,3 +55,17 @@ export type FriendType = {
 	image: string | null
 	online: boolean
 }
+// для dialogs.reduser
+export type MessageObjectType = {
+	id: number
+	image: string
+	link: string
+	position: string
+	message: string
+}
+export type DialogObjectType = {
+	id: number
+	name: string
+	image: string
+	text: string
+}

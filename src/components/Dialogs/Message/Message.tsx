@@ -1,6 +1,12 @@
 import s from "./Message.module.css";
-
-const Message = (props) => {
+type Props = {
+	position:string
+	message:string
+	image:string
+	link:string
+	key:number
+}
+const Message = (props:Props) => {
   return (
 	 <div className={s.row}>
 	 	 {props.position === "left" ? 

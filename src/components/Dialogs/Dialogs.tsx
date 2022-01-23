@@ -2,9 +2,16 @@ import s from "./Dialogs.module.css";
 import DialogItem from "./DialogItem/DialogItem";
 import Message from "./Message/Message";
 import NewMessageContainer from './NewMessage/NewMessageContainer';
+import { DialogObjectType, MessageObjectType } from "../../types/types";
 /* import { Navigate } from 'react-router-dom'; */
-
-const Dialogs = (props) => {
+type Props = {
+	dialogs:{
+		messages: Array<MessageObjectType>
+		dialogs: Array<DialogObjectType>
+	}
+	newMessageActionCreator:(message:string)=>void
+}
+const Dialogs = (props:Props) => {
 let messagesElems = props.dialogs.messages.map((message) => {
 	return (
 	  <Message

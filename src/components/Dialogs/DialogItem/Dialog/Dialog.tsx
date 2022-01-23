@@ -1,5 +1,10 @@
 import s from "./Dialog.module.css";
-const Dialog = (props) => {
+type Props ={
+	name:string
+	image:string
+	text:string
+}
+const Dialog = (props:Props) => {
   return (
     <div className={s.dialog}>
       <div className={s.row}>

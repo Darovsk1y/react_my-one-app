@@ -10,7 +10,7 @@ type PropsType = {
 	status:string
 	isOwner:boolean
 	savePhotoThunk:(file:any)=>void
-	//! писал сам проверить с Димычем
+	//! писал сам проверить с Димычем 
 	setFormThunk:(formData:any)=>Promise<Object>
 }
 const UserHeader = (props:PropsType) =>{

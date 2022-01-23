@@ -1,7 +1,13 @@
 import LoginFormRedux from './NewMessage';
-
-const NewMessageContainer = (props) => {
-	const onSubmit = (formData) => {
+type Props = {
+	newMessageActionCreator:(message:string)=>void
+}
+/* type FormLocalData ={
+	message:string
+} */
+const NewMessageContainer = (props:Props) => {
+	//! пока так
+	const onSubmit = (formData:any) => {
 		console.log(formData);
 		props.newMessageActionCreator(formData.message);
 		formData.message = "";

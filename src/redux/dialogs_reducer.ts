@@ -1,17 +1,7 @@
+import { DialogObjectType, MessageObjectType } from "../types/types";
+
 const ADD_MESSAGE = "react_my-one-app/dialogs/ADD-MESSAGE";
-type MessageObjectType = {
-	id: number
-	image: string
-	link: string
-	position: string
-	message: string
-}
-type DialogObjectType = {
-	id: number
-	name: string
-	image: string
-	text: string
-}
+
 let initialState = {
 	messages: [
 		{
