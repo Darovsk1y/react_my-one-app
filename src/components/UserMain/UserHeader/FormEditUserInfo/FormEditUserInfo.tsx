@@ -1,22 +1,22 @@
 import s from "./../User-Info/UserInfo.module.css";
 import f from "../../../global/FormControls/FormControls.module.css";
-import { Field, reduxForm, SubmitHandler } from 'redux-form';
+import { Field, InjectedFormProps, reduxForm } from 'redux-form';
 import { FormControls } from "../../../global/FormControls/FormControls";
 import { maxLengthCreator } from "../../../../utils/validators/validators";
 import { ProfileType } from "../../../../types/types";
+import { FormEditUserInfoValuesType } from "../UserHeader";
 /* import { required } from './../../../../utils/validators/validators'; */
 
 const Input = FormControls("input");
 const Textarea = FormControls("textarea");
 let maxLength30 = maxLengthCreator(30);
-//! нельзя
-/* type Props = {
-	handleSubmit: SubmitHandler<{}, {}, string>
+
+type OwnProps = {
 	status: string
 	profile: ProfileType
-	error: string
-} */ 
-const ProfileForm = ({handleSubmit, status, profile, error}) => {
+	error?: string
+} 
+const ProfileForm:React.FC<InjectedFormProps<FormEditUserInfoValuesType ,OwnProps> &OwnProps> = ({handleSubmit, status, profile, error}) => {
   return (
     <form className={s.form} onSubmit={handleSubmit}>
 		<div className={s.line}>
@@ -59,7 +59,7 @@ const ProfileForm = ({handleSubmit, status, profile, error}) => {
 				<div className={s.param}>{key}</div>
 				<Field component={Input} className={s.answer+" "+ s.param_input} 
 				type="text" name={`contacts.${key}`} 
-				placeholder={profile.contacts[key]}/>
+				/* placeholder={profile.contacts[key]} *//>
 			</div>
 		  )
 		})}
@@ -73,7 +73,7 @@ const ProfileForm = ({handleSubmit, status, profile, error}) => {
   )
 };
 
-const FormEditUserInfo = reduxForm({
+const FormEditUserInfo = reduxForm<FormEditUserInfoValuesType, OwnProps>({
 	// a unique name for the form
   form: 'profile'
 })(ProfileForm)

@@ -1,15 +1,16 @@
 import s from "./NewMessage.module.css";
 import  React  from 'react';
-import { Field, reduxForm, SubmitHandler } from "redux-form";
+import { Field, InjectedFormProps, reduxForm } from "redux-form";
 import { required, maxLengthCreator } from '../../../utils/validators/validators';
 import { FormControls } from '../../global/FormControls/FormControls';
+import { NewMessageFormValuesType } from "./NewMessageContainer";
 
 const Textarea = FormControls("textarea");
 let maxLength100 = maxLengthCreator(100);
-type Props = {
-	handleSubmit:SubmitHandler<{}, {}, string>
+type OwnProps = {
+
 }
-const NewMessage = (props:Props) => {
+const NewMessage:React.FC<InjectedFormProps<NewMessageFormValuesType, OwnProps> & OwnProps> = (props) => {
 
   return (
     <form action="" className={s.newmessage} onSubmit={props.handleSubmit}>
@@ -26,8 +27,8 @@ const NewMessage = (props:Props) => {
     </form>
   );
 };
-const LoginFormRedux = reduxForm({
+const NewMessageFormRedux = reduxForm<NewMessageFormValuesType, OwnProps>({
 	// a unique name for the form
   form: 'message'
 })(NewMessage)
-export default LoginFormRedux;
+export default NewMessageFormRedux;

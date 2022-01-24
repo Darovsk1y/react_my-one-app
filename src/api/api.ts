@@ -1,7 +1,7 @@
 //const axios = require("axios");
 //todo там мы будем использовать типизацию зашитую в axios
 import axios from "axios";
-import { ProfileType, UserType } from "../types/types";
+import { ProfileType } from "../types/types";
 
 const instance = axios.create({
 	baseURL: "https://social-network.samuraijs.com/api/1.0/",

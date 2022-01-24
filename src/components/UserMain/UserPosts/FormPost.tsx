@@ -1,14 +1,16 @@
 import s from "./UserPosts.module.css";
-import { Field, SubmitHandler } from "redux-form";
+import { Field, InjectedFormProps } from "redux-form";
 import { required, maxLengthCreator } from '../../../utils/validators/validators';
 import { FormControls } from '../../global/FormControls/FormControls';
-type PropsType = {
-	handleSubmit:SubmitHandler<{}, {}, string>
+import { FormPostValuesType } from "./UserPosts";
+import { reduxForm } from "redux-form";
+type OwnPropsType = {
+	
 }
 const Textarea = FormControls("textarea");
 
 let maxLength10 = maxLengthCreator(10);
-const FormPost = (props:PropsType) => {
+const FormPost:React.FC<InjectedFormProps<FormPostValuesType, OwnPropsType> & OwnPropsType> = (props) => {
 	
   return (
 	<form className={s.form} onSubmit={props.handleSubmit}>
@@ -18,4 +20,5 @@ const FormPost = (props:PropsType) => {
 	</form>
   );
 };
-export default FormPost;
+const FormPostRedux = reduxForm<FormPostValuesType, OwnPropsType>({form: 'post'})(FormPost)
+export default FormPostRedux;

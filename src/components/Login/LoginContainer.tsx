@@ -39,11 +39,12 @@ type MapStatePropsType = {
 type MapDispatchToPropsType = {
 	authLoginThunk: (email:string, password:string, rememberMe:boolean, captcha:string)=>void
 }
+type OwnPropsType={}
 //todo Описали и на входе и на выходе
 let mapStateProps = (state:AppStateType): MapStatePropsType => ({
 	isAuth: state.auth.isAuth,
 	captchaUrl: state.auth.captchaUrl,
 })
-const LoginConnect = connect(mapStateProps, {authLoginThunk})(LoginContainer);
+const LoginConnect = connect<MapStatePropsType, MapDispatchToPropsType, OwnPropsType, AppStateType>(mapStateProps, {authLoginThunk})(LoginContainer);
 
 export default LoginConnect;

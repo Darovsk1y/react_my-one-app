@@ -13,13 +13,31 @@ type PropsType = {
 	//! писал сам проверить с Димычем 
 	setFormThunk:(formData:any)=>Promise<Object>
 }
+export type FormEditUserInfoValuesType={
+		aboutMe:string | null
+		contacts: {
+		  facebook: string | null
+		  website: string | null
+		  vk: string | null
+		  twitter: string | null
+		  instagram: string | null
+		  youtube: string | null
+		  github: string | null
+		  mainLink: string | null
+		}
+		lookingForAJob: boolean
+		lookingForAJobDescription: string
+		fullName: string,
+		userId: number
+		
+}
 const UserHeader = (props:PropsType) =>{
 
 	let [editMode, setEditMode] = useState(false);
 	const changeEditMode = () => {
 		setEditMode(!editMode);
 	}
-	let onSubmit=(formData:any)=>{
+	let onSubmit=(formData:FormEditUserInfoValuesType)=>{
 		console.log(formData)
 		props.setFormThunk(formData).then(
 			()=>{

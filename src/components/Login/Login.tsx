@@ -18,6 +18,7 @@ type OwnProps = {
 const LoginForm: React.FC<InjectedFormProps<LoginFormDataValuesType, OwnProps> & OwnProps> = (props) =>{
 	return <form className={s.form} onSubmit={props.handleSubmit}>
 		<div className={s.line}>
+			//todo мы хотим проверять значения name что бы НЕОШИБИТЬСЯ с ключем для формы
 			<Field component={Input} name={"email"} validate={[required, maxLength30]} placeholder="login" autoFocus={true}/>
 		</div>
 		<div className={s.line}>
