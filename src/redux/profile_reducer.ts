@@ -182,19 +182,20 @@ export const savePhotoThunk = (photo:any):ThunkType => {
 	}
 }
 export const setFormThunk = (formData:ProfileType):ThunkType =>{
-	//! проблема с передачей конкретного userId number а в auth.id может быть null
-	return async (dispatch:any, getState:any) => {
-		const userId = getState().auth.id;
+	//todo userId number а в auth.id может быть null решил получить прямои из формы
+	return async (dispatch:any, getState) => {
+		/* const userId = getState().auth.id; */
 		const data = await profileAPI.setForm(formData)
 		if(data){
 			if(data.data.resultCode === 0){
-				dispatch(getProfileThusk(userId));
+				dispatch(getProfileThusk(formData.userId));
 			} else {
 				const message = data.data.messages.length > 0 ? data.data.messages[0] : "Some error";
 				//общая ошибка
 				dispatch(stopSubmit("profile", {_error: message}));
 				return Promise.reject(message);
-				//todo ошибка поля
+
+				//todo ошибка поля /Мой личный код
 				/* dispatch(stopSubmit("profile", {"contacts":{"twitter": message}})); */
 				/* let{textError, section, subSection} = getFormatErrors(message);
 				dispatch(stopSubmit("profile", {[section]:{[subSection]: textError}}));
@@ -203,7 +204,7 @@ export const setFormThunk = (formData:ProfileType):ThunkType =>{
 		}
 	}
 }
-//todo функция извлечения значений поля из ошибки
+//todo функция извлечения значений поля из ошибки /Мой личный код
 // Invalid url format (Contacts->Twitter)
 /* const getFormatErrors = (message) =>{
 	let formaterMessage = message.split(/\(/);

@@ -1,4 +1,4 @@
-import usersReducer, { follow, setUsers, toggelFollowDisable, unfollow } from "./users_reducer";
+import usersReducer, { follow, actions, toggelFollowDisable, unfollow } from "./users_reducer";
 
 it(' users should to be received', ()=>{
 	//1.test data
@@ -37,7 +37,7 @@ it(' users should to be received', ()=>{
 			"large": null
 		  },
 	},]
-	let action = setUsers(usersData);
+	let action = actions.setUsers(usersData);
 	//2. new state
 	let newState = usersReducer(state, action);
 	//3. expectation
@@ -85,7 +85,7 @@ let testState = {
 }
 it(' follow should work', ()=>{
 	//1. test data
-	let action = follow(1);
+	let action = actions.follow(1);
 	//2. new state
 	let newState = usersReducer(testState, action);
 	//3. expectation
@@ -93,14 +93,14 @@ it(' follow should work', ()=>{
 });
 it(' unfollow should work', ()=>{
 	//1. test data
-	let action = unfollow(3);
+	let action = actions.unfollow(3);
 	//2. new state
 	let newState = usersReducer(testState, action);
 	//3. expectation
 	expect(newState.users[2].followed).toBe(false);
 });
 it(' clicked button should be disabled before the answer', ()=>{
-	let action= toggelFollowDisable(true, 211);
+	let action= actions.toggelFollowDisable(true, 211);
 	let newState = usersReducer(testState, action);
 	expect(newState.isDisabled[0]).toBe(211);
 });

@@ -32,4 +32,13 @@ const store = createStore(reducersPack, composeEnhancers(applyMiddleware(thunkMi
 // @ts-ignore
 window.__store__ = store;
 
+//todo Тип Выдедет наши типы из АС автоматически
+type PropertyesType<T> = T extends {[key: string]: infer U} ? U : never
+
+//ошибка (...args: any) => any //todo чувак ты в ReturnType не можешь ничего закинуть кроме ф-ии 
+//type ActionsType<T extends (...args: any) => any> = ReturnType<PropertyesType<T>> ОШИБКА
+
+//todo сделаем уточнение что вернется ф-ия
+export type InferActionsType< T extends {[key: string]:(...args: any)=>any} > = ReturnType<PropertyesType<T>>
+
 export default store;
