@@ -1,5 +1,6 @@
 import { mapItemsUpdateHelper } from '../utils/validators/object-helpers';
-import { usersAPI, followAPI } from '../api/api';
+import { followAPI } from "../api/followAPI";
+import { usersAPI } from "../api/usersAPI";
 import { UserType } from '../types/types';
 import { Dispatch } from 'redux';
 import { AppStateType, InferActionsType } from './redux_store';

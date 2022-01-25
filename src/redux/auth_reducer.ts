@@ -1,6 +1,8 @@
 import { stopSubmit } from 'redux-form';
 import { ThunkAction } from 'redux-thunk';
-import { authAPI, ResultCodeEnum, ResultCodeForCaptcha, securityAPI } from '../api/api';
+import { ResultCodeEnum, ResultCodeForCaptcha } from '../api/api';
+import { securityAPI } from "../api/securityAPI";
+import { authAPI } from "../api/authAPI";
 import { ProfileType } from '../types/types';
 import { AppStateType } from './redux_store';
 const SET_USER_DATA = "react_my-one-app/auth/SET_USER_DATA";

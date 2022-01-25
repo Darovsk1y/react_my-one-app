@@ -1,4 +1,3 @@
-
 import { ThunkAction } from 'redux-thunk';
 import { authMeThunk } from './auth_reducer';
 import { AppStateType } from './redux_store';
@@ -6,14 +5,11 @@ const INITIALIZE_APP = "react_my-one-app/app/INITIALIZE_APP";
 const SAVED_GLOGAL_ERROR = "react_my-one-app/app/SAVED_GLOGAL_ERROR";
 const CLEAR_GLOGAL_ERROR = "react_my-one-app/app/CLEAR_GLOGAL_ERROR";
 
-type intialStateType = {
-	initialized: boolean
-	globalError: string | null
-}
-let intialState:intialStateType = {
+let intialState = {
 	initialized: false,
-	globalError: null,
+	globalError: null as string|null,
 }
+type intialStateType = typeof intialState
 type ActionType = initializeAppACType|savedGlobalErrorACType|clearGlobalErrorACType
 const appReducer = (state = intialState, action:ActionType):intialStateType => {
 	switch (action.type){

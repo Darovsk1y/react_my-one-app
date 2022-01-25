@@ -1,6 +1,6 @@
 import { stopSubmit } from 'redux-form';
 import { ThunkAction } from 'redux-thunk';
-import { profileAPI } from '../api/api';
+import { profileAPI } from "../api/profileAPI";
 import { PhotosType, PostType, ProfileType } from '../types/types';
 import { AppStateType } from './redux_store';
 
@@ -149,7 +149,7 @@ export const getProfileThusk = (userId:number):ThunkType => {
 	return async (dispatch) => {
 		let data = await profileAPI.getProfile(userId)
 		if(data){
-			dispatch(setUserProfile(data.data));
+			dispatch(setUserProfile(data))
 		}
 	}
 }
@@ -157,7 +157,7 @@ export const setStatusThusk = (userId:number):ThunkType => {
 	return async (dispatch) => {
 		let data = await profileAPI.getStatus(userId)
 		if(data){
-			dispatch(setStatus(data.data));
+			dispatch(setStatus(data))
 		}
 	}
 }
@@ -165,8 +165,8 @@ export const updateStatusThusk = (status:string):ThunkType => {
 	return async (dispatch) => {
 		let data = await profileAPI.updateStatus(status);
 		if(data){
-			if(data.data.resultCode === 0){
-				dispatch(setStatus(status));
+			if(data.resultCode === 0){
+				dispatch(setStatus(status))
 			}
 		}
 	}
@@ -174,10 +174,9 @@ export const updateStatusThusk = (status:string):ThunkType => {
 export const savePhotoThunk = (photo:any):ThunkType => {
 	return async (dispatch) => {
 		let data = await profileAPI.updateAvatar(photo)
-		if(data){
-			if(data.data.resultCode === 0){
-				dispatch(savePhotoSuccsess(data.data.data.photos))
-			}
+		//todo вырезали у Димыча нет такого if(data){ }
+		if(data.resultCode === 0){
+			dispatch(savePhotoSuccsess(data.data.photos))
 		}
 	}
 }
@@ -187,10 +186,10 @@ export const setFormThunk = (formData:ProfileType):ThunkType =>{
 		/* const userId = getState().auth.id; */
 		const data = await profileAPI.setForm(formData)
 		if(data){
-			if(data.data.resultCode === 0){
-				dispatch(getProfileThusk(formData.userId));
+			if(data.resultCode === 0){
+				dispatch(getProfileThusk(formData.userId))
 			} else {
-				const message = data.data.messages.length > 0 ? data.data.messages[0] : "Some error";
+				const message = data.messages.length > 0 ? data.messages[0] : "Some error";
 				//общая ошибка
 				dispatch(stopSubmit("profile", {_error: message}));
 				return Promise.reject(message);
