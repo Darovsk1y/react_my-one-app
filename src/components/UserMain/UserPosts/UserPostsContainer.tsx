@@ -8,7 +8,7 @@ type MapStatePropsType = {
 	posts: Array<PostType>
 }
 type MapDispatchPropsType = {
-	newPostActionCreator: (text:string)=>void
+	newPost: (text:string)=>void
 }
 type OwnPropsType = {
 	//todo Тут пусто но если удалить OwnPropsType то ругается
@@ -19,16 +19,9 @@ let mapStateTopProps = (state: AppStateType):MapStatePropsType => {
     posts: state.profile.posts,
   };
 };
-//! пришлось делать MapDispatchToProps, не читало ключ actions.newMessageActionCreator в connect
-let MapDispatchToProps = (dispatch:any) => {
-	return {
-		newPostActionCreator: (newMessage:string) =>{
-			dispatch(actions.newPostActionCreator(newMessage));
-		}
-	}
-}
+
 let UserPostsContainer = connect<MapStatePropsType, MapDispatchPropsType, OwnPropsType, AppStateType>(
   mapStateTopProps,
-  MapDispatchToProps
+  {newPost: actions.newPostActionCreator}
 )(UserPosts);
 export default UserPostsContainer;

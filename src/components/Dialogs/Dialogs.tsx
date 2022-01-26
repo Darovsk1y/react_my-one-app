@@ -2,14 +2,12 @@ import s from "./Dialogs.module.css";
 import DialogItem from "./DialogItem/DialogItem";
 import Message from "./Message/Message";
 import NewMessageContainer from './NewMessage/NewMessageContainer';
-import { DialogObjectType, MessageObjectType } from "../../types/types";
+//import { DialogObjectType, MessageObjectType } from "../../types/types";
+import { DialogsStateType } from "../../redux/dialogs_reducer";
 /* import { Navigate } from 'react-router-dom'; */
 type Props = {
-	dialogs:{
-		messages: Array<MessageObjectType>
-		dialogs: Array<DialogObjectType>
-	}
-	newMessageActionCreator:(message:string)=>void
+	dialogs:DialogsStateType
+	newMessage:(message:string)=>void
 }
 const Dialogs = (props:Props) => {
 let messagesElems = props.dialogs.messages.map((message) => {
@@ -40,7 +38,7 @@ let messagesElems = props.dialogs.messages.map((message) => {
       <div className={s.dialogsList}>{dialogsElements}</div>
       <div className={s.board}>
         <div className={s.messages}>{messagesElems}</div>
-			<NewMessageContainer newMessageActionCreator={props.newMessageActionCreator}/>
+			<NewMessageContainer newMessage={props.newMessage}/>
       </div>
     </div>
 	

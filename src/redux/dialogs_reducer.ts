@@ -73,9 +73,9 @@ let initialState = {
 	] as Array<DialogObjectType>,
 }
 //todo быстрый способ получения типа из готового обьекта
-export type initialStateType = typeof initialState
+export type DialogsStateType = typeof initialState
 type ActionType = InferActionsType<typeof actions>
-const dialogsReducer =(state = initialState, action:ActionType):initialStateType=>{
+const dialogsReducer =(state = initialState, action:ActionType):DialogsStateType=>{
 
 	switch(action.type) {
 		case ADD_MESSAGE: {

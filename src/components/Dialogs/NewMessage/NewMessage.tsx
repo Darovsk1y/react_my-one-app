@@ -11,7 +11,7 @@ type OwnProps = {
 
 }
 const NewMessage:React.FC<InjectedFormProps<NewMessageFormValuesType, OwnProps> & OwnProps> = (props) => {
-
+//! как задать тип Field что бы ждать от него опред. константу name ???
   return (
     <form action="" className={s.newmessage} onSubmit={props.handleSubmit}>
       <Field

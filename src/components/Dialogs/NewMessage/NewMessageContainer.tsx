@@ -1,13 +1,15 @@
 import NewMessageFormRedux from './NewMessage';
 type Props = {
-	newMessageActionCreator:(message:string)=>void
+	newMessage:(message:string)=>void
 }
 export type NewMessageFormValuesType ={
 	message:string
+	name:"message"
 }
 const NewMessageContainer:React.FC<Props> = (props) => {
+	//todo точные тыпы что надо получить
 	const onSubmit = (formData:NewMessageFormValuesType) => {
-		props.newMessageActionCreator(formData.message);
+		props.newMessage(formData.message);
 		formData.message = "";
 	}
   return (

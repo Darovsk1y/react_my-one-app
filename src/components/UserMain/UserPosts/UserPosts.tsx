@@ -5,14 +5,14 @@ import { PostType } from "../../../types/types";
 
 type PropsType = {
 	posts:Array<PostType>
-	newPostActionCreator:(text:string)=>void
+	newPost:(text:string)=>void
 }
 export type FormPostValuesType = {
 	textarea:string
 }
 const UserPosts = (props:PropsType) => {
 	let onSubmit = (formData:FormPostValuesType) => {
-		props.newPostActionCreator(formData.textarea);
+		props.newPost(formData.textarea);
 		formData.textarea = ""; 
 		/* возможно из за такого способа валидация не видит пустоты */
 	}
