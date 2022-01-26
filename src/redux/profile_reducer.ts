@@ -1,14 +1,7 @@
-import { stopSubmit } from 'redux-form';
-import { ThunkAction } from 'redux-thunk';
+import { FormAction, stopSubmit } from 'redux-form';
 import { profileAPI } from "../api/profileAPI";
 import { PhotosType, PostType, ProfileType } from '../types/types';
-import { AppStateType } from './redux_store';
-
-const ADD_POST = "react_my-one-app/profile/ADD-POST";
-const SET_USER_PROFILE = "react_my-one-app/profile/SET_USER_PROFILE";
-const SET_STATUS = "react_my-one-app/profile/SET_STATUS";
-const DELETE_POST = "react_my-one-app/profile/DELETE_POST";
-const SAVE_PHOTO = "react_my-one-app/profile/SAVE_PHOTO";
+import { BaseThunkType, InferActionsType } from './redux_store';
 
 let initialState = {
 	posts: [
@@ -43,11 +36,13 @@ let initialState = {
 	status: "",
 };
 //todo вынесли особо нужные Type от сюда во внешний файл /types/types
-type ActionType = newPostActionCreatorAСType|setUserProfileAСType|setStatusAСType|deletePostACAСType|savePhotoSuccsessAСType
+type ActionType = InferActionsType<typeof actions>
 export type InitialStateType = typeof initialState;
+type ThunkType = BaseThunkType<ActionType | FormAction>
+
 const profileReducer = (state = initialState, action:ActionType):InitialStateType => {
 	switch (action.type) {
-		case ADD_POST: {
+		case 'react_my-one-app/profile/ADD-POST': {
 			if (state.profile){
 				let newPost = {
 					/* id: 4, */
@@ -65,23 +60,23 @@ const profileReducer = (state = initialState, action:ActionType):InitialStateTyp
 				return {...state};
 			}
 		}
-		case SET_USER_PROFILE: {
+		case 'react_my-one-app/profile/SET_USER_PROFILE': {
 			return {...state,
 				profile: action.profile,
 			};
 		}
-		case SET_STATUS: {
+		case 'react_my-one-app/profile/SET_STATUS': {
 			return {...state,
 				status: action.status,
 			};
 		}
-		case DELETE_POST: {
+		case 'react_my-one-app/profile/DELETE_POST': {
 			return {
 				...state,
 				posts: state.posts.filter(p => p.id !== action.id)
 			}
 		}
-		case SAVE_PHOTO: {
+		case 'react_my-one-app/profile/SAVE_PHOTO': {
 			return{
 				...state,
 				//! Исправить позже с Димычем
@@ -92,64 +87,45 @@ const profileReducer = (state = initialState, action:ActionType):InitialStateTyp
 			return state;
 	}
 }
-type newPostActionCreatorAСType ={
-	type: typeof ADD_POST,
-	text: string
-}
-export const newPostActionCreator = (text:string):newPostActionCreatorAСType =>{
-	return {
-		type:ADD_POST,
-		text
-	}
-};
-type setUserProfileAСType ={
-	type: typeof SET_USER_PROFILE,
-	profile: ProfileType
-}
-export const setUserProfile = (profile:ProfileType):setUserProfileAСType =>{
-	return {
-		type:SET_USER_PROFILE,
-		profile
-	}
-};
-type setStatusAСType ={
-	type: typeof SET_STATUS,
-	status: string
-}
-export const setStatus = (status:string):setStatusAСType =>{
-	return {
-		type:SET_STATUS,
-		status
-	}
-};
-type deletePostACAСType ={
-	type: typeof DELETE_POST,
-	id: number
-}
-export const deletePostAC = (id:number):deletePostACAСType =>{
-	return{
-		type: DELETE_POST,
-		id
+export const actions = {
+	newPostActionCreator: (text:string) =>{
+		return {
+			type:'react_my-one-app/profile/ADD-POST',
+			text
+		} as const
+	},
+	setUserProfile: (profile:ProfileType) =>{
+		return {
+			type:'react_my-one-app/profile/SET_USER_PROFILE',
+			profile
+		} as const
+	},
+	setStatus: (status:string) =>{
+		return {
+			type:'react_my-one-app/profile/SET_STATUS',
+			status
+		} as const
+	},
+	deletePostAC: (id:number) =>{
+		return{
+			type: 'react_my-one-app/profile/DELETE_POST',
+			id
+		} as const
+	},
+	savePhotoSuccsess: (photos:PhotosType) =>{
+		return{
+			type: 'react_my-one-app/profile/SAVE_PHOTO',
+			photos
+		} as const
 	}
 }
-/* после санки загрузки фото обновим его*/
-type savePhotoSuccsessAСType ={
-	type: typeof SAVE_PHOTO,
-	photos: PhotosType
-}
-export const savePhotoSuccsess = (photos:PhotosType):savePhotoSuccsessAСType =>{
-	return{
-		type: SAVE_PHOTO,
-		photos
-	}
-}
+
 /* Thusks */
-type ThunkType = ThunkAction<Promise<void>, AppStateType, unknown, ActionType>
 export const getProfileThusk = (userId:number):ThunkType => {
 	return async (dispatch) => {
 		let data = await profileAPI.getProfile(userId)
 		if(data){
-			dispatch(setUserProfile(data))
+			dispatch(actions.setUserProfile(data))
 		}
 	}
 }
@@ -157,7 +133,7 @@ export const setStatusThusk = (userId:number):ThunkType => {
 	return async (dispatch) => {
 		let data = await profileAPI.getStatus(userId)
 		if(data){
-			dispatch(setStatus(data))
+			dispatch(actions.setStatus(data))
 		}
 	}
 }
@@ -166,23 +142,23 @@ export const updateStatusThusk = (status:string):ThunkType => {
 		let data = await profileAPI.updateStatus(status);
 		if(data){
 			if(data.resultCode === 0){
-				dispatch(setStatus(status))
+				dispatch(actions.setStatus(status))
 			}
 		}
 	}
 }
-export const savePhotoThunk = (photo:any):ThunkType => {
+export const savePhotoThunk = (photo:File):ThunkType => {
 	return async (dispatch) => {
 		let data = await profileAPI.updateAvatar(photo)
 		//todo вырезали у Димыча нет такого if(data){ }
 		if(data.resultCode === 0){
-			dispatch(savePhotoSuccsess(data.data.photos))
+			dispatch(actions.savePhotoSuccsess(data.data.photos))
 		}
 	}
 }
 export const setFormThunk = (formData:ProfileType):ThunkType =>{
 	//todo userId number а в auth.id может быть null решил получить прямои из формы
-	return async (dispatch:any, getState) => {
+	return async (dispatch, getState) => {
 		/* const userId = getState().auth.id; */
 		const data = await profileAPI.setForm(formData)
 		if(data){

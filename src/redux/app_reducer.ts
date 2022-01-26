@@ -1,31 +1,28 @@
 import { ThunkAction } from 'redux-thunk';
 import { authMeThunk } from './auth_reducer';
-import { AppStateType } from './redux_store';
-const INITIALIZE_APP = "react_my-one-app/app/INITIALIZE_APP";
-const SAVED_GLOGAL_ERROR = "react_my-one-app/app/SAVED_GLOGAL_ERROR";
-const CLEAR_GLOGAL_ERROR = "react_my-one-app/app/CLEAR_GLOGAL_ERROR";
+import { AppStateType, InferActionsType } from './redux_store';
 
 let intialState = {
 	initialized: false,
 	globalError: null as string|null,
 }
 type intialStateType = typeof intialState
-type ActionType = initializeAppACType|savedGlobalErrorACType|clearGlobalErrorACType
+type ActionType = InferActionsType<typeof actions>
 const appReducer = (state = intialState, action:ActionType):intialStateType => {
 	switch (action.type){
-		case INITIALIZE_APP: {
+		case 'react_my-one-app/app/INITIALIZE_APP': {
 			return {
 				...state,
 				initialized: true,
 			}
 		}
-		case SAVED_GLOGAL_ERROR: {
+		case 'react_my-one-app/app/SAVED_GLOGAL_ERROR': {
 			return {
 				...state,
-				globalError: action.error,
+				globalError: action.error
 			}
 		}
-		case CLEAR_GLOGAL_ERROR: {
+		case 'react_my-one-app/app/CLEAR_GLOGAL_ERROR': {
 			return {
 				...state,
 				globalError: null,
@@ -35,33 +32,25 @@ const appReducer = (state = intialState, action:ActionType):intialStateType => {
 		return state;
 	}
 }
+const actions = {
+	initializeApp: () => {
+		return {
+			type:'react_my-one-app/app/INITIALIZE_APP',
+		} as const
+	},
+	savedGlobalError: (error:string) => {
+		return {
+			type: 'react_my-one-app/app/SAVED_GLOGAL_ERROR',
+			error
+		} as const
+	},
+	clearGlobalError: () => {
+		return {
+			type: 'react_my-one-app/app/CLEAR_GLOGAL_ERROR',
+		} as const
+	}
+}
 
-type initializeAppACType = {
-	type: typeof INITIALIZE_APP
-}
-export const initializeApp = ():initializeAppACType => {
-	return {
-		type:INITIALIZE_APP,
-	}
-}
-type savedGlobalErrorACType = {
-	type: typeof SAVED_GLOGAL_ERROR
-	error:string
-}
-export const savedGlobalError = (error:string):savedGlobalErrorACType => {
-	return {
-		type: SAVED_GLOGAL_ERROR,
-		error
-	}
-}
-type clearGlobalErrorACType = {
-	type: typeof CLEAR_GLOGAL_ERROR
-}
-export const clearGlobalError = ():clearGlobalErrorACType => {
-	return {
-		type: CLEAR_GLOGAL_ERROR,
-	}
-}
 	//лочим боди при попапе убираем скролл
 const addBodyClassLock = () => document.body.classList.add('_lock');
 const removeBodyClassLock = () => document.body.classList.remove('_lock');
@@ -73,17 +62,17 @@ export const initializeAppThunk = () => (dispatch:any) => {
 	/* dispatch(authMeThunk()); */
 	Promise.all([promise])
 	.then( ()=> { /* Когда придет ответ запусти наш инишиал_АС */
-		dispatch(initializeApp());
+		dispatch(actions.initializeApp());
 	})
 }
 //todo для обработки ошибки запуска попапа и убирания скролла
 export const handlingGlobalErrorThunk = (PromiseRejectionEvent:any) => (dispatch:any) => {
 	const reason = String(PromiseRejectionEvent.reason);
-	dispatch(savedGlobalError(reason));
+	dispatch(actions.savedGlobalError(reason));
 	addBodyClassLock();
 }
 export const clearGlobalErrorThunk = () => (dispatch:any) => {
-	dispatch(clearGlobalError());
+	dispatch(actions.clearGlobalError());
 	removeBodyClassLock();
 }
 

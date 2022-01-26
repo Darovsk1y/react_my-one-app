@@ -1,4 +1,4 @@
-import usersReducer, { follow, actions, toggelFollowDisable, unfollow } from "./users_reducer";
+import usersReducer, { actions } from "./users_reducer";
 
 it(' users should to be received', ()=>{
 	//1.test data

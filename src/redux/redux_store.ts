@@ -1,10 +1,10 @@
-import { combineReducers, createStore, applyMiddleware, compose } from "redux";
+import { combineReducers, createStore, applyMiddleware, compose, Action } from "redux";
 import profileReducer from './profile_reducer';
 import dialogsReducer from './dialogs_reducer';
 import assideReducer from './asside_reducer';
 import usersReducer from "./users_reducer";
 import authReduser from "./auth_reducer";
-import thunkMiddleware from 'redux-thunk';
+import thunkMiddleware, { ThunkAction } from 'redux-thunk';
 import { reducer as formReducer } from 'redux-form'
 import appReducer from './app_reducer';
 
@@ -40,5 +40,12 @@ type PropertyesType<T> = T extends {[key: string]: infer U} ? U : never
 
 //todo сделаем уточнение что вернется ф-ия
 export type InferActionsType< T extends {[key: string]:(...args: any)=>any} > = ReturnType<PropertyesType<T>>
+
+//todo универсальный ThunkType
+//todo 1-что возвращает, 2-Наша глобал.Стэйт,
+//todo 3-ExtraThunkArg(третий параметр если он нужен идет после getState)
+//todo 4-базовый экшен Redux-а (или наш родной ActionType)
+//пример что было type ThunkType = ThunkAction<Promise<void>, AppStateType, unknown, ActionType>
+export type BaseThunkType<A extends Action=Action, R=Promise<void> > = ThunkAction<R, AppStateType, unknown, A>
 
 export default store;

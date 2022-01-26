@@ -1,4 +1,4 @@
-import { newPostActionCreator } from "../../../redux/profile_reducer";
+import { actions } from "../../../redux/profile_reducer";
 import UserPosts from "./UserPosts";
 import { connect } from "react-redux";
 import { AppStateType } from "../../../redux/redux_store";
@@ -19,9 +19,16 @@ let mapStateTopProps = (state: AppStateType):MapStatePropsType => {
     posts: state.profile.posts,
   };
 };
-
+//! пришлось делать MapDispatchToProps, не читало ключ actions.newMessageActionCreator в connect
+let MapDispatchToProps = (dispatch:any) => {
+	return {
+		newPostActionCreator: (newMessage:string) =>{
+			dispatch(actions.newPostActionCreator(newMessage));
+		}
+	}
+}
 let UserPostsContainer = connect<MapStatePropsType, MapDispatchPropsType, OwnPropsType, AppStateType>(
   mapStateTopProps,
-  {newPostActionCreator}
+  MapDispatchToProps
 )(UserPosts);
 export default UserPostsContainer;

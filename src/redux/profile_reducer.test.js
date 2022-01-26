@@ -1,4 +1,4 @@
-import profileReducer, { deletePostAC, newPostActionCreator } from "./profile_reducer";
+import profileReducer, { actions } from "./profile_reducer";
 let state = {
 	posts: [
 		{
@@ -39,7 +39,7 @@ let state = {
 
 it(' lendth should be changed at added new post', ()=>{
 	// 1. test data
-	let action = newPostActionCreator("it-camasutra.com");
+	let action = actions.newPostActionCreator("it-camasutra.com");
 	// 2.new state
 	let newState = profileReducer(state, action);
 	// 3. expectation
@@ -48,7 +48,7 @@ it(' lendth should be changed at added new post', ()=>{
 
 it(' message of new post should be correct', ()=>{
 	// 1. test data
-	let action = newPostActionCreator("it-camasutra.com");
+	let action = actions.newPostActionCreator("it-camasutra.com");
 	// 2.new state
 	let newState = profileReducer(state, action);
 	// 3. expectation
@@ -57,7 +57,7 @@ it(' message of new post should be correct', ()=>{
 
 it(' lenght should be changed at delete post', ()=>{
 	// 1. test data
-	let action = deletePostAC(1);
+	let action = actions.deletePostAC(1);
 	// 2.new state
 	let newState = profileReducer(state, action);
 	// 3. expectation
@@ -66,7 +66,7 @@ it(' lenght should be changed at delete post', ()=>{
 
 it(` after deleted post lenght shouldn't be changed if id incorrect`, ()=>{
 	// 1. test data
-	let action = deletePostAC(1000);
+	let action = actions.deletePostAC(1000);
 	// 2.new state
 	let newState = profileReducer(state, action);
 	// 3. expectation

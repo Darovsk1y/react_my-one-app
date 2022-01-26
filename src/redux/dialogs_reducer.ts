@@ -1,4 +1,5 @@
 import { DialogObjectType, MessageObjectType } from "../types/types";
+import { InferActionsType } from "./redux_store";
 
 const ADD_MESSAGE = "react_my-one-app/dialogs/ADD-MESSAGE";
 
@@ -73,7 +74,7 @@ let initialState = {
 }
 //todo быстрый способ получения типа из готового обьекта
 export type initialStateType = typeof initialState
-type ActionType = newMessageACType
+type ActionType = InferActionsType<typeof actions>
 const dialogsReducer =(state = initialState, action:ActionType):initialStateType=>{
 
 	switch(action.type) {
@@ -93,15 +94,14 @@ const dialogsReducer =(state = initialState, action:ActionType):initialStateType
 			return state;
 	}
 }
-type newMessageACType = {
-	type:typeof ADD_MESSAGE,
-	text:string
-}
-export const newMessageActionCreator = (text:string):newMessageACType =>{
-	return {
-		type:ADD_MESSAGE,
-		text
+export const actions = {
+	newMessageActionCreator: (text:string) =>{
+		return {
+			type:ADD_MESSAGE,
+			text
+		} as const
 	}
-};
+}
+
 
 export default dialogsReducer;
