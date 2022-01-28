@@ -21,6 +21,7 @@ export const profileAPI = {
 			.then(response => {
 				return response.data
 			})
+			
 	},
 	updateStatus(status: string) {
 		return instance

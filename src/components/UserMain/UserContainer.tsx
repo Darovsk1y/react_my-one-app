@@ -7,7 +7,7 @@ import { withAuthRedirect } from '../../hoc/withAuthRedirect';
 import { compose } from "redux";
 import { ProfileType } from "../../types/types";
 import { AppStateType } from "../../redux/redux_store";
-import { useParams, Navigate } from "react-router-dom";
+import { Navigate, useMatch } from "react-router-dom";
 
 type MapStatePropsType = ReturnType<typeof mapStateToProps>
 type MapDispatchPropsType = {
@@ -19,14 +19,15 @@ type MapDispatchPropsType = {
 	setEditMode: (editMode: boolean)=>void
 }
 type PropsOwnType = {
-	id?: string
+	match: any | null
 }
 type PropsType = MapStatePropsType & MapDispatchPropsType & PropsOwnType
 
 class UserContainer extends React.Component<PropsType> {
 	isOwner:boolean = false;
 	refreshProfile(){
-		let userId = this.props.id ? +this.props.id : this.props.authID;
+		//let userId = this.props.id ? +this.props.id : this.props.authID;
+		let userId = this.props.match ? this.props.match.params.userId : this.props.authID;
 		if(userId){
 			this.props.getProfileThusk(userId);
 			this.props.setStatusThusk(userId);
@@ -40,9 +41,14 @@ class UserContainer extends React.Component<PropsType> {
 		
 	}
 	componentDidUpdate(prevProps:PropsType, prevState:PropsType){
-		if(this.props.id && this.props.id !== prevProps.id){
+		/* if(this.props.id && this.props.id !== prevProps.id){
 			this.refreshProfile();
 		} else if(!this.props.id && this.props.id !== prevProps.id){
+			this.refreshProfile();
+		} */
+		if(this.props.match && this.props.match.params.userId !== prevProps.match.params.userId){
+			this.refreshProfile();
+		} else if(!this.props.match && this.props.match !== prevProps.match){
 			this.refreshProfile();
 		}
 	}
@@ -77,10 +83,9 @@ let mapStateToProps = (state: AppStateType) =>({
 })
 type ConnectType = MapStatePropsType & MapDispatchPropsType & OwnPropsType & AppStateType
 const ProfileMatch = (props:ConnectType) => {
-	const params = useParams();
-	const id = params.id
+	let match = useMatch("/profile/:userId");
 	return (
-		<UserContainer {...props} id={id}/>
+		<UserContainer {...props} match={match}/>
 	)
 }
 type OwnPropsType={}

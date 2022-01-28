@@ -148,6 +148,8 @@ export const setStatusThusk = (userId:number):ThunkType => {
 		let data = await profileAPI.getStatus(userId)
 		if(data){
 			dispatch(actions.setStatus(data))
+		}else{//если статус null
+			dispatch(actions.setStatus(''))
 		}
 	}
 }
