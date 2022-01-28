@@ -1,6 +1,6 @@
 import MainImage from "./MainImage";
 import s from "./Profile.module.css";
-import UserContainer from './UserContainer';
+import UserContainer from './UserContainerFunc';
 
 const Profile = () => {
   return (
