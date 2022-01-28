@@ -4,7 +4,7 @@ import { Field, InjectedFormProps, reduxForm } from "redux-form";
 import { FormControls } from "../global/FormControls/FormControls";
 import { maxLengthCreator } from "../../utils/validators/validators";
 import { required } from '../../utils/validators/validators';
-import { LoginFormDataValuesType } from "./LoginContainer";
+import { UniversalKeysFormType } from "../../types/types";
 
 const Input = FormControls("input");
 
@@ -12,28 +12,37 @@ let maxLength30 = maxLengthCreator(30);
 type OwnProps = {
 	captchaUrl:string |null
 }
+// todo Что должно быть в Форме
+export type LoginFormDataValuesType = { 
+	email:string
+	password:string
+	rememberMe:boolean
+	//тут captcha прошла проверку и не может быть null
+	captcha:string
+}
+//todo задаем тип Field что бы ждать от него опред.константу name
+type FieldType = UniversalKeysFormType<LoginFormDataValuesType>
 //todo InjectedFormProps содержит все нужные обьекты родные для формы
 // todo а передав ему конкретный тип формы мы уточнили её параметры
 
 const LoginForm: React.FC<InjectedFormProps<LoginFormDataValuesType, OwnProps> & OwnProps> = (props) =>{
 	return <form className={s.form} onSubmit={props.handleSubmit}>
 		<div className={s.line}>
-			//todo мы хотим проверять значения name что бы НЕОШИБИТЬСЯ с ключем для формы
-			<Field component={Input} name={"email"} validate={[required, maxLength30]} placeholder="login" autoFocus={true}/>
+			<Field<FieldType> component={Input} name={"email"} validate={[required, maxLength30]} placeholder="login" autoFocus={true}/>
 		</div>
 		<div className={s.line}>
-			<Field component={Input} name={"password"} validate={[required, maxLength30]} placeholder="password" type="password"/>
+			<Field<FieldType> component={Input} name={"password"} validate={[required, maxLength30]} placeholder="password" type="password"/>
 		</div>
 		<div className={s.line}>
 			<label className={s.checkboxBlok}>
-				<Field component={"input"} name={"rememberMe"} className={s.checkbox} type="checkbox"/>
+				<Field<FieldType> component={"input"} name={"rememberMe"} className={s.checkbox} type="checkbox"/>
 				<span >запомнить меня</span>
 			</label>
 		</div>
 		{/* Хитрый способ задания условия через && */}
 		{props.captchaUrl && <img src={props.captchaUrl} alt="captcha" className={s.captcha}/>}
 		{props.captchaUrl && <div className={s.line +" "+s.captchaInput}>
-			<Field component={Input} name={"captcha"} type="text" autoFocus={true} validate={[required]}/>
+			<Field<FieldType> component={Input} name={"captcha"} type="text" autoFocus={true} validate={[required]}/>
 		</div>
 		}
 

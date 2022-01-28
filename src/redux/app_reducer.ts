@@ -56,7 +56,7 @@ const addBodyClassLock = () => document.body.classList.add('_lock');
 const removeBodyClassLock = () => document.body.classList.remove('_lock');
 //Thunks
 //type ThunkType = ThunkAction<Promise<void>, AppStateType, unknown, ActionType>
-type ThunkType = BaseThunkType<ActionType>
+type ThunkType = BaseThunkType<ActionType, Promise<any>>
 //! void не дает работать dispatch
 export const initializeAppThunk = () => (dispatch:any) => {
 	const promise = dispatch(authMeThunk()); /* или несколько диспатчей и промисов */

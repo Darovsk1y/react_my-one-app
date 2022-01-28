@@ -3,18 +3,22 @@ import  React  from 'react';
 import { Field, InjectedFormProps, reduxForm } from "redux-form";
 import { required, maxLengthCreator } from '../../../utils/validators/validators';
 import { FormControls } from '../../global/FormControls/FormControls';
-import { NewMessageFormValuesType } from "./NewMessageContainer";
+import { UniversalKeysFormType } from "../../../types/types";
 
 const Textarea = FormControls("textarea");
 let maxLength100 = maxLengthCreator(100);
 type OwnProps = {
 
 }
+export type NewMessageFormValuesType ={
+	message:string
+}
+//todo задаем тип Field что бы ждать от него опред.константу name
+type FieldType = UniversalKeysFormType<NewMessageFormValuesType>
 const NewMessage:React.FC<InjectedFormProps<NewMessageFormValuesType, OwnProps> & OwnProps> = (props) => {
-//! как задать тип Field что бы ждать от него опред. константу name ???
   return (
     <form action="" className={s.newmessage} onSubmit={props.handleSubmit}>
-      <Field
+      <Field<FieldType>
 	  component={Textarea}
         name="message"
         className={s.textarea}

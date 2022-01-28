@@ -34,10 +34,11 @@ let initialState = {
 	] as Array<PostType>,
 	profile: null as ProfileType | null,
 	status: "",
+	editMode: false
 };
-//todo вынесли особо нужные Type от сюда во внешний файл /types/types
 type ActionType = InferActionsType<typeof actions>
 export type InitialStateType = typeof initialState;
+// добавление FormAction нужно для stopSubmit но оно убирает вообще любую проверку Action...
 type ThunkType = BaseThunkType<ActionType | FormAction>
 
 const profileReducer = (state = initialState, action:ActionType):InitialStateType => {
@@ -83,10 +84,17 @@ const profileReducer = (state = initialState, action:ActionType):InitialStateTyp
 				profile: {...state.profile, photos: action.photos} as ProfileType
 			}
 		}
+		case 'react_my-one-app/profile/SET_EDIT_MODE': {
+			return{
+				...state,
+				editMode: action.editMode
+			}
+		}
 		default:
 			return state;
 	}
 }
+
 export const actions = {
 	newPostActionCreator: (text:string) =>{
 		return {
@@ -116,6 +124,12 @@ export const actions = {
 		return{
 			type: 'react_my-one-app/profile/SAVE_PHOTO',
 			photos
+		} as const
+	},
+	setEditMode: (editMode: boolean) =>{
+		return {
+			type: 'react_my-one-app/profile/SET_EDIT_MODE',
+			editMode: !editMode
 		} as const
 	}
 }
@@ -156,14 +170,14 @@ export const savePhotoThunk = (photo:File):ThunkType => {
 		}
 	}
 }
-export const setFormThunk = (formData:ProfileType):ThunkType =>{
+export const setFormThunk = (file:ProfileType):ThunkType =>{
 	//todo userId number а в auth.id может быть null решил получить прямои из формы
 	return async (dispatch, getState) => {
 		/* const userId = getState().auth.id; */
-		const data = await profileAPI.setForm(formData)
+		const data = await profileAPI.setForm(file)
 		if(data){
 			if(data.resultCode === 0){
-				dispatch(getProfileThusk(formData.userId))
+				dispatch(getProfileThusk(file.userId))
 			} else {
 				const message = data.messages.length > 0 ? data.messages[0] : "Some error";
 				//общая ошибка
@@ -177,6 +191,7 @@ export const setFormThunk = (formData:ProfileType):ThunkType =>{
 				debugger */
 			}
 		}
+		if(data){dispatch(actions.setEditMode(getState().profile.editMode))}
 	}
 }
 //todo функция извлечения значений поля из ошибки /Мой личный код

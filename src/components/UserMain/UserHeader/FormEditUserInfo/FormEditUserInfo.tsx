@@ -3,9 +3,10 @@ import f from "../../../global/FormControls/FormControls.module.css";
 import { Field, InjectedFormProps, reduxForm } from 'redux-form';
 import { FormControls } from "../../../global/FormControls/FormControls";
 import { maxLengthCreator } from "../../../../utils/validators/validators";
-import { ProfileType } from "../../../../types/types";
+import { ContactsType, ProfileType, UniversalKeysFormType } from "../../../../types/types";
 import { FormEditUserInfoValuesType } from "../UserHeader";
 /* import { required } from './../../../../utils/validators/validators'; */
+import Preloader from './../../../global/Preloader/preloader';
 
 const Input = FormControls("input");
 const Textarea = FormControls("textarea");
@@ -13,15 +14,20 @@ let maxLength30 = maxLengthCreator(30);
 
 type OwnProps = {
 	status: string
-	profile: ProfileType
+	profile: ProfileType | null
 	error?: string
 } 
-const ProfileForm:React.FC<InjectedFormProps<FormEditUserInfoValuesType ,OwnProps> &OwnProps> = ({handleSubmit, status, profile, error}) => {
-  return (
+//todo задаем тип Field что бы ждать от него опред.константу name
+type FieldType = UniversalKeysFormType<ProfileType>
+const ProfileForm:React.FC<InjectedFormProps<ProfileType ,OwnProps> &OwnProps> = ({handleSubmit, status, profile, error}) => {
+	if(!profile){
+		return <Preloader/>
+	}
+	return (
     <form className={s.form} onSubmit={handleSubmit}>
 		<div className={s.line}>
 			<div className={s.param +" "+ s.param_name}>name</div>
-			<Field component={Input} className={s.param +" "+ s.param_name+" "+ s.param_input} 
+			<Field<FieldType> component={Input} className={s.param +" "+ s.param_name+" "+ s.param_input} 
 			type="text" name={"fullName"} validate={[maxLength30]} 
 			placeholder={profile.fullName}/>
      	</div>
@@ -29,7 +35,7 @@ const ProfileForm:React.FC<InjectedFormProps<FormEditUserInfoValuesType ,OwnProp
 
 		<div className={s.line}>
 			<div className={s.param}>About Me</div>
-			<Field component={Textarea} className={s.answer+" "+ s.param_input} 
+			<Field<FieldType> component={Textarea} className={s.answer+" "+ s.param_input} 
 			type="text" name={"aboutMe"} 
 			placeholder={profile.aboutMe}/>
 		</div>
@@ -37,14 +43,14 @@ const ProfileForm:React.FC<InjectedFormProps<FormEditUserInfoValuesType ,OwnProp
 		<div className={s.line}>
 			<div className={s.param}>Looking for a job</div>
 			<div className={s.answer+" "+ s.param_checkboxBlock}>
-				<Field component={Input} className={s.param_checkbox} 
+				<Field<FieldType> component={Input} className={s.param_checkbox} 
 				type="checkbox" name={"lookingForAJob"} 
 				/>
 			</div>
 		</div>
 	  	<div className={s.line}>
 			<div className={s.param}>Looking for a job Description</div>
-			<Field component={Textarea} className={s.answer+" "+ s.param_input} 
+			<Field<FieldType> component={Textarea} className={s.answer+" "+ s.param_input} 
 			type="text" name={"lookingForAJobDescription"} 
 			placeholder={profile.lookingForAJobDescription}/>
 		</div>
@@ -59,7 +65,7 @@ const ProfileForm:React.FC<InjectedFormProps<FormEditUserInfoValuesType ,OwnProp
 				<div className={s.param}>{key}</div>
 				<Field component={Input} className={s.answer+" "+ s.param_input} 
 				type="text" name={`contacts.${key}`} 
-				/* placeholder={profile.contacts[key]} *//>
+				/>
 			</div>
 		  )
 		})}
@@ -73,7 +79,7 @@ const ProfileForm:React.FC<InjectedFormProps<FormEditUserInfoValuesType ,OwnProp
   )
 };
 
-const FormEditUserInfo = reduxForm<FormEditUserInfoValuesType, OwnProps>({
+const FormEditUserInfo = reduxForm<ProfileType, OwnProps>({
 	// a unique name for the form
   form: 'profile'
 })(ProfileForm)

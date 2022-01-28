@@ -1,17 +1,15 @@
-/* import { ChangeEvent } from "react"; */
+import { ChangeEvent } from "react";
 import s from "./UserAvatar.module.css";
-/* type PropsType = {
-	avatar: string
+type PropsType = {
+	avatar: string | null
 	editMode: boolean
 	isOwner: boolean
-	//! принимаем файл
-	savePhotoThunk: (file:FileList[0])=>void
-} */
-//! Ждем Димыча, ругается e.target.files.length может быть null
-const UserAvatar = (props) => {
-	const onPhotoSelected = (e) =>{
+	savePhotoThunk: (file:File)=>void
+}
+const UserAvatar:React.FC<PropsType> = (props) => {
+	const onPhotoSelected = (e: ChangeEvent<HTMLInputElement>) =>{
 		/* const target = e.target as HTMLInputElement; */
-		if(e.target.files.length){
+		if(e.target.files?.length){
 			props.savePhotoThunk(e.target.files[0]);
 		}
 	/* 	if(e.target.files.length){

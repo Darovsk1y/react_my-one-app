@@ -22,7 +22,10 @@ type PropsOwnType = {
 	id?: string
 }
 type PropsType = MapStatePropsType & MapDispatchPropsType & PropsOwnType
-
+function getParams () {
+	return useParams();
+} 
+const Uid = getParams;
 class UserContainer extends React.Component<PropsType> {
 	isOwner:boolean = false;
 	refreshProfile(){
@@ -48,6 +51,7 @@ class UserContainer extends React.Component<PropsType> {
 	}
 	
 	render () {
+		debugger
 		if(this.props.profile){
 			if(this.props.authID === this.props.profile.userId){
 				this.isOwner = true

@@ -2,7 +2,7 @@ import { ChangeEvent, useEffect, useState } from "react";
 import s from "./../UserInfo.module.css"; /* Наш первый ХУК */
 type PropsType = {
 	status:string
-	updateStatusThusk: (status:string)=>any
+	updateStatusThusk: (status:string)=>void
 	isOwner: boolean
 }
 //? StateType не нужен? хукам не нужно ничего предавать видимо

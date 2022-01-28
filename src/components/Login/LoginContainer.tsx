@@ -1,18 +1,11 @@
 import s from "./Login.module.css";
-import LoginFormRedux from "./Login";
+import LoginFormRedux, { LoginFormDataValuesType } from "./Login";
 import { connect } from 'react-redux';
 import { authLoginThunk } from '../../redux/auth_reducer';
 import { Navigate } from "react-router-dom";
 import { AppStateType } from "../../redux/redux_store";
 
-// todo Что должно быть в Форме
-export type LoginFormDataValuesType = { 
-	email:string
-	password:string
-	rememberMe:boolean
-	//тут captcha прошла проверку и не может быть null
-	captcha:string
-}
+
 //todo Там можно задать типы MapStatePropsType & MapDispatchToPropsType
 const LoginContainer: React.FC<MapStatePropsType & MapDispatchToPropsType> = (props) =>{
 //что пришло из формы

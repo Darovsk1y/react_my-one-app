@@ -35,7 +35,6 @@ let UsersPresent = (props:PropsType) => {
 					  id={u.id}
 					  name={u.name}
 					  status={u.status}
-					  adress={"u.adress"}
 					  avatar={u.photos.small}
 					  isfollow={u.followed}
 					  link={"/profile/" + u.id}

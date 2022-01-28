@@ -69,3 +69,14 @@ export type DialogObjectType = {
 	image: string
 	text: string
 }
+//! как задать тип Field что бы ждать от него опред. константу name ???
+export type UniversalKeysFormType<T> = { //todo валидируем поле name
+	name: keyof T // где Т - это обьект у которого ключ нужный для name
+	component:any
+	className?:string
+	type?:string
+	validate?: any
+	placeholder?:any
+	autoFocus?:boolean
+}
+export type GetStringKeys<T> = Extract<keyof T, string>

@@ -1,16 +1,19 @@
-import { ProfileType } from "../../../../types/types";
+import { ContactsType, ProfileType } from "../../../../types/types";
 import Contact from "./Contact";
 import s from "./UserInfo.module.css";
 /* import UserStatus from './UserStatus/UserSatus'; */
 import UserStatusWithHooks from './UserStatus/UserSatusWithHooks';
+import Preloader from './../../../global/Preloader/preloader';
 type PropsType = {
 	status: string
-	profile: ProfileType
+	profile: ProfileType | null
 	updateStatusThusk: (status:string)=>void
 	isOwner: boolean
 }
 const UserInfo: React.FC<PropsType> = ({status, profile, updateStatusThusk, isOwner}) => {
-
+	if(!profile){
+		return <Preloader/>
+	}
   return (
     <div className={s.info}>
       <div className={s.line}>
@@ -43,8 +46,8 @@ const UserInfo: React.FC<PropsType> = ({status, profile, updateStatusThusk, isOw
 		</div>
 	  <div className={s.param}>contacts: </div>
 	  {Object.keys(profile.contacts).map(key => {
-		  // @ts-ignore //!!! Димыч помоги
-		  return <Contact key={key} contactTitle={key} contactValue={profile.contacts[key]}/>
+		
+		  return <Contact key={key} contactTitle={key} contactValue={profile.contacts[key as keyof ContactsType]}/>
 		})}
 
     </div>

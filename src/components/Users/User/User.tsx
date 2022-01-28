@@ -6,7 +6,6 @@ type UserType = {
 	id:number
 	name:string | null
 	status:string | null
-	adress:string | null
 	avatar:string | null
 	isfollow:boolean
 	link:string

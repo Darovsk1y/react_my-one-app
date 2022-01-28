@@ -79,7 +79,7 @@ let mapStateToProps = (state: AppStateType):MapStatePropsType =>({
 //? cntrl + click on connect что бы увидеть что сидит в ожидаемых react-redux типах
 //TStateProps = {}, TDispatchProps = {}, TOwnProps = {}, State = DefaultState
 //todo т.е. Оказалось connect содержит всё сразу, вернее это то что в него приходит
-export default compose(connect<MapStatePropsType, MapDispatchPropsType, OwnPropsType, AppStateType>(mapStateToProps, {
+export default compose<React.ComponentType>(connect<MapStatePropsType, MapDispatchPropsType, OwnPropsType, AppStateType>(mapStateToProps, {
 	getUsersThunk,
 	getUsersActivePageThunk,
 	unfollowThunk,

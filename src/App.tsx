@@ -1,6 +1,6 @@
 import './App.css';
 import Header from './components/Header/Header';
-import Asside from './components/Asside/Asside.tsx';
+import Asside from './components/Asside/Asside';
 import { Routes, Route, Navigate } from 'react-router-dom';
 import React, { Component, Suspense } from 'react';
 import { initializeAppThunk, handlingGlobalErrorThunk, clearGlobalErrorThunk } from './redux/app_reducer';
@@ -8,7 +8,7 @@ import { connect } from 'react-redux';
 import Preloader from './components/global/Preloader/preloader';
 import { BrowserRouter } from 'react-router-dom';
 import { Provider } from 'react-redux';
-import store from './redux/redux_store';
+import store, { AppStateType } from './redux/redux_store';
 import GlobalError from './components/global/GlobalError/GlobalError';
 //todo lazy Loading
 const Profile = React.lazy(() => import('./components/UserMain/Profile'));
@@ -20,10 +20,10 @@ const UsersContainer = React.lazy(() => import('./components/Users/UsersContaine
 const LoginContainer = React.lazy(() => import('./components/Login/LoginContainer'));
 
 
-class App extends Component {
-	catchAllUnhandleErrors = (PromiseRejectionEvent) => {
+class App extends Component<MapStatePropsType & MapDispatchPropsType> {
+	catchAllUnhandleErrors = (e: PromiseRejectionEvent) => {
 		//? логика обработки Глобальной необработанной ошибки
-		this.props.handlingGlobalErrorThunk(PromiseRejectionEvent);
+		this.props.handlingGlobalErrorThunk(e);
 	}
 	clearError = () => {
 		this.props.clearGlobalErrorThunk();
@@ -52,7 +52,8 @@ class App extends Component {
 							<Route path='/news/*' element={<News />} />
 							<Route path='/music/*' element={<Muzic />} />
 							<Route path='/settings/*' element={<Settings />} />
-							<Route path='/users/*' element={<UsersContainer pageTitle={"Sumuray test props"}/>} />
+							<Route path='/users/*' element={//@ts-ignore  //! Незнаю как прокинуть пропсы
+							<UsersContainer pageTitle={"Sumuray test props"}/>} />
 							<Route path='/login/*' element={<LoginContainer/>} />
 						</Routes>
 					</Suspense>
@@ -63,13 +64,25 @@ class App extends Component {
 		);
 	}
 }
-const mapDispathToProps = (state) => ({
+//todo почему ReturnType иногда есть а иногда нет???
+type MapStatePropsType = ReturnType<typeof mapStateToProps>
+const mapStateToProps = (state:AppStateType) => ({
 	initialized: state.app.initialized,
 	globalError: state.app.globalError,
-})
-const AppContainer = connect(mapDispathToProps, {initializeAppThunk, handlingGlobalErrorThunk, clearGlobalErrorThunk})(App);
+	//pageTitle:"Sumuray test props"
+});
+type MapDispatchPropsType = {
+	initializeAppThunk:()=>void
+	handlingGlobalErrorThunk:(data:PromiseRejectionEvent)=>void
+	clearGlobalErrorThunk:()=>void
+}
+//type OwnPropsType = {}
+// <MapStatePropsType, MapDispatchPropsType, OwnPropsType, AppStateType>
+//! почему то Димыч не захотел описывать connect а описал приходящие отдельно
+const AppContainer = connect
+(mapStateToProps, {initializeAppThunk, handlingGlobalErrorThunk, clearGlobalErrorThunk})(App);
 //todo Эта глобал.обертка была создана для коррект.работы теста App
-let GlobalApp = (props) => {
+let GlobalApp:React.FC = (props) => {
 	return(
 	<BrowserRouter basename={process.env.PUBLIC_URL}>
 		<Provider store={store}>
