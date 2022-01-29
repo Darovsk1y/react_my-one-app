@@ -4,7 +4,7 @@ import { create } from 'react-test-renderer';
 
 let state = {
 	users: [],
-	totalUsersCount: 101,
+	totalItemsCount: 101,
 	pageSize: 10,
 	activePage: 1,
 	isfetching: true,
@@ -16,14 +16,14 @@ describe("Paginator tests", ()=>{
 	test(" quantity spans pagin must to be equels 'maxbaselight' ", ()=>{
 		const component = create(<Paginator 
 			activePage={1}
-			totalUsersCount={100}
+			totalItemsCount={100}
 			pageSize={10}
-			clickActivePage
+			clickActivePage={(x)=>x}
 			maxbaselight={20} />);
 		//получить экземпляр
 		const root = component.root;
 		let span = root.findAllByType("span");
-		//! рендерится компанента, но тест не видит вообще никаких детей внутри кроме 1
-	/* 	expect(span.length).toBe(10); */
+		expect(span.length).toBe(10);
+		debugger
 	});
 });

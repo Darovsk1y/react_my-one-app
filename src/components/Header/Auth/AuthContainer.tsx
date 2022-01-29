@@ -13,8 +13,7 @@ type MapStatePropsType = {
 type MapDispatchPropsType = {
 	LogoutThunk:()=>void
 }
-type PropsType = MapStatePropsType & MapDispatchPropsType
-class AuthContainer extends React.Component<PropsType> {
+class AuthContainer extends React.Component<MapStatePropsType & MapDispatchPropsType> {
 	onOut = () =>{
 		this.props.LogoutThunk();
 	}
@@ -22,10 +21,11 @@ class AuthContainer extends React.Component<PropsType> {
 		return <Auth {...this.props} onOut={this.onOut}/>
 	}
 }
-let mapStateToProps = (state: AppStateType) =>({
+let mapStateToProps = (state: AppStateType):MapStatePropsType =>({
 	login: state.auth.login,
 	isAuth: state.auth.isAuth,
 	activeUser: state.auth.activeUser,
 })
 
-export default connect(mapStateToProps, {LogoutThunk})(AuthContainer);
+export default connect<MapStatePropsType, MapDispatchPropsType, {}, AppStateType>
+(mapStateToProps, {LogoutThunk})(AuthContainer);

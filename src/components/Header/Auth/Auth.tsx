@@ -14,7 +14,13 @@ let Auth = (props:PropsType) => {
 		{props.isAuth ? 
 		<div className={s.authLine}>
 			<button className={s.logout} onClick={props.onOut}>Log out</button>
-			<div className={s.login}>User: {props.login}</div>
+			{props.activeUser ?
+				<NavLink to ={"/profile"} className={s.avatarBlock}>
+					<img src={props.activeUser.photos.large ? props.activeUser.photos.large : ""} alt="Avatar" className={s.avatarImage}/>
+				</NavLink>
+				: ""
+			}
+			<NavLink to ={"/profile"} className={s.login}>User: {props.login}</NavLink>
 		</div>
 		 : 
 		<NavLink to={"/login"}>Login Up</NavLink>}

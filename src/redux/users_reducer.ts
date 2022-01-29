@@ -14,7 +14,7 @@ let initialState = {
 	isDisabled: [] as Array<number>, /* блокировка нажатой кнопки */ //todo Array of Users id
 	maxbaselight: 20,/* количество точек пагинации страниц */
 }
-type initialStateType = typeof initialState;
+export type initialStateType = typeof initialState;
 type ActionType = InferActionsType<typeof actions> //todo импор ф-ия которая выводит типы
 type ThunkType = BaseThunkType<ActionType>
 

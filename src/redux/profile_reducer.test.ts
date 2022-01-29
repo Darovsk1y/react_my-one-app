@@ -3,7 +3,7 @@ let state = {
 	posts: [
 		{
 			id: 1,
-			likes: "2",
+			likes: 2,
 			name: "Raketa",
 			avatar: "http://cs622426.vk.me/v622426834/409d/baLqspYwi84.jpg",
 			text: "Hellow friend!",
@@ -11,7 +11,7 @@ let state = {
 		},
 		{
 			id: 2,
-			likes: "8",
+			likes: 8,
 			name: "Lola Flex",
 			avatar:
 				"https://cs11.pikabu.ru/post_img/big/2020/04/12/9/1586704514168132921.png",
@@ -20,7 +20,7 @@ let state = {
 		},
 		{
 			id: 3,
-			likes: "34",
+			likes: 34,
 			name: "Fransua Ewently",
 			avatar:
 				"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSJbnEIzrjyxxOY0epeMS4hYgqan30wNAZsIQ&usqp=CAU",
@@ -33,8 +33,22 @@ let state = {
 		fullName: "Test",
 		photos:
 			{large: null,
-				small: null,}
-	}
+				small: null,},
+		lookingForAJob: true,
+		lookingForAJobDescription: 'eee',
+		contacts: {
+			github: 'string',
+			vk: 'string',
+			facebook: 'string',
+			instagram: 'string',
+			twitter: 'string',
+			website: 'string',
+			youtube: 'string',
+			mainLink: 'string'},
+		aboutMe: 'string',
+	},
+	status: "",
+	editMode: false
 }
 
 it(' lendth should be changed at added new post', ()=>{
