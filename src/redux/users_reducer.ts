@@ -4,6 +4,7 @@ import { usersAPI } from "../api/usersAPI";
 import { UserType } from '../types/types';
 import { Dispatch } from 'redux';
 import { BaseThunkType, InferActionsType } from './redux_store';
+import { ApiResponseType } from '../api/api';
 
 let initialState = {
 	users: [] as Array<UserType>,
@@ -149,7 +150,7 @@ export const getUsersActivePageThunk = (page:number, pageSize:number):ThunkType 
 //todo выносим общую логику в методах подписки
 	const _followUnfollowFlow = async (dispatch:DispatchType, 
 		id:number, 
-		apiMethod:any, 
+		apiMethod:(id: number)=> Promise<ApiResponseType>, 
 		actionCreator:(id:number)=>ActionType) =>{
 			dispatch(actions.toggelFollowDisable(true, id));
 			let data = await apiMethod(id);
@@ -162,13 +163,14 @@ export const getUsersActivePageThunk = (page:number, pageSize:number):ThunkType 
 export const followThunk = (id:number):ThunkType => {
 	return async (dispatch) => {
 		let apiMethod = followAPI.followApi.bind(followAPI);
-		_followUnfollowFlow(dispatch, id, apiMethod, actions.follow);
+		//todo await необходим почему то, хотя он есть в более глубокой логике
+		await _followUnfollowFlow(dispatch, id, apiMethod, actions.follow);
 	}
 }
 export const unfollowThunk = (id:number):ThunkType => {
 	return async (dispatch) => {
 		let apiMethod = followAPI.unfollowApi.bind(followAPI);
-		_followUnfollowFlow(dispatch, id, apiMethod, actions.unfollow);
+		await _followUnfollowFlow(dispatch, id, apiMethod, actions.unfollow);
 	}
 }
 export default usersReducer;

@@ -1,6 +1,6 @@
-import { ThunkAction } from 'redux-thunk';
+
 import { authMeThunk } from './auth_reducer';
-import { AppStateType, BaseThunkType, InferActionsType } from './redux_store';
+import { BaseThunkType, InferActionsType } from './redux_store';
 
 let intialState = {
 	initialized: false,
@@ -56,17 +56,18 @@ const addBodyClassLock = () => document.body.classList.add('_lock');
 const removeBodyClassLock = () => document.body.classList.remove('_lock');
 //Thunks
 //type ThunkType = ThunkAction<Promise<void>, AppStateType, unknown, ActionType>
-type ThunkType = BaseThunkType<ActionType, Promise<any>>
-//! void не дает работать dispatch
-export const initializeAppThunk = () => (dispatch:any) => {
-	const promise = dispatch(authMeThunk()); /* или несколько диспатчей и промисов */
+type ThunkType = BaseThunkType<ActionType>
+
+export const initializeAppThunk = ():ThunkType => async (dispatch) => {
+	const promise = await dispatch(authMeThunk()); /* или несколько диспатчей и промисов */
 	/* dispatch(authMeThunk()); */
 	Promise.all([promise])
 	.then( ()=> { /* Когда придет ответ запусти наш инишиал_АС */
 		dispatch(actions.initializeApp());
 	})
 }
-//todo для обработки ошибки запуска попапа и убирания скролла
+//todo для обработки ошибки запуска попапа и убирания скролла 
+//! void не дает работать dispatch
 export const handlingGlobalErrorThunk = (PromiseRejectionEvent:any) => (dispatch:any) => {
 	const reason = String(PromiseRejectionEvent.reason);
 	dispatch(actions.savedGlobalError(reason));

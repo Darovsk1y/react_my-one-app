@@ -3,8 +3,7 @@ import f from "../../../global/FormControls/FormControls.module.css";
 import { Field, InjectedFormProps, reduxForm } from 'redux-form';
 import { FormControls } from "../../../global/FormControls/FormControls";
 import { maxLengthCreator } from "../../../../utils/validators/validators";
-import { ContactsType, ProfileType, UniversalKeysFormType } from "../../../../types/types";
-import { FormEditUserInfoValuesType } from "../UserHeader";
+import { ProfileType, UniversalKeysFormType } from "../../../../types/types";
 /* import { required } from './../../../../utils/validators/validators'; */
 import Preloader from './../../../global/Preloader/preloader';
 

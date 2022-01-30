@@ -1,6 +1,3 @@
-/* тренируемся тестировать - тестируем КЛК*/
-
-import { fireEvent } from "@testing-library/react";
 import { create } from "react-test-renderer";
 import UserStatusWithHooks from "./UserSatusWithHooks";
 
@@ -12,7 +9,7 @@ describe('ProfileStatus component', ()=>{
 		const instance = component.getInstance();
 		expect(instance.state.status).toBe("test-samuray-go");
 	}); */ //! getInstance() для КлК, видимо у нас нет доступа к State
-	
+
 	//проверка на существование спана в начале
 	test('component should contain span', ()=>{
 		const component = create(<UserStatusWithHooks status="test-samuray-go" updateStatusThusk={(x)=>x}
