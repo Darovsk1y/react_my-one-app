@@ -1,8 +1,10 @@
 /* Презентационная компонента */
+import { FilterType } from "../../redux/users_reducer";
 import { UserType } from "../../types/types";
 import { Paginator } from "../global/Paginator/Paginator";
 import User from "./User/User";
 import s from "./Users.module.css";
+import UsersSearchForm from "./UsersSearchForm";
 
 type PropsType = {
 	activePage:number
@@ -14,11 +16,13 @@ type PropsType = {
 	isDisabled:Array<number>
 	unfollowThunk:(id:number)=>void
 	followThunk:(id:number)=>void
+	onFilterChanged:(filter:FilterType)=>void
 }
-let UsersPresent = (props:PropsType) => {
+let UsersPresent:React.FC<PropsType> = (props) => {
 	return (
 		<div className={s.users}>
 		  <div className={s.body}>
+			  <UsersSearchForm onFilterChanged={props.onFilterChanged} />
 			  {/* вынесена в отдельный файл*/}
 			  <Paginator 
 			  	activePage={props.activePage}

@@ -22,3 +22,6 @@ export const getUsersIsDisabled = (state: AppStateType) => {
 export const getUsersMaxbaselight = (state: AppStateType) => {
 	return state.users.maxbaselight;
 }
+export const getUsersFilter = (state: AppStateType) => {
+	return state.users.filter;
+}

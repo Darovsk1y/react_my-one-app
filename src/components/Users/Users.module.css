@@ -25,3 +25,36 @@
     cursor: pointer;
 	margin: 0 auto;
 }
+/* Search form*/
+.UsersSearchForm{
+	margin: 0px 0px 20px 0px;
+}
+.searchLine{
+	display: flex;
+	align-items: center;
+}
+.paramInput{
+	line-height: 1.2;
+    color: black;
+	font-size: 24px;
+	padding: 5px 10px;
+	margin-right: 10px;
+}
+.buttonSearch {
+	min-height: 20px;
+	min-width: 100px;
+	padding: 5px 20px;
+	color: rgb(255, 255, 255);
+	background-color: rgb(66, 0, 121);
+	border: 1px solid rgb(28, 0, 44);
+	font-size: 16px;
+	border-radius: 10px;
+	transition: all 0.3s ease 0s;
+    display: inline-block;
+}
+.buttonSearch:hover{
+	background-color: rgb(118, 6, 209);
+}
+.buttonSearch:disabled{
+	background-color: rgb(187, 187, 187);
+}

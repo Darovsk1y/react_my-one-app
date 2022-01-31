@@ -14,8 +14,14 @@ let initialState = {
 	isfetching: true,
 	isDisabled: [] as Array<number>, /* блокировка нажатой кнопки */ //todo Array of Users id
 	maxbaselight: 20,/* количество точек пагинации страниц */
+	filter: {
+		term:"",
+		friend: null as null | boolean,
+	},
+	//isDisabledSearch: false,
 }
 export type initialStateType = typeof initialState;
+export type FilterType = typeof initialState.filter;
 type ActionType = InferActionsType<typeof actions> //todo импор ф-ия которая выводит типы
 type ThunkType = BaseThunkType<ActionType>
 
@@ -61,6 +67,12 @@ const usersReducer = (state = initialState, action:ActionType):initialStateType 
 			return {
 				...state,
 				isDisabled: action.isfetching ? [...state.isDisabled, action.id ] : state.isDisabled.filter((id) => id !== action.id),
+			}
+		}
+		case 'react_my-one-app/users/SET_FILTER': {
+			return {
+				...state,
+				filter: action.payload,
 			}
 		}
 		default:
@@ -120,6 +132,12 @@ export const actions = {
 			id
 		} as const
 	},
+	setFilter: (filter: FilterType) => {
+		return {
+			type: 'react_my-one-app/users/SET_FILTER',
+			payload: filter
+		} as const
+	}
 }
 
 type DispatchType = Dispatch<ActionType>
@@ -136,11 +154,12 @@ export const getUsersThunk = (activePage:number, pageSize:number):ThunkType => {
 		  };
 	}
 }
-export const getUsersActivePageThunk = (page:number, pageSize:number):ThunkType => {
+export const getUsersActivePageThunk = (page:number, pageSize:number, filter:FilterType):ThunkType => {
 	return async (dispatch) => {
 		dispatch(actions.toggelFetching(true));
 		dispatch(actions.setActivePage(page));
-		let data = await usersAPI.getUsers(page, pageSize);
+		dispatch(actions.setFilter(filter));
+		let data = await usersAPI.getUsers(page, pageSize, filter.term, filter.friend);
 		if(data) {
 			dispatch(actions.toggelFetching(false));
 			dispatch(actions.setUsers(data.items));
