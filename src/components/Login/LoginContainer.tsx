@@ -1,43 +1,31 @@
 import s from "./Login.module.css";
 import LoginFormRedux, { LoginFormDataValuesType } from "./Login";
-import { connect } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { authLoginThunk } from '../../redux/auth_reducer';
 import { Navigate } from "react-router-dom";
 import { AppStateType } from "../../redux/redux_store";
 
+const LoginContainer: React.FC = () =>{
+	//теперь получаем данные через хуки
+	//пример невынесенного селектора, так делать нежелательно
+	const captchaUrl = useSelector((state:AppStateType)=> state.auth.captchaUrl);
+	const isAuth = useSelector((state:AppStateType)=> state.auth.isAuth);
+	const dispatch = useDispatch();
 
-//todo Там можно задать типы MapStatePropsType & MapDispatchToPropsType
-const LoginContainer: React.FC<MapStatePropsType & MapDispatchToPropsType> = (props) =>{
-//что пришло из формы
-	
 	const onSubmit = (formData:LoginFormDataValuesType) => {
-		if(props.isAuth === false){
-			props.authLoginThunk(formData.email, formData.password, formData.rememberMe, formData.captcha);
+		if(isAuth === false){
+			//todo если раньше простовызывали то сейчас Диспатчим эту санку
+			dispatch(authLoginThunk(formData.email, formData.password, 
+				formData.rememberMe, formData.captcha))
 		}
 	}
-
-	if(props.isAuth) return <Navigate to={"/profile"}/>
+	if(isAuth) return <Navigate to={"/profile"}/>
     return (
       <div className="login">
         <h3 className={s.title}>Login</h3>
-        <LoginFormRedux onSubmit={onSubmit} captchaUrl={props.captchaUrl}/>
+        <LoginFormRedux onSubmit={onSubmit} captchaUrl={captchaUrl}/>
       </div>
     )
 }
-//todo Описание типив
-type MapStatePropsType = {
-	isAuth: boolean
-	captchaUrl: string | null
-}
-type MapDispatchToPropsType = {
-	authLoginThunk: (email:string, password:string, rememberMe:boolean, captcha:string)=>void
-}
-type OwnPropsType={}
-//todo Описали и на входе и на выходе
-let mapStateProps = (state:AppStateType): MapStatePropsType => ({
-	isAuth: state.auth.isAuth,
-	captchaUrl: state.auth.captchaUrl,
-})
-const LoginConnect = connect<MapStatePropsType, MapDispatchToPropsType, OwnPropsType, AppStateType>(mapStateProps, {authLoginThunk})(LoginContainer);
 
-export default LoginConnect;
+export default LoginContainer;

@@ -7,7 +7,7 @@ import { withAuthRedirect } from '../../hoc/withAuthRedirect';
 import { compose } from "redux";
 import { ProfileType } from "../../types/types";
 import { AppStateType } from "../../redux/redux_store";
-import { useParams, Navigate } from "react-router-dom";
+import { useParams, Navigate} from "react-router-dom";
 //todo ФК сейчас используется
 type MapStatePropsType = ReturnType<typeof mapStateToProps>
 type MapDispatchPropsType = {
