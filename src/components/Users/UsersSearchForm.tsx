@@ -30,7 +30,7 @@ const UsersSearchForm: React.FC<PropsType> = React.memo((props) => {
   return (
     <div className={s.UsersSearchForm}>
       <Formik
-        initialValues={{ term:"", friend:"null" as "null"}}
+        initialValues={{ term:"", friend:"null" as "null"}} 
         validate={usersSearchValidate}
         onSubmit={submit}
       >

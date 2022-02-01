@@ -10,13 +10,13 @@ import { BrowserRouter } from 'react-router-dom';
 import { Provider } from 'react-redux';
 import store, { AppStateType } from './redux/redux_store';
 import GlobalError from './components/global/GlobalError/GlobalError';
-//todo lazy Loading
+//todo lazy Loading //заметил что ему нужен только export default
 const Profile = React.lazy(() => import('./components/UserMain/Profile'));
 const DialogsContainer = React.lazy(() => import('./components/Dialogs/DialogsContainer'));
 const News = React.lazy(() => import('./components/News/News'));
 const Muzic = React.lazy(() => import('./components/Muzic/Muzic'));
 const Settings = React.lazy(() => import('./components/Settings/Settings'));
-const UsersContainer = React.lazy(() => import('./components/Users/UsersContainer'));
+const UsersPage = React.lazy(() => import('./components/Users/UsersContainer'));
 const LoginContainer = React.lazy(() => import('./components/Login/LoginContainer'));
 
 
@@ -53,7 +53,7 @@ class App extends Component<MapStatePropsType & MapDispatchPropsType> {
 							<Route path='/music/*' element={<Muzic />} />
 							<Route path='/settings/*' element={<Settings />} />
 							<Route path='/users/*' element={//@ts-ignore  //! Незнаю как прокинуть пропсы
-							<UsersContainer pageTitle={"Sumuray test props"}/>} />
+							<UsersPage pageTitle={"Sumuray test props"}/>} />
 							<Route path='/login/*' element={<LoginContainer/>} />
 						</Routes>
 					</Suspense>

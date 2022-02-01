@@ -143,7 +143,7 @@ export const actions = {
 type DispatchType = Dispatch<ActionType>
 
 /* Thunks */
-export const getUsersThunk = (activePage:number, pageSize:number):ThunkType => {
+/* export const getUsersThunk = (activePage:number, pageSize:number):ThunkType => {
 	return async (dispatch) => {
 		dispatch(actions.toggelFetching(true));
 		let data = await usersAPI.getUsers(activePage, pageSize);
@@ -153,8 +153,22 @@ export const getUsersThunk = (activePage:number, pageSize:number):ThunkType => {
 			dispatch(actions.setTotalUsersCount(data.totalCount));
 		  };
 	}
+} */
+//! обьединенная логика двух санок
+export const getUsersThunk = ( activePage:number, pageSize:number, filter:FilterType):ThunkType => {
+	return async (dispatch) => {
+		dispatch(actions.toggelFetching(true));
+		dispatch(actions.setActivePage(activePage));
+		dispatch(actions.setFilter(filter));
+		let data = await usersAPI.getUsers(activePage, pageSize, filter.term, filter.friend);
+		  if(data) {
+			dispatch(actions.toggelFetching(false));
+			dispatch(actions.setUsers(data.items));
+			dispatch(actions.setTotalUsersCount(data.totalCount));
+		  };
+	}
 }
-export const getUsersActivePageThunk = (page:number, pageSize:number, filter:FilterType):ThunkType => {
+/* export const getUsersActivePageThunk = (page:number, pageSize:number, filter:FilterType):ThunkType => {
 	return async (dispatch) => {
 		dispatch(actions.toggelFetching(true));
 		dispatch(actions.setActivePage(page));
@@ -165,7 +179,7 @@ export const getUsersActivePageThunk = (page:number, pageSize:number, filter:Fil
 			dispatch(actions.setUsers(data.items));
 		};
 	}
-}
+} */
 //todo выносим общую логику в методах подписки
 	const _followUnfollowFlow = async (dispatch:DispatchType, 
 		id:number, 

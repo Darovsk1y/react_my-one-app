@@ -8,7 +8,7 @@ import { compose } from "redux";
 import { ProfileType } from "../../types/types";
 import { AppStateType } from "../../redux/redux_store";
 import { Navigate, useMatch } from "react-router-dom";
-//! todo КК сейчас используется
+//! todo КК сейчас не используется
 type MapStatePropsType = ReturnType<typeof mapStateToProps>
 type MapDispatchPropsType = {
 	getProfileThusk:(id:number)=>void
