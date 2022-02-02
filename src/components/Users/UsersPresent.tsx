@@ -1,6 +1,7 @@
 /* Грязная компанента */
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
+import { createSearchParams, useLocation, useNavigate, useSearchParams } from "react-router-dom";
 import { getUsersActivePage, getUsersFilter, getUsersIsDisabled, 
 	getUsersMaxbaselight, getUsersPageSize, getUsersTotalUsersCount, 
 	getUsersUsers } from "../../redux/selectors/users_selectors";
@@ -23,10 +24,51 @@ export const UsersPresent:React.FC<PropsType> = (props) => {
 	const filter = useSelector(getUsersFilter);
 
 	const dispatch = useDispatch();
+	const navigate = useNavigate();
+	
 	// заменяет componentDidMount
+	const search = useLocation().search
+	const [searchParams] = useSearchParams();
+	type ParamURL = {
+		term?:string
+		friend?:string
+		page?:string
+	}
 	useEffect(()=>{
-		dispatch(getUsersThunk(activePage, pageSize, filter))
+		// 1) получение параметров из адресной строки
+		const paramURL = Object.fromEntries([...searchParams]);
+		let actualPage = activePage;
+		
+		if(!!paramURL.page) actualPage= Number(paramURL.page);
+		let actualFilter = filter;
+		if(!!paramURL.term) actualFilter= {...actualFilter, term: paramURL.term}
+		let friend = paramURL.friend==="true" ? true : paramURL.friend==="false" ?
+		false : null;
+		if(!!paramURL.friend) actualFilter= { ...actualFilter, friend: friend}
+		dispatch(getUsersThunk(actualPage, pageSize, actualFilter))
 	}, [])
+
+	//todo это синхронизация адресной строки c изменениями в UI
+	useEffect(()=>{
+		// 2) формируем обьект значений будущей адресной строки если есть знач. в стэйте
+		const query:ParamURL = {}
+		if(!!filter.term) query.term = filter.term
+		if(filter.friend !==null) query.friend = String(filter.friend)
+		if(activePage !==1) query.page = String(activePage)
+
+		// 3) формируем обьект с методом передачи в URL
+		let newUrl = new URLSearchParams();
+		  for (const [key, value] of Object.entries(query)) {
+			newUrl.append(key, value)
+		  }
+		
+		// 4) задание адресной строки из стэйт параметров если они есть
+		navigate({
+			pathname: '/users',
+			//search: `?term=${filter.term}&friend=${filter.friend}&page=${activePage}`,
+			search: newUrl.toString(),
+		})
+	}, [filter, activePage])
 	//! Теперь мы не прокидываем сюда Кулбеки нужные ей а создаем тут же!
 	const onPageChanged = (page:number) =>{
 		dispatch(getUsersThunk(page, pageSize, filter))

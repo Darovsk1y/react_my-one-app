@@ -2,12 +2,16 @@ import { Field, Form, Formik } from "formik";
 import { FilterType } from "../../redux/users_reducer";
 import s from "./Users.module.css";
 import React from "react";
+import { useSelector } from "react-redux";
+import { getUsersFilter } from "../../redux/selectors/users_selectors";
 type PropsType = {
   onFilterChanged: (filter: FilterType) => void;
 }
+type FriendType = "null" | "true" | "false";
+
 type FormValStrType = {
 	term: string
-    friend:"null"|"true"|"false"
+    friend:FriendType
 }
 
 // теперь все компоненты будет оборачивать в React.memo
@@ -26,11 +30,12 @@ const UsersSearchForm: React.FC<PropsType> = React.memo((props) => {
       setSubmitting(false);
     }, 400);
   };
-
+  const filter = useSelector(getUsersFilter);
   return (
     <div className={s.UsersSearchForm}>
       <Formik
-        initialValues={{ term:"", friend:"null" as "null"}} 
+	  	enableReinitialize={true} // разрешить Реинициализацию что бы подтянуть параметры из стэйта
+        initialValues={{ term: filter.term, friend: String(filter.friend) as FriendType}} 
         validate={usersSearchValidate}
         onSubmit={submit}
       >
