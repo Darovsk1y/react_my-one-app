@@ -1,3 +1,4 @@
+import 'antd/dist/antd.css';
 import './App.css';
 import Header from './components/Header/Header';
 import Asside from './components/Asside/Asside';
@@ -10,6 +11,8 @@ import { BrowserRouter } from 'react-router-dom';
 import { Provider } from 'react-redux';
 import store, { AppStateType } from './redux/redux_store';
 import GlobalError from './components/global/GlobalError/GlobalError';
+import { Button } from 'antd';
+import AntBody from './AntBody';
 //todo lazy Loading //заметил что ему нужен только export default
 const Profile = React.lazy(() => import('./components/UserMain/Profile'));
 const DialogsContainer = React.lazy(() => import('./components/Dialogs/DialogsContainer'));
@@ -40,7 +43,9 @@ class App extends Component<MapStatePropsType & MapDispatchPropsType> {
 	render(){
 		if(!this.props.initialized) return <Preloader/>
 		return (
-			<div className="app-wrapper" role='main'>
+			//todo создали приложение AntDesign
+			<AntBody/>
+			/* <div className="app-wrapper">
 				<Header />
 				<Asside />
 				<main className="main">
@@ -60,10 +65,11 @@ class App extends Component<MapStatePropsType & MapDispatchPropsType> {
 				
 				</main>
 				{(this.props.globalError) ? <GlobalError globalError={this.props.globalError} clearError={this.clearError}/> : ""}
-			</div>
-		);
+			</div> */
+		)
 	}
 }
+
 //todo почему ReturnType иногда есть а иногда нет???
 type MapStatePropsType = ReturnType<typeof mapStateToProps>
 const mapStateToProps = (state:AppStateType) => ({

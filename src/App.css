@@ -97,3 +97,10 @@ h6 {
 	grid-area: main;
 	position: relative;
 }
+.btnAnt{
+	background-color: orange;
+	border: none;
+}
+/* .ant-btn-primary{
+	background-color: orange;
+} */

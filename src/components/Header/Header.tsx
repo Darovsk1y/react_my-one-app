@@ -1,14 +1,17 @@
 import s from "./Header.module.css";
-import AuthContainer from './Auth/AuthContainer';
-const Header = () => {
+import Auth from "./Auth/Auth";
+const HeaderMy = () => {
   return (
-    <header className={s.header}>
-      <img className={s.headerLogo}
-        src="https://bnetcmsus-a.akamaihd.net/cms/template_resource/fh/FHSCSCG9CXOC1462229977849.png"
-        alt=""></img>
-		<AuthContainer />
-    </header>
+    <div className={s.header}>
+		<div className={s.headerLogoBody}>
+			<img className={s.headerLogo}
+			src="https://bnetcmsus-a.akamaihd.net/cms/template_resource/fh/FHSCSCG9CXOC1462229977849.png"
+			alt=""></img>
+		</div>
+      
+		<Auth />
+    </div>
   );
 };
 
-export default Header;
+export default HeaderMy;

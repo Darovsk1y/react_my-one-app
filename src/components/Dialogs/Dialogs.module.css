@@ -2,15 +2,16 @@
 	display: grid;
 	grid-template-columns: 2fr 4fr;
 	column-gap: 30px;
-	background-color: rgba(16, 58, 80, 0.6);
+	/* background-color: rgba(16, 58, 80, 0.6); */
 	min-height: 100%;
     padding: 20px 10px;
 	padding-right: 20px;
 	position: relative;
+	z-index: 1;
 }
 .dialogs::after {
 	content: "";
-	background: url("https://games.mail.ru/pic/pc/gallery/91/36/ce0f987a.jpeg");
+	background: center / cover no-repeat url("https://games.mail.ru/pic/pc/gallery/91/36/ce0f987a.jpeg") ;
 	opacity: 1;
 	top: 0;
 	left: 0;
@@ -19,7 +20,20 @@
 	position: absolute;
 	z-index: -1;  
   }
-.dialogsList{}
+.dialogs::before {
+	content: "";
+	background-color: rgba(16, 58, 80, 0.6);
+	opacity: 1;
+	top: 0;
+	left: 0;
+	bottom: 0;
+	right: 0;
+	position: absolute;
+	z-index: 0;
+  }
+.dialogsList{
+	z-index: 1;
+}
 
 /*TODO Общая Оболочка элемента что бы добавить к ком.Dialod ссылку для перехода */
 .dialogsItem{
@@ -31,7 +45,7 @@ position: relative;
 	flex-direction: column;
 }
 .board{
-	
+	z-index: 1;
 }
 .link{
 	position: absolute;width: 100%;height: 100%;top: 0;left: 0;

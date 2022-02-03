@@ -1,5 +1,5 @@
 import s from "./Menu-nav.module.css";
-import { NavLink, NavLinkProps } from "react-router-dom";
+import { NavLink } from "react-router-dom";
 // :React.ForwardRefExoticComponent<NavLinkProps & React.RefAttributes<HTMLAnchorElement>>
 //! isActive не существует если подкл. типизацию navLink
 const setActive = (navLink:any) => navLink.isActive ? s.active : '';

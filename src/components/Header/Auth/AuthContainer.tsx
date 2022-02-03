@@ -1,10 +1,10 @@
 import React from 'react';
-import Auth from './Auth';
+/* import Auth from './Auth'; */
 import { connect } from 'react-redux';
 import { LogoutThunk } from '../../../redux/auth_reducer';
 import { ProfileType } from '../../../types/types';
 import { AppStateType } from '../../../redux/redux_store';
-
+//! Удилить. убрали из кода
 type MapStatePropsType = {
 	login: string | null
 	isAuth: boolean
@@ -18,7 +18,7 @@ class AuthContainer extends React.Component<MapStatePropsType & MapDispatchProps
 		this.props.LogoutThunk();
 	}
 	render () {
-		return <Auth {...this.props} onOut={this.onOut}/>
+		return <div className=""></div>
 	}
 }
 let mapStateToProps = (state: AppStateType):MapStatePropsType =>({
