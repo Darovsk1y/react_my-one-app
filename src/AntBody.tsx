@@ -4,7 +4,7 @@ import React, { Suspense } from 'react';
 import { Link, Navigate, Route, Routes } from 'react-router-dom';
 import FriendsContainer from "./components/Asside/Friends/FriendsContainer";
 import Preloader from './components/global/Preloader/preloader';
-import s from './AntBody.style.module.css';
+// import s from './AntBody.style.module.css';
 import Auth from "./components/Header/Auth/Auth";
 
 const Profile = React.lazy(() => import('./components/UserMain/Profile'));
@@ -14,7 +14,9 @@ const Muzic = React.lazy(() => import('./components/Muzic/Muzic'));
 const Settings = React.lazy(() => import('./components/Settings/Settings'));
 const UsersPage = React.lazy(() => import('./components/Users/UsersContainer'));
 const LoginContainer = React.lazy(() => import('./components/Login/LoginContainer'));
+const ChatPage = React.lazy(() => import('./pages/Chat/ChatPage'));
 //todo компанента на AntDesignimport Header from './components/Header/Header';
+
 
 const { SubMenu } = Menu;
 const { Header, Content, Footer, Sider } = Layout;
@@ -76,7 +78,9 @@ const AntBody = () => {
                 <Menu.Item key="6">
 					<Link to="/music">Muzic</Link>
 					</Menu.Item>
-                <Menu.Item key="7">option7</Menu.Item>
+                <Menu.Item key="7">
+				<Link to="/chat">Chat</Link>
+					</Menu.Item>
                 <Menu.Item key="8">option8</Menu.Item>
               </SubMenu>
               <SubMenu key="sub3" icon={<NotificationOutlined />} title="Find users">
@@ -102,6 +106,7 @@ const AntBody = () => {
 						<Route path='/users/*' element={//@ts-ignore  //! Незнаю как прокинуть пропсы
 						<UsersPage pageTitle={"Sumuray test props"}/>} />
 						<Route path='/login/*' element={<LoginContainer/>} />
+						<Route path='/chat/*' element={<ChatPage/>} />
 					</Routes>
 				</Suspense>
 
