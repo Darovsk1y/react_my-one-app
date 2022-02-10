@@ -4,6 +4,7 @@ import { securityAPI } from "../api/securityAPI";
 import { authAPI } from "../api/authAPI";
 import { ProfileType } from '../types/types';
 import { BaseThunkType, InferActionsType } from './redux_store';
+import { setFriendsThunk } from './asside_reducer';
 //пока что капчу мы рассмотрим только для случая логинизации
 
 let intialState = {
@@ -74,6 +75,8 @@ export const authMeThunk = ():ThunkType => {
 				if(responseProfile) {
 					dispatch(actions.setAuthUserProfile(responseProfile));
 					//? Тут мы получиши профайл пользователя
+					//todo получаем друзей
+					dispatch(setFriendsThunk())
 				}
 			}
 	}

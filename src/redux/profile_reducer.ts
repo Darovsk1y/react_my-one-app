@@ -96,8 +96,8 @@ const profileReducer = (state = initialState, action:ActionType):InitialStateTyp
 }
 
 export const actions = {
-	newPostActionCreator: (text:string) =>{
-		return {
+	newPostActionCreator(text:string){ //! другой синтаксис тест
+		return { 
 			type:'react_my-one-app/profile/ADD-POST',
 			text
 		} as const

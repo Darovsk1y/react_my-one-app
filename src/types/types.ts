@@ -52,8 +52,8 @@ export type UserOnMap= {
 export type FriendType = {
 	id: number
 	name: string | null
-	image: string | null
-	online: boolean
+	photos: PhotosType
+	followed: boolean
 }
 // для dialogs.reduser
 export type MessageObjectType = {

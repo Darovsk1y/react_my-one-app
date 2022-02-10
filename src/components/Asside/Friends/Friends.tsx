@@ -6,13 +6,15 @@ type Props = {
 	friends:Array<FriendType>
 }
 const Friends = (props:Props) => {
-	let frendsItems = props.friends.map( (friend) => {
+	let frendsItems = props.friends.slice(0,5).map( (friend) => {
 		return (
 			//! Тип "string | null" не может быть назначен для типа "string" пробуем вернуть туда undefined
 			<Friend key={friend.id}
-					image={friend.image ? friend.image : undefined}
+					image={friend.photos.small ? friend.photos.small :
+						 'https://i0.wp.com/slovami.net/wp-content/uploads/2018/04/1-36-1024x1024.jpg'}
 					name={friend.name}
-					online={friend.online}
+					followed={friend.followed}
+					id={friend.id}
 			/>
 		);
 	});

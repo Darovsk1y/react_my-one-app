@@ -14,11 +14,4 @@ export const usersAPI = {
 				return response.data
 			})
 	},
-	/* getFriends(activePage = 1, pageSize = 10, friends = true){
-		return instance
-		.get<UsersType>(`users?page=${activePage}&count=${pageSize}&friend=${friends}`)
-		.then((response)=>{
-			return response.data
-		})
-	}, */
 };
